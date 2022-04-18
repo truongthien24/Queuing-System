@@ -1,0 +1,77 @@
+import React from 'react';
+import { Form, Input, Button, Checkbox } from 'antd';
+import { NavLink } from 'react-router-dom';
+import { isBuffer } from 'util';
+
+type EventTypes = {
+    username: string,
+    password: string
+}
+
+export const Login = () => {
+
+    const onFinish = (e: EventTypes) => {
+        console.log('Success:', e);
+        if(e.username === 'lequynhaivan01' && e.password === '123456') {
+            window.location.replace('/');
+        }else {
+            alert('Tài khoản mật khẩu chưa đúng! mời bạn nhập lại');
+        }
+    };
+
+  return (
+    <div className='layout'>
+        <div className='container-fuild h-100'>
+            <div className='row login'>
+                <div className='col-5 login__left'>
+                    <div className='login__left-logo'>
+                        <img src="./img/logo.png" className='login__left-img'/>
+                    </div>
+                    <Form
+                        name="basic"
+                        onFinish={onFinish}
+                        className='login__left-form'
+                        >
+                        <Form.Item
+                            label=""
+                            // rules={[{ required: true, message: 'Vui lòng nhập tài khoản!' }]}
+                        >
+                            <p>Tên đăng nhập *</p>
+                            <Form.Item name="username">
+                                <Input className='login__left-input' required/>
+                            </Form.Item>
+                        </Form.Item>
+
+                        <Form.Item
+                            label=""
+                            // rules={[{ required: true, message: 'Vui lòng nhập mật khẩu!' }]}
+                        >
+                            <p>Mật khẩu *</p>
+                            <Form.Item name="password">
+                                <Input.Password className='login__left-input' name="password"  required/>
+                            </Form.Item>
+                        </Form.Item>
+
+                        <NavLink to='/confirmEmail' style={{color: 'red', margin: '0 0 19px 0', display: 'block'}}>
+                            Quên mật khẩu ?
+                        </NavLink>
+
+                        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+                            <Button type="primary" htmlType="submit" className='login__left-btn'>
+                                <span style={{fontWeight: '500'}}>Đăng nhập</span>
+                            </Button>
+                        </Form.Item>
+                        </Form>
+                </div>
+                <div className='col-7 login__right'>
+                    <img src='img/banner.png' className='login__right-img'/>
+                    <div className='login__right-title'>
+                        <p>Hệ thống</p>
+                        <h1>QUẢN LÝ XẾP HÀNG</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  )
+}

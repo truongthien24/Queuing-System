@@ -1,24 +1,27 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { Login } from './component/Login';
+import './Util/css/style.css';
+import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
+import routes from './config/routes';
+import MainRoutes from './config/routes';
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {/* <BrowserRouter>
+        <Switch>
+          {routes.map((route, index)=> {
+            return (
+              <Route key={index} path={route.path} component={route.component} exact={route.exact}/>
+            )
+          })}
+        </Switch>
+      </BrowserRouter> */}
+      <MainRoutes/>
+
     </div>
   );
 }

@@ -1,0 +1,257 @@
+// Start thietBi
+.thietBi {
+    padding: 30px 97px 30px 24px;
+
+    // Start thietBi__breadcrumb 
+    .thietBi__breadcrumb {
+        margin-bottom: 45px;
+
+        // Start ant-breadcrumb
+        .ant-breadcrumb {
+                
+            span {
+                font-size: 20px !important;
+                color: #7E7D88;
+
+                span {
+                    font-weight: 700 !important;
+                }
+
+                &:last-child {
+                    
+                    span {
+                        color: $primary-color-txt !important;
+                    }
+                }
+            }
+
+            .ant-breadcrumb-separator {
+                margin: 0 15.4px !important;
+            }
+        }
+        //End ant-breadcrumb 
+
+    }
+    // End thietBi__breadcrumb
+
+    // Start thietBi__content
+    .thietBi__content {
+
+        // Start thietBi__content-heading
+        .thietBi__content-heading {
+            font-size: 24px;
+            color: $primary-color-txt;
+            font-weight: 700;
+            line-height: 36px;
+            margin-bottom: 16px;
+        }
+        // End thietBi__content-heading
+
+        // Start thietBi__content-menu
+        .thietBi__content-menu {
+            display: flex;
+            justify-content: space-between;
+            width: 1112px;
+
+            // Start thietBi__content-list 
+            .thietBi__content-list {
+                display: flex;
+
+                // Start thietBi__content-item
+                .thietBi__content-item {
+                    display: flex;
+                    flex-direction: column;
+                    margin-right: 24px;
+
+                    span {
+                        margin-bottom: 4px;
+                        line-height: 24px;
+                        font-weight: 700;
+                    }
+
+                    //Start thietBi__content-select
+                    .thietBi__content-select {
+                        width: 300px !important;
+                        height: 44px !important;
+
+                        .ant-select-selector {
+                            height: 100%;
+                            padding: 10px 12px;
+                            border-radius: 8px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-between;
+                        }
+
+                        &.ant-select-focused:not(.ant-select-disabled).ant-select:not(.ant-select-customize-input) .ant-select-selector {
+                            border-color: $primary-color-txt !important;
+                        }
+
+                        // &.ant-select:not(.ant-select-customize-input) .ant-select-selector {
+                        //     border-color: $primary-color-txt !important;
+                        // }
+                    }
+                    //End thietBi__content-select
+
+                    // Start ant-input-affix-wrapper
+                    .ant-input-affix-wrapper {
+                        padding: 10px 12px;
+                        border-radius: 8px;
+                        width: 300px !important;
+                        height: 44px !important;
+
+                        .ant-input {
+                            font-size: 16px;
+
+                            // &:hover {
+                            //     border-color: $primary-color-txt !important;
+                            // }
+
+                            // &:focus {
+                            //     border-color: $primary-color-txt !important;
+                            // }
+                        }
+
+                        &:not(.ant-input-affix-wrapper-disable):hover {
+                            border-color: $primary-color-txt !important;
+                        }
+
+                    }
+
+                    .ant-input-affix-wrapper-focused {
+                        border-color: $primary-color-txt !important;
+                    }
+                    // End ant-input-affix-wrapper
+
+                }
+                // End thietBi__content-item
+
+                &.thietBi__content-search {
+
+                    .thietBi__content-item {
+                        margin-right: 0;
+                    }
+                }
+            }
+            // End thietBi__content-list 
+        }
+        // End thietBi__content-menu
+
+        // Start thietBi__content-table 
+        .thietBi__content-table {
+            width: 1112px;
+            margin-top: 16px;
+
+            // Start ant-table-wrapper
+            .ant-table-wrapper {
+
+                //Start ant-table
+                .ant-table {
+                    border-radius: 12px;
+                    box-shadow: $box-shadow;
+                    overflow: hidden;
+
+                    // Start ant-table-content
+                    .ant-table-content {
+
+                        .ant-table-thead {
+
+                            .ant-table-cell {
+                                text-align: center;
+                                background-color: $primary-color-btn;
+                                color: #fff;
+                                font-size: 16px !important;
+                                font-weight: 700;
+                            }
+                        }
+
+                        tr {
+                            height: 49px !important;
+
+                            .ant-table-cell {
+                                overflow: hidden;
+                                white-space: nowrap;
+                                text-overflow: ellipsis;
+                                max-width: 268px;
+                                font-size: 14px !important;
+                            }
+
+                            &:nth-child(even) {
+                                background-color: $primary-color-btn-hover !important;
+                            }
+                        }
+                    }
+                    // End ant-table-content
+                }
+                //End ant-table
+
+                // Start ant-pagination
+                .ant-pagination {
+
+                    .ant-pagination-item {
+                        width: 32px !important;
+                        height: 32px !important;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        border-radius: 4px;
+
+                        a {
+
+                            &.hover {
+                                color: #000;
+                            }
+                        }
+                    }
+
+                    .ant-pagination-item-active {
+                        background-color: $primary-color-txt;
+                        color: #fff;
+                        border-color: transparent !important;
+
+                        &:hover a {
+                            color: #fff !important;
+                        }
+                    }
+                }
+                // End ant-pagination
+            }
+            // End ant-table-wrapper
+        }
+        // End thietBi__content-table 
+    }
+    // End thietBi__content
+}
+// End thietBi
+
+// Start ant-select-dropdown
+.ant-select-dropdown {
+    width: 300px !important;
+    height: 152px !important;
+    border-radius: 8px !important; 
+    padding: 8px 0 !important;
+
+    .rc-virtual-list-holder {
+        height: 152px !important;
+
+        .rc-virtual-list-holder-inner {
+            height: 100% !important;
+
+            .ant-select-item  {
+                height: 44px !important;
+                padding: 10px 12px !important;
+            }
+
+            .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+                background-color: #fff2e7 !important;
+            }
+        }
+    }
+    
+    // Start ant-select-item-option-active:not(.ant-select-item-option-disabled)
+    .ant-select-item-option-active:not(.ant-select-item-option-disabled) {
+        background-color: #fff2e7 !important;
+    }
+    // End ant-select-item-option-active:not(.ant-select-item-option-disabled)
+}
+// End ant-select-dropdown
