@@ -1,35 +1,35 @@
 import { Breadcrumb, Select } from 'antd';
-import { useFormik } from 'formik';
-import React, { Fragment } from 'react';
+import React, { Fragment } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Image } from '../../Util/variableImage';
+import {Formik, useFormik, FormikProps, Form, Field} from 'formik';
 
 interface formikFace {
-  maThietBi: string,
-  loaiThietBi: string,
-  tenThietBi: string,
-  tenDangNhap: string,
-  diaChi: string,
-  matKhau: string,
-  dichVuSuDung: string[],
+    maThietBi: string,
+    loaiThietBi: string,
+    tenThietBi: string,
+    tenDangNhap: string,
+    diaChi: string,
+    matKhau: string,
+    dichVuSuDung: string[],
 }
 
-export const ThemThietBi = () => {
+export const CapNhatThietBi = () => {
 
     const { Option } = Select;
-  
-    const location = useLocation();
 
     const navigate = useNavigate();
 
+    const location = useLocation();
+
     const initialValues: formikFace = {
-      maThietBi: 'KIO_01',
-      loaiThietBi: 'Kiosk',
-      tenThietBi: 'Kiosk',
-      tenDangNhap: 'Linhkyo011',
-      diaChi: '128.172.308',
-      matKhau: 'CMS',
-      dichVuSuDung: ['Khám tim mạch'],
+        maThietBi: 'KIO_01',
+        loaiThietBi: 'Kiosk',
+        tenThietBi: 'Kiosk',
+        tenDangNhap: 'Linhkyo011',
+        diaChi: '128.172.308',
+        matKhau: 'CMS',
+        dichVuSuDung: ['Khám tim mạch'],
     }
 
     const formik = useFormik({
@@ -41,41 +41,42 @@ export const ThemThietBi = () => {
     })
 
     const breadCrumbView = () => {
-      const {pathname} = location;
-      const pathnames = pathname.split('/').filter((item) => item);
-      return (
-        <div>
-          <Breadcrumb separator=''>
-            {pathnames.length > 0 ? (
-              <>
-                <Breadcrumb.Item>Thiết bị</Breadcrumb.Item>
-                <Breadcrumb.Separator>
-                  <img src={`${Image.separator}`}/>
-                </Breadcrumb.Separator>
-                <Breadcrumb.Item>
-                  <a onClick={()=> {
-                      navigate('/thietbi');
-                  }}>Danh sách thiết bị</a>
-                </Breadcrumb.Item>
-                <Breadcrumb.Separator>
-                  <img src={`${Image.separator}`}/>
-                </Breadcrumb.Separator>
-                <Breadcrumb.Item>
-                  <span>Thêm thiết bị</span>
-                </Breadcrumb.Item>
-              </>
-            ) : (
-              <>
-                <Breadcrumb.Item>Thiết bị</Breadcrumb.Item>
-                <Breadcrumb.Item>
+        const {pathname} = location;
+        const pathnames = pathname.split('/').filter((item) => item);
+        return (
+          <div>
+            <Breadcrumb separator=''>
+              {pathnames.length > 0 ? (
+                <>
+                  <Breadcrumb.Item>Thiết bị</Breadcrumb.Item>
+                  <Breadcrumb.Separator>
+                    <img src={`${Image.separator}`}/>
+                  </Breadcrumb.Separator>
+                  <Breadcrumb.Item>
+                    <a onClick={()=> {
+                        navigate('/thietbi');
+                    }}>Danh sách thiết bị</a>
+                  </Breadcrumb.Item>
+                  <Breadcrumb.Separator>
+                    <img src={`${Image.separator}`}/>
+                  </Breadcrumb.Separator>
+                  <Breadcrumb.Item>
+                    <span>Cập nhật thiết bị</span>
+                  </Breadcrumb.Item>
+                </>
+              ) : (
+                <>
+                  <Breadcrumb.Item>Thiết bị</Breadcrumb.Item>
+                  <Breadcrumb.Item>
+    
+                  </Breadcrumb.Item>
+                </>
+              )}
+            </Breadcrumb>
+          </div>
+        )
+      }
 
-                </Breadcrumb.Item>
-              </>
-            )}
-          </Breadcrumb>
-        </div>
-      )
-    }
   return (
     <Fragment>
         <div className='thietBi__breadcrumb'>
@@ -85,75 +86,75 @@ export const ThemThietBi = () => {
             <h3 className='thietBi__content-heading'>
             Quản lý thiết bị
             </h3>
-            <form className='thietBi__content-add'>
-                <div className='content__add-top'>
-                    <h3 className='content__add-heading'>
+            <form className='thietBi__content-update'>
+                <div className='content__update-top'>
+                    <h3 className='content__update-heading'>
                         Thông tin thiết bị
                     </h3>   
-                    <div className='content__add-list'>
-                        <div className='content__add-item'>
-                            <div className='content__add-label'>
+                    <div className='content__update-list'>
+                        <div className='content__update-item'>
+                            <div className='content__update-label'>
                                 <span>Mã thiết bị: </span>
                                 <img src={`${Image.chuY}`}/>
                             </div>
-                            <input className='content__add-input' name="maThietBi" onChange={formik.handleChange} placeholder="Nhập mã thiết bị"/>
+                            <input className='content__update-input' value={formik.values.maThietBi} name="maThietBi" onChange={formik.handleChange}/>
                         </div>
-                        <div className='content__add-item'>
-                            <div className='content__add-label'>
+                        <div className='content__update-item'>
+                            <div className='content__update-label'>
                                 <span>Loại thiết bị: </span>
                                 <img src={`${Image.chuY}`}/>
                             </div>
-                            {/* <input className='content__add-input' value={formik.values.loaiThietBi} name="loaiThietBi" onChange={formik.handleChange}/> */}
+                            {/* <input className='content__update-input' value={formik.values.loaiThietBi} name="loaiThietBi" onChange={formik.handleChange}/> */}
                             <Select
                                 labelInValue
-                                placeholder="Chọn loại thiết bị"
+                                defaultValue={{ value: `${formik.values.loaiThietBi}` }}
                                 style={{ width: 120 }}
                                 onChange={formik.handleChange}
                                 suffixIcon={<img src={`${Image.select}`}/>}
-                                className="content__add-item-select"
-                                // open={true}
+                                className="content__update-item-select"
                             >
                                 <Option value="Kiosk">Kiosk</Option>
                                 <Option value="Display counter">Display counter</Option>
                             </Select>
                         </div>
-                        <div className='content__add-item'>
-                            <div className='content__add-label'>
+                        <div className='content__update-item'>
+                            <div className='content__update-label'>
                                 <span>Tên thiết bị: </span>
                                 <img src={`${Image.chuY}`}/>
                             </div>
-                            <input className='content__add-input' name="tenThietBi" onChange={formik.handleChange} placeholder="Nhập tên thiết bị"/>
+                            <input className='content__update-input' value={formik.values.tenThietBi} name="tenThietBi" onChange={formik.handleChange}/>
                         </div>
-                        <div className='content__add-item'>
-                            <div className='content__add-label'>
+                        <div className='content__update-item'>
+                            <div className='content__update-label'>
                                 <span>Tên đăng nhập: </span>
                                 <img src={`${Image.chuY}`}/>
                             </div>
-                            <input className='content__add-input' name="tenDangNhap" onChange={formik.handleChange} placeholder="Nhập tên đăng nhập"/>
+                            <input className='content__update-input' value={formik.values.tenDangNhap} name="tenDangNhap" onChange={formik.handleChange}/>
                         </div>
-                        <div className='content__add-item'>
-                            <div className='content__add-label'>
+                        <div className='content__update-item'>
+                            <div className='content__update-label'>
                                 <span>Địa chỉ IP: </span>
                                 <img src={`${Image.chuY}`}/>
                             </div>
-                            <input className='content__add-input' name="diaChi" onChange={formik.handleChange} placeholder="Nhập địa chỉ IP"/>
+                            <input className='content__update-input' value={formik.values.diaChi} name="diaChi" onChange={formik.handleChange}/>
                         </div>
-                        <div className='content__add-item'>
-                            <div className='content__add-label'>
+                        <div className='content__update-item'>
+                            <div className='content__update-label'>
                                 <span>Mật khẩu: </span>
                                 <img src={`${Image.chuY}`}/>
                             </div>
-                            <input className='content__add-input' name="matKhau" onChange={formik.handleChange} placeholder="Nhập mật khẩu"/>
+                            <input className='content__update-input' value={formik.values.matKhau} name="matKhau" onChange={formik.handleChange}/>
                         </div>
-                        <div className='content__add-item'>
-                            <div className='content__add-label'>
+                        <div className='content__update-item'>
+                            <div className='content__update-label'>
                                 <span>Dịch vụ sử dụng: </span>
                                 <img src={`${Image.chuY}`}/>
                             </div>
                             <Select
                                 mode="multiple"
-                                style={{ width: '100%'}}
-                                placeholder="Nhập dịch vụ sử dụng"
+                                style={{ width: '100%' }}
+                                placeholder="select one country"
+                                defaultValue={[`${formik.values.dichVuSuDung}`]}
                                 onChange={formik.handleChange}
                                 optionLabelProp="label"
                             >
@@ -195,16 +196,16 @@ export const ThemThietBi = () => {
                             </Select>
                         </div>
                     </div>
-                    <div className='content__add-warning'>
+                    <div className='content__update-warning'>
                         <img src={`${Image.chuY}`}/>
                         <span>Là trường thông tin bắt buộc</span>
                     </div>
                 </div>
-                <div className='content__add-bottom'>
-                    <button type='button' className='content__add-btn-cancel' onClick={()=> {
+                <div className='content__update-bottom'>
+                    <button type='button' className='content__update-btn-cancel' onClick={()=> {
                         navigate('/thietbi');
                     }}>Hủy bỏ</button>
-                    <button type='button' className='content__add-btn-add'>Thêm thiết bị</button>
+                    <button type='button' className='content__update-btn-update'>Cập nhật</button>
                 </div>
             </form>  
         </div>

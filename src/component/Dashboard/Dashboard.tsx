@@ -216,7 +216,7 @@ export const Dashboard = () => {
                         <Outlet/>
                         <div className='content__chart-select'>
                             <span className='content__chart-text'>Xem theo</span>
-                            <Select defaultValue="Ngày" style={{ width: 120 }} onChange={handleChange}>
+                            <Select defaultValue="Ngày" style={{ width: 120 }} onChange={handleChange} suffixIcon={<img src={Image.select}/>}>
                                 <Option value="day">Ngày</Option>
                                 <Option value="week">Tuần</Option>
                                 <Option value="month">Tháng</Option>

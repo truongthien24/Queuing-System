@@ -12,6 +12,7 @@ export const ResetPassword = () => {
 
     const onFinishFailed = (errorInfo: any) => {
         console.log('Failed:', errorInfo);
+        window.location.replace('/login');
     };
     
     const onReset = () => {
