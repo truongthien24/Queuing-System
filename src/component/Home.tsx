@@ -7,7 +7,7 @@ import {
     SettingOutlined,
     LinkOutlined,
   } from '@ant-design/icons';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 import logo from '../image/logo.png';
 
   const { SubMenu } = Menu;
@@ -22,6 +22,8 @@ export const Home = () => {
     const [bgNotify, setBgNotify] = useState<string>('#FFF2E7'); 
 
     const [colorNotifyBtn, setColorNotifyBtn] = useState<string>('#FF9138');
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         console.log(imageProfile);
@@ -68,14 +70,20 @@ export const Home = () => {
                         <Link to='/baocao'>Báo cáo</Link>
                     </Menu.Item>
                     <Menu.Item key="6" icon={<img src='./img/setting.png'/>}>
-                        <div>
+                        <span>
                             Cài đặt hệ thống
                             <img src='./img/more.png' className='ant-menu-item-icon' style={{marginLeft: '17px'}}/>
-                        </div>
+                        </span>
                         <div className='setting__wrap'>
-                            <div className='setting__wrap-item'>Quản lý vai trò</div>
-                            <div className='setting__wrap-item'>Quản lý tài khoản</div>
-                            <div className='setting__wrap-item'>Nhật ký người dùng</div>
+                            <div className='setting__wrap-item' onClick={()=> {
+                                navigate('/qlVaiTro');
+                            }}>Quản lý vai trò</div>
+                            <div className='setting__wrap-item' onClick={()=> {
+                                navigate('/qlTaiKhoan');
+                            }}>Quản lý tài khoản</div>
+                            <div className='setting__wrap-item' onClick={()=> {
+                                navigate('/nhatKyNguoiDung');
+                            }}>Nhật ký người dùng</div>
                         </div>
                     </Menu.Item>
                     <Menu.Item key="7" className='home__menu-logOut'>
@@ -84,7 +92,7 @@ export const Home = () => {
                             window.location.replace('/login');
                         }}>
                             <i className="fa-solid fa-arrow-right-from-bracket"></i>
-                            <span>Đâng xuất</span>
+                            <span>Đăng xuất</span>
                         </button>
                     </Menu.Item>
                 </Menu>

@@ -159,7 +159,9 @@ export const Dashboard = () => {
                         Biểu đồ cấp số
                     </h5>
                     <div className='content__list'>
-                        <div className="content__item">
+                        <div className="content__item" onClick={()=> {
+                            navigate('/capSo');
+                        }}>
                             <div className='content__item-top'>
                                 <img src={`${Image.calendar}`}/>
                                 <p>Số thứ tự đã cấp</p>
@@ -172,7 +174,9 @@ export const Dashboard = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="content__item">
+                        <div className="content__item" onClick={()=> {
+                            navigate('/capSo');
+                        }}>
                             <div className='content__item-top'>
                                 <img src={`${Image.calendarplus}`}/>
                                 <p>Số thứ tự đã sử dụng</p>
@@ -185,7 +189,9 @@ export const Dashboard = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="content__item">
+                        <div className="content__item" onClick={()=> {
+                            navigate('/capSo');
+                        }}>
                             <div className='content__item-top'>
                                 <img src={`${Image.hangcho}`}/>
                                 <p>Số thứ tự đang chờ</p>
@@ -198,7 +204,9 @@ export const Dashboard = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="content__item">
+                        <div className="content__item" onClick={()=> {
+                            navigate('/capSo');
+                        }}>
                             <div className='content__item-top'>
                                 <img src={`${Image.flag}`}/>
                                 <p>Số thứ tự đã bỏ qua</p>

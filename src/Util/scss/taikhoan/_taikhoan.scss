@@ -1,12 +1,12 @@
-// Start thietBi
-.thietBi {
+// Start taiKhoan
+.taiKhoan {
     padding: 30px 97px 30px 24px;
     position: relative;
 
-    // Start thietBi__breadcrumb 
-    .thietBi__breadcrumb {
+    // Start taiKhoan__breadcrumb 
+    .taiKhoan__breadcrumb {
         margin-bottom: 45px;
-
+    
         // Start ant-breadcrumb
         .ant-breadcrumb {
                 
@@ -36,35 +36,36 @@
             }
         }
         //End ant-breadcrumb 
-
     }
-    // End thietBi__breadcrumb
+    // End taiKhoan__breadcrumb
 
-    // Start thietBi__content
-    .thietBi__content {
+    // Start taiKhoan__content
+    .taiKhoan__content {
 
-        // Start thietBi__content-heading
-        .thietBi__content-heading {
+        // Start taiKhoan__content-heading
+        .taiKhoan__content-heading {
             font-size: 24px;
             color: $primary-color-txt;
             font-weight: 700;
             line-height: 36px;
             margin-bottom: 16px;
         }
-        // End thietBi__content-heading
+        // End taiKhoan__content-heading
 
-        // Start thietBi__content-menu
-        .thietBi__content-menu {
+        // Start taiKhoan__content-menu
+        .taiKhoan__content-menu {
             display: flex;
             justify-content: space-between;
             width: 1112px;
 
-            // Start thietBi__content-list 
-            .thietBi__content-list {
+            // Start taiKhoan__content-list 
+            .taiKhoan__content-list {
+                width: 100%;
                 display: flex;
+                justify-content: space-between;
 
-                // Start thietBi__content-item
-                .thietBi__content-item {
+                // Start taiKhoan__content-item
+                .taiKhoan__content-item {
                     display: flex;
                     flex-direction: column;
                     margin-right: 24px;
@@ -75,9 +76,8 @@
                         font-weight: 700;
                     }
 
-                    //Start thietBi__content-select
-                    .thietBi__content-select {
-                        width: 300px !important;
+                    //Start taiKhoan__content-select
+                    .taiKhoan__content-select {
                         height: 44px !important;
 
                         .ant-select-selector {
@@ -97,7 +97,7 @@
                         //     border-color: $primary-color-txt !important;
                         // }
                     }
-                    //End thietBi__content-select
+                    //End taiKhoan__content-select
 
                     // Start ant-input-affix-wrapper
                     .ant-input-affix-wrapper {
@@ -130,24 +130,28 @@
                     }
                     // End ant-input-affix-wrapper
 
+                    &:last-child {
+                        margin-right: 0;
+                    }
+
                 }
-                // End thietBi__content-item
+                // End taiKhoan__content-item
 
-                &.thietBi__content-search {
+                &.taiKhoan__content-search {
 
-                    .thietBi__content-item {
+                    .taiKhoan__content-item {
                         margin-right: 0;
                     }
                 }
             }
-            // End thietBi__content-list 
+            // End taiKhoan__content-list 
         }
-        // End thietBi__content-menu
+        // End taiKhoan__content-menu
 
-        // Start thietBi__content-table 
-        .thietBi__content-table {
+         // Start taiKhoan__content-table 
+         .taiKhoan__content-table {
             width: 1112px;
-            margin-top: 16px;
+            margin-top: 15px;
 
             // Start ant-table-wrapper
             .ant-table-wrapper {
@@ -164,7 +168,6 @@
                         .ant-table-thead {
 
                             .ant-table-cell {
-                                text-align: center;
                                 background-color: $primary-color-btn;
                                 color: #fff;
                                 font-size: 16px !important;
@@ -181,7 +184,7 @@
                                 width: auto;
                                 font-size: 14px !important;
                                 height: 49px !important;
-                                padding: 3.5px 10px !important;
+                                padding: 3.5px 17px !important;
                                 max-width: 268px;
                                 
                                 .ant-table-cell-content {
@@ -209,12 +212,12 @@
                                             cursor: pointer;
                                         }
 
-                                        &:focus + .ant-table-cell-dichvu {
+                                        &:focus + .ant-table-cell-taiKhoan {
                                             display: block;
                                         }
                                     }
 
-                                    .ant-table-cell-dichvu {
+                                    .ant-table-cell-taiKhoan {
                                         position: absolute;
                                         bottom: -4px;
                                         left: -3px;
@@ -290,75 +293,10 @@
             }
             // End ant-table-wrapper
         }
-        // End thietBi__content-table 
+        // End taiKhoan__content-table 
 
-        // Start thietBi__content=about
-        .thietBi__content-about {
-            width: 1112px;
-            height: 604px;
-            background-color: #fff;
-            border-radius: 16px;
-            box-shadow: $box-shadow;
-            padding: 16px 24px;
-
-            // Start content__about-heading
-            .content__about-heading {
-                font-size: 20px;
-                font-weight: 800;
-                line-height: 30px;
-                color: $primary-color-txt;
-                margin-bottom: 20px;
-            }
-            // End content__about-heading
-
-            // Start content__about-list 
-            .content__about-list {
-                display: flex;
-                justify-content: space-between;
-
-                // Start content__about-item
-                .content__about-item {
-                    flex: 1;
-
-                    // Start about__info-list
-                    .about__info-list {
-                        display: flex;
-                        flex-direction: column;
-
-                        // Start about__info-item
-                        .about__info-item {
-                            margin-bottom: 16px;
-                            display: flex;
-                            align-items: center;
-                            
-                            p {
-                                font-size: 16px;
-                                line-height: 24px;
-                                font-weight: 600;
-                                color: #282739;
-                                flex: 0.5;
-                                margin-bottom: 0;
-                            }
-
-                            span {
-                                color: #535261;
-                                font-weight: 400;
-                                line-height: 24px;
-                                flex: 1.5;
-                            }
-                        }
-                        // End about__info-item
-                    }
-                    // End about__info-list
-                }
-                // Start content__about-item
-            }
-            // End content__about-list
-        }
-        // End thietBi__content-about
-
-        // Start thietBi__content-update
-        .thietBi__content-update {
+        // Start taiKhoan__content-update
+        .taiKhoan__content-update {
 
             // Start content__update-top 
             .content__update-top {
@@ -389,18 +327,16 @@
                     .content__update-item {
                         width: 540px;
 
-                        &:last-child {
-                            width: 100%;
-                            grid-column: span 2;
-                        }
-
                         // Start content__update-label
                         .content__update-label {
                             margin-bottom: 8px;
+                            display: flex;
+                            align-items: center;
 
                             span {
                                 color: #282739;
                                 font-weight: 600;
+                                margin-right: 3px;
                             }
                         }
                         // End content__update-label
@@ -470,7 +406,23 @@
                                 }
                             }
                         }
+
                         // End ant-select
+                        .ant-input-affix-wrapper:not(.ant-input-affix-wrapper-disabled):hover {
+                            border: 2.5px solid $primary-color-txt !important;
+                        }
+
+                        .ant-input-affix-wrapper:hover {
+                            border: 2.5px solid $primary-color-txt !important;
+                        }
+
+                        .ant-input-affix-wrapper-focused {
+                            border: 2.5px solid $primary-color-txt !important;
+                        }
+
+                        .ant-input-affix-wrapper:focus, .ant-input-affix-wrapper-focused {
+                            border: 2.5px solid $primary-color-txt !important;
+                        }
                     }
                     // End content__update-item
                 }
@@ -537,193 +489,12 @@
             }
             // End content__update-bottom
         }
-        // End thietBi__content-update
-
-        // Start thietBi__content-add
-        .thietBi__content-add {
-
-            // Start content__add-top 
-            .content__add-top {
-                width: 1152px;
-                height: 556px;
-                border-radius: 12px;
-                background-color: #fff;
-                padding: 16px 24px;
-                box-shadow: $box-shadow;
-
-                // Start content__add-heading
-                .content__add-heading {
-                    font-weight: 700;
-                    font-size: 20px;
-                    line-height: 30px;
-                    color: $primary-color-txt;
-                    margin-bottom: 15px;
-                }
-                // End content__add-heading
-
-                // Start content__add-list
-                .content__add-list {
-                    display: grid;
-                    grid-template-columns: 1fr 1fr;
-                    grid-gap: 24px;
-
-                    // Start content__add-item
-                    .content__add-item {
-                        width: 540px;
-
-                        &:last-child {
-                            width: 100%;
-                            grid-column: span 2;
-                        }
-
-                        // Start content__add-label
-                        .content__add-label {
-                            margin-bottom: 8px;
-
-                            span {
-                                color: #282739;
-                                font-weight: 600;
-                            }
-                        }
-                        // End content__add-label
-
-                        // Start content__add-input
-                        .content__add-input {
-                            width: 540px;
-                            height: 44px;
-                            padding: 10px 12px;
-                            border: 1px solid #D4D4D7;
-                            border-radius: 8px;
-
-                            &:focus {
-                                outline-color: #FFAC6A !important;
-                            }
-                        }
-                        // End content__add-input
-
-                        // Start ant-select
-                        .ant-select {
-
-                            .ant-select-selector {
-                                padding: 5px 12px;
-                                height: 44px;
-                                align-items: start;
-                                border-radius: 8px;
-                                border-color: $primary-color-btn;
-
-                                .ant-select-selection-overflow-item {
-
-                                    .ant-select-selection-item {
-                                        height: 28px;
-                                        display: flex;
-                                        justify-content: space-between;
-                                        align-items: center;
-                                        background-color: #FFAC6A;
-                                        color: white;
-                                        border-radius: 9px;
-                                        box-shadow: $box-shadow;
-                                        padding: 4.5px 13px;
-
-                                        .ant-select-selection-item-content {
-                                            font-size: 14px;
-                                        }
-
-                                        .anticon-close {
-                                        
-                                            svg {
-                                                color: white;
-                                                transform: translateY(-2px);
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-
-                            &.ant-select-focused:not(.ant-select-disabled).ant-select:not(.ant-select-customize-input) .ant-select-selector {
-                                border-color: $primary-color-txt !important;
-                            }
-
-                            &.content__add-item-select {
-                                width: 540px !important;
-                                
-                                .ant-select-selector {
-                                    height: 44px !important;
-                                    border-color: #D4D4D7;
-                                }
-                            }
-                        }
-                        // End ant-select
-                    }
-                    // End content__add-item
-                }
-                // End content__add-list
-
-                // Start content__add-warning
-                .content__add-warning {
-                    margin-top: 14px;
-
-                    img {
-                        margin-right: 3px;
-                    }
-
-                    span {
-                        font-size: 14px;
-                        color: #7E7D88;
-                    }
-                }
-                // End content__add-warning
-            }
-            // End content__add-top
-
-            // Start content__add-bottom 
-            .content__add-bottom {
-                display: flex;
-                justify-content: center;
-                margin-top: 24px;
-
-                button {
-                    width: 115px;
-                    height: 48px;
-                    border-radius: 8px;
-                    font-weight: 600;
-                    transition: all 0.5s;
-                }
-
-                .content__add-btn-cancel {
-                    margin-right: 32px;
-                    border: 1px solid #FF9138;
-                    background-color: #FFF2E7;
-                    color: #FF9138;
-                    
-                    &:hover {
-                        border: 1px solid #FFF2E7;
-                        background-color: #FF9138;
-                        color: #FFF2E7;  
-                        box-shadow: rgba(244, 128, 34, 0.5) 0px 0px 20px;  
-                    }
-                }
-
-                .content__add-btn-add {
-                    border: 1px solid #fff;
-                    background-color: #FF9138;
-                    color: #fff;
-
-                    &:hover {
-                        border: 1px solid #FF9138;
-                        background-color: #FFF2E7;
-                        color: #FF9138;  
-                        box-shadow: rgba(244, 128, 34, 0.5) 0px 0px 20px;    
-                    }
-                }
-            }
-            // End content__add-bottom
-        }
-        // End thietBi__content-add
+        // End taiKhoan__content-update
     }
-    // End thietBi__content
+    // End taiKhoan__content
 
-    // Start thietBi__addThietBi 
-    .thietBi__addThietBi {
+    // Start taiKhoan__addTaiKhoan 
+    .taiKhoan__addTaiKhoan {
         position: absolute;
         right: 0;
         top: 247px;
@@ -751,71 +522,6 @@
             white-space: normal;
         }
     }
-    // End thietBi__addThietBi 
-
-    // Start thietBi__capNhat
-    .thietBi__capNhat {
-        position: absolute;
-        top: 156px;
-        right: 0;
-        background-color: #FFF2E7;
-        width: 80px;
-        height: 94px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        box-shadow: $box-shadow;
-        cursor: pointer;
-        border-bottom-left-radius: 8px;
-        border-top-left-radius: 8px;
-
-        span {
-            font-size: 14px;
-            font-weight: 600;
-            color: $primary-color-txt;
-            line-height: 19.1px;
-            text-align: center;
-            margin-top: 6.33px;
-        }
-    } 
-    // End thietBi__capNhat 
+    // End taiKhoan__addTaiKhoan 
 }
-// End thietBi
-
-// Start ant-select-dropdown
-.ant-select-dropdown {
-    width: auto;
-    height: 152px !important;
-    border-radius: 8px !important; 
-    padding: 8px 0 !important;
-
-    .rc-virtual-list-holder {
-        height: 100% !important;
-
-        .rc-virtual-list-holder-inner {
-            height: 100% !important;
-
-            .ant-select-item  {
-                height: 44px !important;
-                padding: 10px 12px !important;
-            }
-
-            .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
-                background-color: #fff2e7 !important;
-            }
-        }
-    }
-    
-    // Start ant-select-item-option-active:not(.ant-select-item-option-disabled)
-    .ant-select-item-option-active:not(.ant-select-item-option-disabled) {
-        background-color: #fff2e7 !important;
-    }
-    // End ant-select-item-option-active:not(.ant-select-item-option-disabled)
-
-    .rc-virtual-list-scrollbar-thumb {
-        width: 4px !important;
-        background: #FFAC6A !important;
-    }
-}
-// End ant-select-dropdown
+// End taiKhoan

@@ -366,17 +366,6 @@ export const DanhSachThietBi = () => {
                   </Breadcrumb.Item>
                 </>
               )}
-              {/* {pathnames.map((name,index)=> {
-                const routeTo = `${pathnames.slice(0, index + 1).join('/')}`;
-                const isLast = index === pathnames.length - 1;
-                return isLast ? (
-                  <Breadcrumb.Item>{name}</Breadcrumb.Item>
-                ) : (
-                  <Breadcrumb.Item>
-                    <Link to={`${routeTo}`}>{name}</Link>
-                  </Breadcrumb.Item>
-                )
-              })} */}
             </Breadcrumb>
           </div>
         )
@@ -402,7 +391,7 @@ export const DanhSachThietBi = () => {
             Danh sách thiết bị
             </h3>
             <div className='thietBi__content-menu'>
-            <div className='thietBi__content-list thietBi__content-option'>
+              <div className='thietBi__content-list thietBi__content-option'>
                 <div className='thietBi__content-item'>
                 <span>Trạng thái hoạt động</span>
                 <Select defaultValue="Tất cả" style={{ width: 120 }} onChange={handleChangeSelect} className='thietBi__content-select' autoFocus={false} suffixIcon={<img src={Image.select}/>}>

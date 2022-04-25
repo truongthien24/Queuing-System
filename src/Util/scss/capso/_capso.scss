@@ -1,10 +1,10 @@
-// Start dichVu
-.dichVu {
+// Start capSp
+.capSo {
     padding: 30px 97px 30px 24px;
     position: relative;
 
-    // Start dichVu__breadcrumb 
-    .dichVu__breadcrumb {
+    // Start capSo__breadcrumb 
+    .capSo__breadcrumb {
         margin-bottom: 45px;
 
         // Start ant-breadcrumb
@@ -38,33 +38,33 @@
         //End ant-breadcrumb 
 
     }
-    // End dichVu__breadcrumb
+    // End capSo__breadcrumb
 
-    // Start dichVu__content
-    .dichVu__content {
+    // Start capSo__content
+    .capSo__content {
 
-        // Start dichVu__content-heading
-        .dichVu__content-heading {
+        // Start capSo__content-heading
+        .capSo__content-heading {
             font-size: 24px;
             color: $primary-color-txt;
             font-weight: 700;
             line-height: 36px;
             margin-bottom: 16px;
         }
-        // End dichVu__content-heading
+        // End capSo__content-heading
 
-        // Start dichVu__content-menu
-        .dichVu__content-menu {
+        // Start capSo__content-menu
+        .capSo__content-menu {
             display: flex;
             justify-content: space-between;
             width: 1112px;
 
-            // Start dichVu__content-list 
-            .dichVu__content-list {
+            // Start capSo__content-list 
+            .capSo__content-list {
                 display: flex;
 
-                // Start dichVu__content-item
-                .dichVu__content-item {
+                // Start capSo__content-item
+                .capSo__content-item {
                     display: flex;
                     flex-direction: column;
                     margin-right: 24px;
@@ -75,8 +75,8 @@
                         font-weight: 700;
                     }
 
-                    //Start dichVu__content-select
-                    .dichVu__content-select {
+                    //Start capSo__content-select
+                    .capSo__content-select {
                         width: 300px;
                         height: 44px !important;
 
@@ -98,7 +98,7 @@
                         // }
 
                     }
-                    //End dichVu__content-select
+                    //End capSo__content-select
 
                     // Start ant-input-affix-wrapper
                     .ant-input-affix-wrapper {
@@ -162,7 +162,7 @@
                     // End ant-picker-range
 
                     .ant-picker {
-                        width: 150px;
+                        width: 146px;
                         height: 44px;
                         border-radius: 8px;
 
@@ -189,20 +189,20 @@
                         margin: 0 8px;
                     }
                 }
-                // End dichVu__content-item
+                // End capSo__content-item
 
-                &.dichVu__content-search {
+                &.capSo__content-search {
 
-                    .dichVu__content-item {
+                    .capSo__content-item {
                         margin-right: 0;
                     }
                 }
             }
-            // End dichVu__content-list 
+            // End capSo__content-list 
 
             &.detail {
 
-                .dichVu__content-item {
+                .capSo__content-item {
                     margin-right: 12px;
 
                     .ant-picker {
@@ -211,10 +211,10 @@
                 }
             }
         }
-        // End dichVu__content-menu
+        // End capSo__content-menu
 
-        // Start dichVu__content-table 
-        .dichVu__content-table {
+        // Start capSo__content-table 
+        .capSo__content-table {
             width: 1112px;
             margin-top: 16px;
 
@@ -277,12 +277,12 @@
                                             cursor: pointer;
                                         }
 
-                                        &:focus + .ant-table-cell-dichvu {
+                                        &:focus + .ant-table-cell-capSo {
                                             display: block;
                                         }
                                     }
 
-                                    .ant-table-cell-dichvu {
+                                    .ant-table-cell-capSo {
                                         position: absolute;
                                         bottom: -4px;
                                         left: -3px;
@@ -358,257 +358,150 @@
             }
             // End ant-table-wrapper
         }
-        // End dichVu__content-table 
+        // End capSo__content-table
 
-        // Start dichVu__content-detail
-        .dichVu__content-detail {
-            margin-top: 32px;
-            display: flex;
+        // Start capSo__content=about
+        .capSo__content-about {
+            width: 1112px;
+            height: 604px;
+            background-color: #fff;
+            border-radius: 16px;
+            box-shadow: $box-shadow;
+            padding: 16px 24px;
 
-            // Start content__detail-left 
-            .content__detail-left {
-                width: 370px;
-                height: 606px;
-                background-color: #fff;
-                border-radius: 12px;
-                box-shadow: $box-shadow;
-                margin-right: 24px;
-                padding: 16px;
+            // Start content__about-heading
+            .content__about-heading {
+                font-size: 20px;
+                font-weight: 800;
+                line-height: 30px;
+                color: $primary-color-txt;
+                margin-bottom: 20px;
+            }
+            // End content__about-heading
 
-                // Start detail__item
-                .detail__item {
+            // Start content__about-list 
+            .content__about-list {
+                display: flex;
+                justify-content: space-between;
 
-                    h5 {
-                        font-size: 20px;
-                        font-weight: 700;
-                        color: $primary-color-txt;
-                        line-height: 30px;
-                        margin-bottom: 12px;
-                    }
+                // Start content__about-item
+                .content__about-item {
+                    flex: 1;
 
-                    // Start detail__info
-                    .detail__info {
+                    // Start about__info-list
+                    .about__info-list {
+                        display: flex;
+                        flex-direction: column;
 
-                        .detail__info-item {
+                        // Start about__info-item
+                        .about__info-item {
+                            margin-bottom: 16px;
                             display: flex;
                             align-items: center;
-                            margin-bottom: 12px;
-
-                            .detail__info-left {
+                            
+                            p {
+                                font-size: 16px;
+                                line-height: 24px;
                                 font-weight: 600;
                                 color: #282739;
-                                line-height: 24px;
+                                flex: 0.5;
                                 margin-bottom: 0;
-                                flex: 1;
                             }
 
-                            .detail__info-right {
-                                flex: 2;
+                            span {
                                 color: #535261;
-                                display: flex;
-                                align-items: center;
-
-                                .detail__info-number {
-                                    width: 61px;
-                                    height: 44px;
-                                    border: 1px solid #D4D4D7;
-                                    border-radius: 8px;
-                                    display: flex;
-                                    align-items: center;
-                                    justify-content: center;
-                                }
-
-                                span {
-                                    margin: 8px;
-                                }
+                                font-weight: 400;
+                                line-height: 24px;
+                                flex: 1.5;
                             }
                         }
+                        // End about__info-item
                     }
-                    // End detail__info
+                    // End about__info-list
                 }
-                // End detail__item
+                // Start content__about-item
             }
-            // End content__detail-left 
-
-            // Start content__detail-right 
-            .content__detail-right {
-                width: 718px;
-                height: 606px;
-                background-color: #fff;
-                border-radius: 12px;
-                box-shadow: $box-shadow;
-                margin-right: 24px;
-                padding: 16px 25px;
-
-                // Start dichVu__content-table
-                .dichVu__content-table {
-
-                    .ant-table-wrapper {
-                        width: 669px;
-                        height: 441px;
-                    }
-                   
-                }
-                // End dichVu__content-table
-            }
-            // End content__detail-right 
+            // End content__about-list
         }
-        // End dichVu__content-detail
+        // End capSo__content-about
 
-        // Start dichVu__content-update 
-        .dichVu__content-update {
-            width: 1178px;
-            margin-top: 32px;
+        // Start capSo__content-container
+        .capSo__content-container {
+            width: 1192px;
+            height: 604px;
+            background-color: #fff;
+            border-radius: 16px;
+            box-shadow: $box-shadow;
+            padding: 24px 54px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
 
-            // Start content__update-top 
-            .content__update-top {
-                height: 534px;
-                background-color: #fff;
-                border-radius: 16px;
-                box-shadow: $box-shadow;
-                padding: 16px 24px;
+            // Start content__container-heading
+            .content__container-heading {
+                font-size: 32px;
+                font-weight: 700;
+                color: $primary-color-txt;
+                line-height: 48px;
+                text-transform: uppercase;
+            }
+            // End content__container-heading
+            
+            // Start content__container-form-top
+            .content__container-form-top {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
 
-                // Start content__update-list 
-                .content__update-list {
+                .form__top-title {
+                    font-size: 20px;
+                    font-weight: 700;
+                    color: #535261;
+                    line-height: 30px;
+                    margin-bottom: 12px;
+                }
 
-                    // Start content__update-item 
-                    .content__update-item {
+                // Start form__top-select 
+                .form__top-select {
+                    
+                    .ant-select-selector {
+                        height: 44px;
+                        border-radius: 8px;
+                        border-width: 2px;
 
-                        // Start content__update-heading 
-                        .content__update-heading {
-                            font-size: 20px;
-                            line-height: 30px;
-                            font-weight: 700;
-                            color: $primary-color-txt;
+                        .ant-select-selection-placeholder {
+                            line-height: 44px;
                         }
-                        // End content__update-heading  
 
-                        // Start content__update-content 
-                        .content__update-content {
-                            display: grid;
-                            grid-template-columns: 1fr 1fr;
-                            grid-gap: 12px;
-
-                            // Start content__update-input
-                            .content__update-input {
-                                
-                                // Start update__input-title
-                                .update__input-title {
-                                    font-weight: 600;
-                                    line-height: 24px;
-                                    display: flex;
-                                    align-items: center;
-                                    margin-bottom: 8px;
-                                    
-                                    img {
-                                        margin-left: 3px;
-                                    }
-                                }
-                                // End update__input-title
-
-                                // Start update__input-input
-                                .update__input-input {
-                                    width: 553px;
-                                    height: 44px;
-                                    padding: 10px 12px;
-                                    border: 1px solid #D4D4D7;
-                                    border-radius: 8px;
-
-                                    
-                                    &:focus {
-                                        outline-color: $primary-color-btn;
-                                    }
-                                }
-                                // End update__input-input
-
-                                &.moTa {
-                                    grid-row: span 2;
-
-                                    .update__input-input {
-                                        height: 132px;
-                                        display: flex;
-                                        align-items: flex-start !important;
-                                        text-rendering: unset;
-                                        resize: none;
-                                    }
-                                }
-                            }
-                            // End content__update-input
-
-                            &.check {
-                                display: flex;
-                                flex-direction: column;
-                                justify-content: center;
-
-                                // Start content__update-check
-                                .content__update-check {
-                                    display: flex;
-                                    align-items: center;
-                                    
-                                    // Start content__update-check-left
-                                    .content__update-check-left {
-                                        flex: 1;
-
-                                        .content__update-title {
-                                            font-weight: 700;
-                                            line-height: 24px;
-                                            margin-bottom: 8px;
-                                        }
-                                    }
-                                    // End content__update-check-left
-
-                                    // Start content__update-check-right
-                                    .content__update-check-right {
-                                        display: flex;
-                                        align-items: center;
-                                        flex: 5;
-
-                                        .content__update-check-number {
-                                            width: 61px;
-                                            height: 44px;
-                                            border: 1px solid #D4D4D7;
-                                            border-radius: 8px;
-                                            margin: 0 12px;
-                                            display: flex;
-                                            align-items: center;
-                                            justify-content: center;
-                                        }
-                                    }
-                                    // End content__update-check-right
-                                    
-                                    &:last-child {
-                                        margin-top: 9px;
-
-                                        span {
-                                            margin-left: 3px;
-                                            font-size: 14px;
-                                            color: #7E7D88;
-                                        }
-                                    }
-                                }
-                                // End content__update-check
-                            }
-                        }
-                        // End content__update-content
-
-                        &:last-child {
-
-                            h3 {
-                                margin-top: 16px;
-                            }
+                        .ant-select-selection-item {
+                            line-height: 44px;
                         }
                     }
-                    // End content__update-item 
-                }
-                // End contnet__update-list
-            }
-            // End content__update-top
 
-            // Start content__update-bottom 
-            .content__update-bottom {
+                    &.ant-select-focused:not(.ant-select-disabled).ant-select:not(.ant-select-customize-input) {
+
+                        .ant-select-selector {
+                            border-color: $primary-color-txt;
+                        }
+                    }
+
+                    &:not(.ant-select-disabled):hover {
+                        
+                        .ant-select-selector {
+                            border-color: $primary-color-txt;
+                        }
+                    }
+                }
+                // End form__top-select
+            }
+            // End content__container-form-top
+
+            // Start content__container-form-bottom
+            .content__container-form-bottom {
                 display: flex;
+                align-items: center;
                 justify-content: center;
-                margin-top: 24px;
+                margin-top: 80px;
 
                 button {
                     width: 115px;
@@ -616,10 +509,10 @@
                     border-radius: 8px;
                     font-weight: 600;
                     transition: all 0.5s;
+                    outline: none;
                 }
-                
-                // Start dichVu__cancel 
-                .dichVu__cancel {
+
+                .form__bottom-btn-cancel {
                     margin-right: 32px;
                     border: 1px solid #FF9138;
                     background-color: #FFF2E7;
@@ -632,10 +525,8 @@
                         box-shadow: rgba(244, 128, 34, 0.5) 0px 0px 20px;  
                     }
                 }
-                // End dichVu__cancel
 
-                // Start dichVu__add
-                .dichVu__add {
+                .form__bottom-btn-print {
                     border: 1px solid #fff;
                     background-color: #FF9138;
                     color: #fff;
@@ -648,16 +539,15 @@
 
                     }
                 }
-                // End dichVu__add
             }
-            // End content__update-bottom
+            // End content__container-form-bottom
         }
-        // End dichVu__content-update
+        // End capSo__content-container
     }
-    //End dichVu__content
+    // End capSo__content
 
-    // Start dichVu__adddichVu 
-    .dichVu__adddichVu {
+    // Start capSo__addcapSo 
+    .capSo__addcapSo {
         position: absolute;
         right: 0;
         top: 247px;
@@ -685,16 +575,16 @@
             white-space: normal;
         }
     }
-    // End dichVu__adddichVu
-    
-    // Start dichVu__capNhat
-    .dichVu__capNhat {
+    // End capSo__addcapSo
+
+    // Start capSo__return
+    .capSo__return {
         position: absolute;
-        top: 175px;
+        top: 164px;
         right: 0;
         background-color: #FFF2E7;
         width: 80px;
-        height: 94px;
+        height: 75px;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -713,129 +603,8 @@
             margin-top: 6.33px;
         }
     } 
-    // End dichVu__capNhat 
-
-    // Start dichVu__return
-    .dichVu__return {
-        position: absolute;
-        top: 266px;
-        right: 0;
-        background-color: #FFF2E7;
-        width: 80px;
-        height: 75px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        box-shadow: $box-shadow;
-        cursor: pointer;
-
-        span {
-            font-size: 14px;
-            font-weight: 600;
-            color: $primary-color-txt;
-            line-height: 19.1px;
-            text-align: center;
-            margin-top: 6.33px;
-        }
-    } 
-    // End dichVu__return 
+    // End capSo__return
 }
-//End dichVu
+// End capSo
 
-// Start ant-picker-dropdown
-.ant-picker-dropdown { 
-    
-    .ant-picker-range-wrapper {
 
-        .ant-picker-panel-container {
-
-            .ant-picker-time-panel {
-                display: none;
-            }
-
-            // .ant-picker-footer {
-            //     display: none;
-            // }
-        }
-    }
-
-    .ant-picker-panel-container {
-        border-radius: 8px;
-        height: 336px;
-        width: 320px;
-
-        .ant-picker-date-panel {
-            width: 320px;
-
-            .ant-picker-header {
-                padding: 15px 10px;
-    
-                button {
-                    color: $primary-color-txt;
-                    font-weight: 700
-                }
-            }
-
-            .ant-picker-body {
-
-                .ant-picker-content {
-                    width: calc(320px - 24px);
-
-                    thead {
-
-                        tr {
-                            
-                            th {
-                                color: $primary-color-txt;
-                                font-size: 14px;    
-                                font-weight: 700;
-                            }
-                        }
-                    }
-
-                    tbody {
-
-                        tr {
-
-                            td {
-                                padding: 0;
-                                border-radius: 8px;
-
-                                div {
-                                    font-size: 14px;   
-                                    width: 36px;
-                                    height: 36px;
-                                }
-
-                                &.ant-picker-cell-selected {
-                                    background-color: $primary-color-txt;
-
-                                    .ant-picker-cell-inner {
-                                        background-color: $primary-color-txt;
-                                        color: #fff;
-                                    }
-                                }
-                                
-
-                                &.ant-picker-cell-disabled::before {
-                                    height: 100%;
-                                }
-
-                                &.ant-picker-cell-in-view.ant-picker-cell-today .ant-picker-cell-inner::before {
-                                    border-color: $primary-color-txt;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-        }
-
-        .ant-picker-footer {
-            display: none;
-        }
-    }
-}
-// End ant-picker-dropdown

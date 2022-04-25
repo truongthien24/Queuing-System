@@ -39,6 +39,8 @@ import dangthuchien from '../image/dangthuchien.png';
 import vang from '../image/vang.png';
 import prev from '../image/prev.png';
 import next from '../image/next.png';
+import arrowRight from '../image/arrow-right.png';
+import download from '../image/download.png';
 
 export const Image = {
     logo: `${logo}`,
@@ -82,4 +84,6 @@ export const Image = {
     vang: `${vang}`,
     prev: `${prev}`,
     next: `${next}`,
+    arrowRight: `${arrowRight}`,
+    download: `${download}`,
 } 

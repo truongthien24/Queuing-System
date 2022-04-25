@@ -42,17 +42,6 @@ export const ChiTietThietBi = () => {
                   </Breadcrumb.Item>
                 </>
               )}
-              {/* {pathnames.map((name,index)=> {
-                const routeTo = `${pathnames.slice(0, index + 1).join('/')}`;
-                const isLast = index === pathnames.length - 1;
-                return isLast ? (
-                  <Breadcrumb.Item>{name}</Breadcrumb.Item>
-                ) : (
-                  <Breadcrumb.Item>
-                    <Link to={`${routeTo}`}>{name}</Link>
-                  </Breadcrumb.Item>
-                )
-              })} */}
             </Breadcrumb>
           </div>
         )

@@ -76,7 +76,8 @@
                 }
                 
                 &.ant-menu-item-selected > .ant-menu-title-content a,
-                &.ant-menu-item-selected > .ant-menu-item-icon {
+                &.ant-menu-item-selected > .ant-menu-item-icon, 
+                &.ant-menu-item-selected > .ant-menu-title-content span {
                     color: #fff;
                 }
 

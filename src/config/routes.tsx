@@ -1,8 +1,16 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom';
 import App from '../App';
-import { BaoCao } from '../component/BaoCao';
-import { Capso } from '../component/Capso';
+import { BaoCao } from '../component/BaoCao/BaoCao';
+import { LapBaoCao } from '../component/BaoCao/LapBaoCao';
+import { DanhSachVaiTro } from '../component/CaiDatHeThong/VaiTro/DanhSachVaiTro';
+import { NhatKyNguoiDung } from '../component/CaiDatHeThong/NguoiDung/NhatKyNguoiDung';
+import { QuanLyTaiKhoan } from '../component/CaiDatHeThong/TaiKhoan/QuanLyTaiKhoan';
+import { QuanLyVaiTro } from '../component/CaiDatHeThong/VaiTro/QuanLyVaiTro';
+import { Capso } from '../component/CapSo/Capso';
+import { ChiTietCapSo } from '../component/CapSo/ChiTietCapSo';
+import { DanhSachCapSo } from '../component/CapSo/DanhSachCapSo';
+import { ThemCapSo } from '../component/CapSo/ThemCapSo';
 import { ConfirmEmail } from '../component/ConfirmEmail';
 import { Dashboard } from '../component/Dashboard/Dashboard';
 import { DashboardDate } from '../component/Dashboard/DashboardDate';
@@ -23,6 +31,11 @@ import { ChiTietThietBi } from '../component/ThietBi/ChiTietThietBi';
 import { DanhSachThietBi } from '../component/ThietBi/DanhSachThietBi';
 import { ThemThietBi } from '../component/ThietBi/ThemThietBi';
 import { Thietbi } from '../component/ThietBi/Thietbi';
+import { ThemVaiTro } from '../component/CaiDatHeThong/VaiTro/ThemVaiTro';
+import { CapNhatVaiTro } from '../component/CaiDatHeThong/VaiTro/CapNhatVaiTro';
+import { CapNhattaiKhoan } from '../component/CaiDatHeThong/TaiKhoan/CapNhatTaiKhoan';
+import { DanhSachTaiKhoan } from '../component/CaiDatHeThong/TaiKhoan/DanhSachTaiKhoan';
+import { ThemTaiKhoan } from '../component/CaiDatHeThong/TaiKhoan/ThemTaiKhoan';
 
 const MainRoutes = () => {
   return (
@@ -47,8 +60,25 @@ const MainRoutes = () => {
               <Route path='capNhatDichVu' element={<CapNhatDichVu/>}/>  
               <Route path='themDichVu' element={<ThemDichVu/>}/>  
             </Route>           
-            <Route path='capso' element={<Capso/>}/>           
-            <Route path='baocao' element={<BaoCao/>}/>           
+            <Route path='capso' element={<Capso/>}>
+              <Route index element={<DanhSachCapSo/>}/>
+              <Route path='chiTietCapSo' element={<ChiTietCapSo/>}/>
+              <Route path='themCapSo' element={<ThemCapSo/>}/>
+            </Route>           
+            <Route path='baocao' element={<BaoCao/>}>
+              <Route index element={<LapBaoCao/>}/>  
+            </Route>
+            <Route path='qlVaiTro' element={<QuanLyVaiTro/>}>
+                <Route index element={<DanhSachVaiTro/>}/>
+                <Route path='themVaiTro' element={<ThemVaiTro/>}/>
+                <Route path='capNhatVaiTro' element={<CapNhatVaiTro/>}/>
+            </Route> 
+            <Route path='qlTaiKhoan' element={<QuanLyTaiKhoan/>}>
+              <Route index element={<DanhSachTaiKhoan/>}/>
+              <Route path='capNhatTaiKhoan/:ID' element={<CapNhattaiKhoan/>}/>            
+              <Route path='themTaiKhoan' element={<ThemTaiKhoan/>}/>            
+            </Route> 
+            <Route path='nhatKyNguoiDung' element={<NhatKyNguoiDung/>}/> 
           </Route>
           <Route path='/login' element={<Login/>}/>
           <Route path='/confirmEmail' element={<ConfirmEmail/>}/>
