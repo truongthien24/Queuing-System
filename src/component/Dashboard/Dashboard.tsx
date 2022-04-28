@@ -30,44 +30,77 @@ export const Dashboard = () => {
         console.log(value, mode);
     }
 
+    //Thiết bị
+    const [thietBi, setThietBi] = useState<number>(4221)
+    const [thietBiHD, setThietBiHD] = useState<number>(3799)
+    const [thietBiNHD, setThietBiNHD] = useState<number>(422)
+
+    //Dịch vụ
+    const [dichVu, setDichVu] = useState<number>(276)
+    const [dichVuHD, setdichVuHD] = useState<number>(210)
+    const [dichVuNHD, setDichVuNHD] = useState<number>(66)
+
+    //Cấp số
+    const [capSo, setcapSo] = useState<number>(4221)
+    const [capSoDaSD, setCapSoDaSD] = useState<number>(3721)
+    const [capSoDangCho, setCapSoDangCho] = useState<number>(486)
+    const [capSoBoQua, setCapSoBoQua] = useState<number>(32)
+
+    //tính phần trăm thiết bị
+    const maxAngleThietBi = (thietBiHD/thietBi)*360;
+    const ngungHD = (thietBiNHD/thietBi)*360;
+
+    //Tính phần trăm dịch vụ
+    const maxAngleDichVu = (dichVuHD/dichVu)*360;
+    const ngungHDDichVu = (dichVuNHD/dichVu)*360;
+
+    //Tính phần trăm cấp số
+    const maxAngleCapSo = (capSoDaSD/capSo)*360;
+    const dangChoCapSo = (capSoDangCho/capSo)*360;
+    const boQuaCapSo = (capSoBoQua/capSo)*360;
+
+    console.log(maxAngleDichVu);
+    console.log(ngungHDDichVu);
+
+
     const dataThietBi = [
         {
-          name: 'X6',
-          star: 107,
+          name: '',
+          star: ngungHD,
         },
         {
-          name: 'G',
-          star: 700,
+          name: '2',
+          star: maxAngleThietBi,
         },
     ];
 
     const dataDichVu = [
         {
-          name: 'X6',
-          star: 107,
+          name: '',
+          star: ngungHDDichVu,
         },
         {
-          name: 'G',
-          star: 700,
+          name: '2',
+          star: maxAngleDichVu,
         },
     ];
 
     const dataCapSo = [
         {
-          name: 'X6',
-          star: 56,
+            name: '',
+            star: boQuaCapSo + 20,
         },
         {
-          name: 'G',
-          star: 80,
+            name: '2',
+            star: dangChoCapSo,
         },
         {
-            name: 'F',
-            star: 600,
-          },
+            name: '4',
+            star: maxAngleCapSo,
+        },
     ];
 
-    const configThietbi = {
+    const configThietbi = {       
         data: dataThietBi,
         xField: 'name',
         yField: 'star',
@@ -75,27 +108,32 @@ export const Dashboard = () => {
         height: 60,
         radius: 1,
         innerRadius: 0.7,
-        maxAngle: 320,
-        maxBarWidth: 800,
+        maxAngle: maxAngleThietBi,
         tooltip: {
             showContent: false
         },
         colorField: 'star',
         color: ({ star}:any) => {
-          if (star > 300) {
+          if (star > 50) {
             return '#FF7506';
-          } else if (star < 500) {
+          } else if (star < 50) {
             return '#7E7D88';
           }
-    
           return '#FF7506';
         },
         barBackground: {},
-        // xAxis: {
-        //     title: {
-        //         text: ''
-        //     }
-        // }
+        barStyle: {
+            cursor: 'pointer',
+            // lineCap: 'round'
+        },
+        type: 'round'
+        // annotations: [
+        //     {
+        //         type: 'text',
+        //         position: ['50%', '50%'],
+        //         content: '56%',
+        //     },
+        //   ],
       };
 
       const configDichVu = {
@@ -106,22 +144,24 @@ export const Dashboard = () => {
         height: 60,
         radius: 1,
         innerRadius: 0.7,
-        maxAngle: 270,
-        maxBarWidth: 800,
+        maxAngle: maxAngleDichVu,
         tooltip: {
             showContent: false
         },
         colorField: 'star',
         color: ({ star}:any) => {
-          if (star > 300) {
+          if (star > (dichVu/2)) {
             return '#4277FF';
-          } else if (star < 500) {
+          } else if (star < (dichVu/2)) {
             return '#7E7D88';
           }
     
           return '#4277FF';
         },
         barBackground: {},
+        barStyle: {
+            cursor: 'pointer',
+        },
       };
 
       const configCapSo = {
@@ -131,25 +171,29 @@ export const Dashboard = () => {
         width: 60,
         height: 60,
         radius: 1,
-        innerRadius: 0.7,
-        maxAngle: 300,
-        maxBarWidth: 800,
+        innerRadius: 0.5,
+        maxAngle: maxAngleCapSo,
         tooltip: {
             showContent: false
         },
         colorField: 'star',
         color: ({ star}:any) => {
-          if (star > 300) {
+          if (star > (dichVu/2)) {
             return '#35C75A';
-          } else if (star < 500) {
+          } else if (star < (dichVu/2) && star > 30) {
             return '#7E7D88';
+          } else if (star < 30){
+            return '#F178B6';
           }
-    
           return '#35C75A';
         },
         barBackground: {},
+        barStyle: {
+            cursor: 'pointer',
+        },
       };
 
+      
     return (
         <div className='dashboard'> 
             <div className='dashboard__content'>
@@ -167,7 +211,7 @@ export const Dashboard = () => {
                                 <p>Số thứ tự đã cấp</p>
                             </div>
                             <div className='content__item-bottom'>
-                                <p className='content__item-number'>4.221</p>
+                                <p className='content__item-number'>{thietBi}</p>
                                 <div className='content__item-growth increment'>
                                     <img src={`${Image.increment}`}/>
                                     <span> 32,41%</span>
@@ -182,7 +226,7 @@ export const Dashboard = () => {
                                 <p>Số thứ tự đã sử dụng</p>
                             </div>
                             <div className='content__item-bottom'>
-                                <p className='content__item-number'>3.721</p>
+                                <p className='content__item-number'>{thietBiHD} </p>
                                 <div className='content__item-growth decrement'>
                                     <img src={`${Image.decrement}`}/>
                                     <span> 32,41%</span>
@@ -237,7 +281,7 @@ export const Dashboard = () => {
                     <div className='content__right-list'>
                         <div className="content__right-item">
                             <div className='item__left'>
-                                <RadialBar {...configThietbi} />
+                                <RadialBar  {...configThietbi} />
                                 <div className='item__number'>
                                     <p>4.221</p>
                                     <div className='item__text thietbi'>
@@ -254,7 +298,7 @@ export const Dashboard = () => {
                                             <span>Đang hoạt động</span>
                                         </div>
                                         <div className='item__right-number thietbi'>
-                                            <span>3.799</span>
+                                            <span>{thietBiHD}</span>
                                         </div>
                                     </div>
                                     <div className='item__right-item'>
@@ -263,7 +307,7 @@ export const Dashboard = () => {
                                             <span>Ngưng hoạt động</span>
                                         </div>
                                         <div className='item__right-number thietbi'>
-                                            <span>422</span>
+                                            <span>{thietBiNHD}</span>
                                         </div>
                                     </div>
                                 </div>

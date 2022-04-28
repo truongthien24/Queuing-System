@@ -6,232 +6,40 @@ import { Image } from '../../Util/variableImage';
 import { Select } from 'antd';
 import { Table, Input, InputNumber, Popconfirm, Form, Typography } from 'antd';
 import * as Data from '../../data/ThietBiData.json';
+import { State, thietBiCreator } from '../../Redux';
+import { bindActionCreators } from 'redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 
-
-const data = [
-    {
-        "maThietBi": "KIO_01",
-        "tenThietBi": "Kiosk",
-        "loaiThietBi": "Kiosk",
-        "tenDangNhap": "Linhkyo011",
-        "Mật khẩu": "CMS",
-        "diaChi": "192.168.1.10",
-        "trangThaiHD": "Ngưng hoạt động",
-        "trangThaiKN": "Mất kết nối",
-        "dichVu": "Khám tim mạch, Khám Sản - Phụ Khoa, Khám răng hàm mặt. Khám tai mũi họng, Khám hô hấp, Khám tổng quát",
-        "key": 0
-    },
-    {
-        "maThietBi": "KIO_01",
-        "tenThietBi": "Kiosk",
-        "diaChi": "192.168.1.10",
-        "trangThaiHD": "Hoạt động",
-        "trangThaiKN": "Kết nối",
-        "dichVu": "Khám tim mạch, Khám Sản - Phụ Khoa, Khám răng hàm mặt. Khám tai mũi họng, Khám hô hấp, Khám tổng quát",
-        "key": 1,
-    },
-    {
-        "key": 2,
-        "maThietBi": "KIO_01",
-        "tenThietBi": "Kiosk",
-        "diaChi": "192.168.1.10",
-        "trangThaiHD": "Hoạt động",
-        "trangThaiKN": "Mất kết nối",
-        "dichVu": "Khám tim mạch, Khám Sản - Phụ Khoa, Khám răng hàm mặt. Khám tai mũi họng, Khám hô hấp, Khám tổng quát",
-    },
-    {
-      "key": 3,
-      "maThietBi": "KIO_01",
-      "tenThietBi": "Kiosk",
-      "diaChi": "192.168.1.10",
-      "trangThaiHD": "Ngưng hoạt động",
-      "trangThaiKN": "Kết nối",
-      "dichVu": "Khám tim mạch, Khám Sản - Phụ Khoa, Khám răng hàm mặt. Khám tai mũi họng, Khám hô hấp, Khám tổng quát",
-    },
-    {
-      "key": 4,
-        "maThietBi": "KIO_01",
-        "tenThietBi": "Kiosk",
-        "diaChi": "192.168.1.10",
-        "trangThaiHD": "Hoạt động",
-        "trangThaiKN": "Mất kết nối",
-        "dichVu": "Khám tim mạch, Khám Sản - Phụ Khoa, Khám răng hàm mặt. Khám tai mũi họng, Khám hô hấp, Khám tổng quát"
-    },
-    {
-      "key": 5,
-        "maThietBi": "KIO_01",
-        "tenThietBi": "Kiosk",
-        "diaChi": "192.168.1.10",
-        "trangThaiHD": "Hoạt động",
-        "trangThaiKN": "Kết nối",
-        "dichVu": "Khám tim mạch, Khám Sản - Phụ Khoa, Khám răng hàm mặt. Khám tai mũi họng, Khám hô hấp, Khám tổng quát"
-    },
-    {
-      "key": 6,
-        "maThietBi": "KIO_01",
-        "tenThietBi": "Kiosk",
-        "diaChi": "192.168.1.10",
-        "trangThaiHD": "Ngưng hoạt động",
-        "trangThaiKN": "Kết nối",
-        "dichVu": "Khám tim mạch, Khám Sản - Phụ Khoa, Khám răng hàm mặt. Khám tai mũi họng, Khám hô hấp, Khám tổng quát"
-    },
-    {
-      "key": 7,
-        "maThietBi": "KIO_01",
-        "tenThietBi": "Kiosk",
-        "diaChi": "192.168.1.10",
-        "trangThaiHD": "Ngưng hoạt động",
-        "trangThaiKN": "Mất kết nối",
-        "dichVu": "Khám tim mạch, Khám Sản - Phụ Khoa, Khám răng hàm mặt. Khám tai mũi họng, Khám hô hấp, Khám tổng quát"
-    },
-    {
-      "key": 8,
-        "maThietBi": "KIO_01",
-        "tenThietBi": "Kiosk",
-        "diaChi": "192.168.1.10",
-        "trangThaiHD": "Hoạt động",
-        "trangThaiKN": "Mất kết nối",
-        "dichVu": "Khám tim mạch, Khám Sản - Phụ Khoa, Khám răng hàm mặt. Khám tai mũi họng, Khám hô hấp, Khám tổng quát"
-    },
-    {    
-      "key": 9,
-        "maThietBi": "KIO_01",
-        "tenThietBi": "Kiosk",
-        "diaChi": "192.168.1.10",
-        "trangThaiHD": "Ngưng hoạt động",
-        "trangThaiKN": "Mất kết nối",
-        "dichVu": "Khám tim mạch, Khám Sản - Phụ Khoa, Khám răng hàm mặt. Khám tai mũi họng, Khám hô hấp, Khám tổng quát"
-    },
-    {    
-      "key": 10,
-        "maThietBi": "KIO_01",
-        "tenThietBi": "Kiosk",
-        "diaChi": "192.168.1.10",
-        "trangThaiHD": "Ngưng hoạt động",
-        "trangThaiKN": "Kết nối",
-        "dichVu": "Khám tim mạch, Khám Sản - Phụ Khoa, Khám răng hàm mặt. Khám tai mũi họng, Khám hô hấp, Khám tổng quát"
-    },
-    {    
-      "key": 11,
-        "maThietBi": "KIO_01",
-        "tenThietBi": "Kiosk",
-        "diaChi": "192.168.1.10",
-        "trangThaiHD": "Ngưng hoạt động",
-        "trangThaiKN": "Mất kết nối",
-        "dichVu": "Khám tim mạch, Khám Sản - Phụ Khoa, Khám răng hàm mặt. Khám tai mũi họng, Khám hô hấp, Khám tổng quát"
-    },
-    {
-        "maThietBi": "KIO_01",
-        "tenThietBi": "Kiosk",
-        "diaChi": "192.168.1.10",
-        "trangThaiHD": "Ngưng hoạt động",
-        "trangThaiKN": "Mất kết nối",
-        "dichVu": "Khám tim mạch, Khám Sản - Phụ Khoa, Khám răng hàm mặt. Khám tai mũi họng, Khám hô hấp, Khám tổng quát",
-        "key": 0
-    },
-    {
-        "maThietBi": "KIO_01",
-        "tenThietBi": "Kiosk",
-        "diaChi": "192.168.1.10",
-        "trangThaiHD": "Hoạt động",
-        "trangThaiKN": "Kết nối",
-        "dichVu": "Khám tim mạch, Khám Sản - Phụ Khoa, Khám răng hàm mặt. Khám tai mũi họng, Khám hô hấp, Khám tổng quát",
-        "key": 1,
-    },
-    {
-        "key": 2,
-        "maThietBi": "KIO_01",
-        "tenThietBi": "Kiosk",
-        "diaChi": "192.168.1.10",
-        "trangThaiHD": "Hoạt động",
-        "trangThaiKN": "Mất kết nối",
-        "dichVu": "Khám tim mạch, Khám Sản - Phụ Khoa, Khám răng hàm mặt. Khám tai mũi họng, Khám hô hấp, Khám tổng quát"
-    },
-    {
-      "key": 3,
-      "maThietBi": "KIO_01",
-      "tenThietBi": "Kiosk",
-      "diaChi": "192.168.1.10",
-      "trangThaiHD": "Ngưng hoạt động",
-      "trangThaiKN": "Kết nối",
-      "dichVu": "Khám tim mạch, Khám Sản - Phụ Khoa, Khám răng hàm mặt. Khám tai mũi họng, Khám hô hấp, Khám tổng quát"
-    },
-    {
-      "key": 4,
-        "maThietBi": "KIO_01",
-        "tenThietBi": "Kiosk",
-        "diaChi": "192.168.1.10",
-        "trangThaiHD": "Hoạt động",
-        "trangThaiKN": "Mất kết nối",
-        "dichVu": "Khám tim mạch, Khám Sản - Phụ Khoa, Khám răng hàm mặt. Khám tai mũi họng, Khám hô hấp, Khám tổng quát"
-    },
-    {
-      "key": 5,
-        "maThietBi": "KIO_01",
-        "tenThietBi": "Kiosk",
-        "diaChi": "192.168.1.10",
-        "trangThaiHD": "Hoạt động",
-        "trangThaiKN": "Kết nối",
-        "dichVu": "Khám tim mạch, Khám Sản - Phụ Khoa, Khám răng hàm mặt. Khám tai mũi họng, Khám hô hấp, Khám tổng quát"
-    },
-    {
-      "key": 6,
-        "maThietBi": "KIO_01",
-        "tenThietBi": "Kiosk",
-        "diaChi": "192.168.1.10",
-        "trangThaiHD": "Ngưng hoạt động",
-        "trangThaiKN": "Kết nối",
-        "dichVu": "Khám tim mạch, Khám Sản - Phụ Khoa, Khám răng hàm mặt. Khám tai mũi họng, Khám hô hấp, Khám tổng quát"
-    },
-    {
-      "key": 7,
-        "maThietBi": "KIO_01",
-        "tenThietBi": "Kiosk",
-        "diaChi": "192.168.1.10",
-        "trangThaiHD": "Ngưng hoạt động",
-        "trangThaiKN": "Mất kết nối",
-        "dichVu": "Khám tim mạch, Khám Sản - Phụ Khoa, Khám răng hàm mặt. Khám tai mũi họng, Khám hô hấp, Khám tổng quát"
-    },
-    {
-      "key": 8,
-        "maThietBi": "KIO_01",
-        "tenThietBi": "Kiosk",
-        "diaChi": "192.168.1.10",
-        "trangThaiHD": "Hoạt động",
-        "trangThaiKN": "Mất kết nối",
-        "dichVu": "Khám tim mạch, Khám Sản - Phụ Khoa, Khám răng hàm mặt. Khám tai mũi họng, Khám hô hấp, Khám tổng quát"
-    },
-    {    
-      "key": 9,
-        "maThietBi": "KIO_01",
-        "tenThietBi": "Kiosk",
-        "diaChi": "192.168.1.10",
-        "trangThaiHD": "Ngưng hoạt động",
-        "trangThaiKN": "Mất kết nối",
-        "dichVu": "Khám tim mạch, Khám Sản - Phụ Khoa, Khám răng hàm mặt. Khám tai mũi họng, Khám hô hấp, Khám tổng quát"
-    },
-  ];
   const { Option } = Select;
   
   const { Search } = Input;
 
 export const DanhSachThietBi = () => {
 
+   const dispatch = useDispatch();
 
-    // const [chiTiet, setChiTiet] = useState(false);
+   const [thietBi, setThietBi] = useState<any>([]);
+
+   const {LoadDuLieu} = bindActionCreators(thietBiCreator, dispatch);
+
+   useEffect(()=> {
+     LoadDuLieu();
+   }, []);
+
+   const {thietBiData} = useSelector((state: State) => state.thietBi);
+
+   useEffect(()=> {
+     console.log(thietBiData);
+     const getThietBi = async () => {
+         setThietBi(thietBiData.docs.map((doc:any)=> ({...doc.data(), id: doc.id})));
+     }
+       getThietBi();
+   }, [thietBiData]);
 
     const location = useLocation();
   
     const navigate = useNavigate();
-  
-    // useEffect(()=>{
-    //   if(chiTiet) {
-    //     navigate('/thietbi/chiTietThietBi');
-    //   }else {
-    //     navigate('/thietbi');
-    //   }
-    // },[chiTiet]);
   
     const columns = [
   
@@ -252,7 +60,7 @@ export const DanhSachThietBi = () => {
       },
       {
         title: 'Trạng thái hoạt động',
-        dataIndex: 'trangThaiHD',
+        dataIndex: 'trangThaiHoatDong',
         width: 171,
         render: (dataIndex:string) => {
     
@@ -273,7 +81,7 @@ export const DanhSachThietBi = () => {
       },
       {
         title: 'Trạng thái kết nối',
-        dataIndex: 'trangThaiKN',
+        dataIndex: 'trangThaiKetNoi',
         width: 145,
         render: (dataIndex:string) => {
     
@@ -311,11 +119,11 @@ export const DanhSachThietBi = () => {
       },
       {
         title: ' ',
-        dataIndex: 'Chi tiết',
-        render: () => {
+        dataIndex: 'id',
+        render: (dataIndex:any) => {
           return (
             <button onClick={()=> {
-              navigate('/thietbi/chiTietThietBi');
+              navigate(`/thietbi/chiTietThietBi/${dataIndex}`);
             }}>
               Chi tiết
             </button>
@@ -324,11 +132,11 @@ export const DanhSachThietBi = () => {
       },
       {
         title: ' ',
-        dataIndex: 'Cập nhật',
-        render: () => {
+        dataIndex: 'id',
+        render: (dataIndex:any) => {
           return (
             <button onClick={()=> {
-                navigate('/thietbi/capNhatThietBi');
+                navigate(`/thietbi/capNhatThietBi/${dataIndex}`);
               }}>
                 Cập nhật
               </button>
@@ -426,7 +234,7 @@ export const DanhSachThietBi = () => {
             </div>
             <div className='thietBi__content-table'>
             <Table
-                dataSource={data}
+                dataSource={thietBi}
                 columns={columns}
                 size="small"
                 pagination={{ pageSize: 9, itemRender:itemRender }}

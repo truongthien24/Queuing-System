@@ -6,6 +6,8 @@ import { useFormik } from 'formik';
 import { string } from 'yup';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import * as yup from 'yup';
+import { collection, addDoc } from "firebase/firestore"; 
+import { db } from '../../../firebase/firebase.config';
 
 interface formikFace {
     hoTen: string,
@@ -15,7 +17,7 @@ interface formikFace {
     email: string,
     nhapLaiMatKhau: string,
     vaiTro: string,
-    tinhTrang: string
+    trangThaiHoatDong: string
 }
 
 const {Option} = Select;
@@ -34,7 +36,7 @@ export const ThemTaiKhoan = () => {
       email: '',
       nhapLaiMatKhau: '',
       vaiTro: '',
-      tinhTrang: 'Hoạt động'
+      trangThaiHoatDong: ''
   }
 
   const validationSchema = yup.object().shape({
@@ -56,11 +58,34 @@ export const ThemTaiKhoan = () => {
   const formik = useFormik({
       initialValues,
       enableReinitialize: true,
-      onSubmit: (values) => {
-          console.log(JSON.stringify(values));
+      onSubmit: (values:any) => {
+            console.log(values);
+            const addDocument = async () => {
+                // Add a new document with a generated id.
+                const docRef = await addDoc(collection(db, "taiKhoan"), {
+                    hoTen: values.hoTen,
+                    email: values.email,
+                    matKhau: values.matKhau,
+                    nhapLaiMatKhau: values.matKhau,
+                    sdt: values.sdt,
+                    vaiTro: values.vaiTro,
+                    trangThaiHoatDong: values.trangThaiHoatDong,
+                    tenDangNhap: values.tenDangNhap,
+                    ID: (Math.random() * 1000).toString()
+                });
+            }
+            addDocument();
       },
       validationSchema
   })
+
+  const handleChangeSelectVaiTro = (e:any) => {
+    formik.setFieldValue('vaiTro',e.value);
+}
+
+const handleChangeSelectTrangThaiHoatDong = (e:any) => {
+    formik.setFieldValue('trangThaiHoatDong',e.value);
+}
   const breadCrumbView = () => {
       const {pathname} = location;
       const pathnames = pathname.split('/').filter((item) => item);
@@ -87,7 +112,7 @@ export const ThemTaiKhoan = () => {
                 <>
                   <Breadcrumb.Item>Cài đặt hệ thống</Breadcrumb.Item>
                   <Breadcrumb.Item>
-
+                    
                   </Breadcrumb.Item>
                 </>
               )}
@@ -95,6 +120,15 @@ export const ThemTaiKhoan = () => {
           </div>
         )
   }
+
+//   const addDocument = async () => {
+//     // Add a new document with a generated id.
+//     const docRef = await addDoc(collection(db, "taiKhoan"), {
+//         name: "Tokyo",
+//         country: "Japan"
+//     });
+//     console.log("Document written with ID: ", docRef.id);
+//   }
   return (
     <div>
         <div className='taiKhoan__breadcrumb'>
@@ -104,7 +138,7 @@ export const ThemTaiKhoan = () => {
             <h3 className='taiKhoan__content-heading'>
             Quản lý thiết bị
             </h3>
-            <form className='taiKhoan__content-update'>
+            <form className='taiKhoan__content-update' onSubmit={formik.handleSubmit}>
                 <div className='content__update-top'>
                     <h3 className='content__update-heading'>
                         Thông tin thiết bị
@@ -167,7 +201,8 @@ export const ThemTaiKhoan = () => {
                             <Select
                                 labelInValue
                                 style={{ width: 120 }}
-                                onChange={formik.handleChange}
+                                onChange={handleChangeSelectVaiTro}
+                                defaultValue={{ value: `${formik.values.vaiTro}` }}
                                 suffixIcon={<img src={`${Image.select}`}/>}
                                 placeholder='Chọn vai trò'
                                 className="content__update-item-select"
@@ -184,9 +219,9 @@ export const ThemTaiKhoan = () => {
                             </div>
                             <Select
                                 labelInValue
-                                defaultValue={{ value: `${formik.values.tinhTrang}` }}
+                                defaultValue={{ value: `${formik.values.trangThaiHoatDong}` }}
                                 style={{ width: 120 }}
-                                onChange={formik.handleChange}
+                                onChange={handleChangeSelectTrangThaiHoatDong}
                                 suffixIcon={<img src={`${Image.select}`}/>}
                                 className="content__update-item-select"
                             >
@@ -205,7 +240,9 @@ export const ThemTaiKhoan = () => {
                     <button type='button' className='content__update-btn-cancel' onClick={()=> {
                         navigate('/qlTaiKhoan');
                     }}>Hủy bỏ</button>
-                    <button type='submit' className='content__update-btn-update'>Thêm</button>
+                    <button type='submit' className='content__update-btn-update'  onClick={()=> {
+                            // addDocument()
+                    }}>Thêm</button>
                 </div>
             </form>  
         </div>

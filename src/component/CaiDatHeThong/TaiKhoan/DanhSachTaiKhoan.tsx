@@ -162,17 +162,22 @@ export const DanhSachTaiKhoan = () => {
 
     useEffect(()=> {
       LoadDuLieu();
-    });
+    }, []);
 
-    const data = useSelector((state: State) => state.taiKhoan);
+
+    const {taiKhoanData} = useSelector((state: State) => state.taiKhoan);
 
     useEffect(()=> {
+      console.log(taiKhoanData);
       const getAccount = async () => {
-        const realData = data.data;
-        setAccount(realData.docs.map((doc:any)=> ({...doc.data(), id: doc.id})));
+          setAccount(taiKhoanData.docs.map((doc:any)=> ({...doc.data(), id: doc.id})));
       }
-      getAccount();
-    }, []);
+        getAccount();
+    }, [taiKhoanData]);
+
+    useEffect(()=> {
+      console.log('account nè',account);
+    }, [account])
 
     const location = useLocation();
 
@@ -225,7 +230,7 @@ export const DanhSachTaiKhoan = () => {
       },
       {
         title: ' ',
-        dataIndex: 'ID',
+        dataIndex: "id",
         width: 99,
         render: (dataIndex:any) => {
             return (

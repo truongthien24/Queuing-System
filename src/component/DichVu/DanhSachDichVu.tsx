@@ -16,7 +16,6 @@ const data = [
         "tenDichVu": "Kiosk",
         "loaiDichVu": "Kiosk",
         "tenDangNhap": "Linhkyo011",
-        "Mật khẩu": "CMS",
         "diaChi": "192.168.1.10",
         "trangThaiHD": "Ngưng hoạt động",
         "trangThaiKN": "Mất kết nối",

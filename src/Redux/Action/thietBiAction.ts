@@ -14,4 +14,4 @@ type LayDuLieu = {
 }
 
 
-export type ActionProps = loadDuLieu | CapNhatDuLieu | LayDuLieu ;
+export type ActionProps = loadDuLieu | CapNhatDuLieu | LayDuLieu;

@@ -9,6 +9,8 @@ import { bindActionCreators } from 'redux';
 import { useDispatch, useSelector } from 'react-redux';
 import { MyParams } from '../../../config/paramType';
 import * as yup from 'yup';
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from '../../../firebase/firebase.config';
 
 interface formikFace {
     hoTen: string,
@@ -25,7 +27,9 @@ const {Option} = Select;
 
 export const CapNhattaiKhoan = (props:any) => {
 
-    const { ID } = useParams<keyof MyParams>() as MyParams;
+    const { id } = useParams<keyof MyParams>() as MyParams;
+
+    const [idDocument, setIdDocument] = useState<string>('');
 
     const [infoAccount,setInfoAccount] = useState<any | undefined>({
         hoTen: '',
@@ -38,40 +42,28 @@ export const CapNhattaiKhoan = (props:any) => {
         trangThaiHoatDong: ''
     });
 
-    // const [vaiTro,setVaiTro] = useState<string>('Kế toán');
-
     const dispatch = useDispatch();
 
     const {LayDuLieu} = bindActionCreators(taiKhoanCreator, dispatch);
 
     useEffect(()=> {
-        LayDuLieu(ID);
-        console.log(ID);
+        LayDuLieu(id);
+        console.log(id);
     }, []);
 
     const taiKhoanInfo = useSelector((state: State) => state.taiKhoan);
 
     useEffect(()=> {
-        // setInfoAccount(taiKhoanInfo.taiKhoanInfo._document.data.value.mapValue.fields);
-        const hihi = taiKhoanInfo.taiKhoanInfo[0]._document.data.value.mapValue.fields;
         setInfoAccount(taiKhoanInfo.taiKhoanInfo[0]._document.data.value.mapValue.fields);
-        console.log('fdsafdsf',hihi);
+        setIdDocument(taiKhoanInfo.taiKhoanInfo[0]._document.key.path.segments[6]);
         console.log('infoAccount',infoAccount);
-    }, []);
+    }, [taiKhoanInfo]);
 
     const location = useLocation();
     const navigate = useNavigate();
 
 
     const initialValues: formikFace = {
-        // hoTen: 'Nguyen Van A',
-        // tenDangNhap: 'tuyetnguyen123',
-        // sdt: '090245678',
-        // matKhau: 'Tuyetnguyen12',
-        // email: 'NguyenA154@gmail.com',
-        // nhapLaiMatKhau: 'Tuyetnguyen12',
-        // vaiTro: 'Quản lý',
-        // tinhTrang: 'Hoạt động'
         hoTen: `${infoAccount.hoTen.stringValue}`,
         tenDangNhap: `${infoAccount.tenDangNhap.stringValue}`,
         sdt: `${infoAccount.sdt.stringValue}`,
@@ -101,8 +93,25 @@ export const CapNhattaiKhoan = (props:any) => {
     const formik = useFormik({
         initialValues,
         enableReinitialize: true,
-        onSubmit: (values) => {
-            console.log(JSON.stringify(values));
+        onSubmit: (values:any) => {
+            // console.log(JSON.stringify(values));
+            console.log('Đây là giá trị',values);
+            const update = async () => {
+                console.log(id);
+                const washingtonRef = doc(db, "taiKhoan", `${idDocument}`);
+
+                await updateDoc(washingtonRef, {
+                    hoTen: values.hoTen,
+                    email: values.email,
+                    matKhau: values.matKhau,
+                    nhapLaiMatKhau: values.matKhau,
+                    sdt: values.sdt,
+                    vaiTro: values.vaiTro,
+                    trangThaiHoatDong: values.trangThaiHoatDong,
+                    tenDangNhap: values.tenDangNhap,
+                });
+            }
+            update();
         },
         validationSchema
     })
@@ -159,7 +168,7 @@ export const CapNhattaiKhoan = (props:any) => {
                 <h3 className='taiKhoan__content-heading'>
                 Quản lý thiết bị
                 </h3>
-                <form className='taiKhoan__content-update'>
+                <form className='taiKhoan__content-update' onSubmit={formik.handleSubmit}>
                     <div className='content__update-top'>
                         <h3 className='content__update-heading'>
                             Thông tin thiết bị
@@ -259,7 +268,7 @@ export const CapNhattaiKhoan = (props:any) => {
                         <button type='button' className='content__update-btn-cancel' onClick={()=> {
                             navigate('/qlTaiKhoan');
                         }}>Hủy bỏ</button>
-                        <button type='button' className='content__update-btn-update'>Cập nhật</button>
+                        <button type='submit' className='content__update-btn-update'>Cập nhật</button>
                     </div>
                 </form>  
             </div>

@@ -311,20 +311,20 @@
                 //End profile__notify-list
 
                 &::-webkit-scrollbar {
-                    width: 0;
+                    width: 5px;
+                    background-color: transparent;
                 }
+
+                &::-webkit-scrollbar-thumb {
+                    background-color: $primary-color-btn;
+                    border-radius: 16px;
+                }
+
+                // &::-webkit-scrollbar-track {
+
+                // }
             }
             // End profile__notify-content
-
-            &::after {
-                content: '';
-                position: absolute;
-                right: 4px;
-                bottom: 100px;
-                width: 4px;
-                height: 340px;
-                background-color: #FFC89B;
-            }
 
         }
         // End profile__notify

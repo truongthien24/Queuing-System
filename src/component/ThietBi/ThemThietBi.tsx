@@ -3,6 +3,8 @@ import { useFormik } from 'formik';
 import React, { Fragment } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Image } from '../../Util/variableImage';
+import { collection, addDoc  } from "firebase/firestore"; 
+import { db } from '../../firebase/firebase.config';
 
 interface formikFace {
   maThietBi: string,
@@ -11,7 +13,7 @@ interface formikFace {
   tenDangNhap: string,
   diaChi: string,
   matKhau: string,
-  dichVuSuDung: string[],
+  dichVu: string[],
 }
 
 export const ThemThietBi = () => {
@@ -23,22 +25,42 @@ export const ThemThietBi = () => {
     const navigate = useNavigate();
 
     const initialValues: formikFace = {
-      maThietBi: 'KIO_01',
-      loaiThietBi: 'Kiosk',
-      tenThietBi: 'Kiosk',
-      tenDangNhap: 'Linhkyo011',
-      diaChi: '128.172.308',
-      matKhau: 'CMS',
-      dichVuSuDung: ['Khám tim mạch'],
+      maThietBi: '',
+      loaiThietBi: '',
+      tenThietBi: '',
+      tenDangNhap: '',
+      diaChi: '',
+      matKhau: '',
+      dichVu: [],
     }
 
     const formik = useFormik({
         initialValues,
         enableReinitialize: true,
-        onSubmit: (values) => {
-            console.log(JSON.stringify(values));
-        }
+        onSubmit: () => {
+            // console.log(JSON.stringify(values));s
+            const addThietBi = async () => {
+                const docRef = await addDoc(collection(db, "thietBi"), {
+                    maThietBi: formik.values.maThietBi,
+                    loaiThietBi: formik.values.loaiThietBi,
+                    tenThietBi: formik.values.tenThietBi,
+                    tenDangNhap: formik.values.tenDangNhap,
+                    diaChi: formik.values.diaChi,
+                    matKhau: formik.values.matKhau,
+                    dichVu: formik.values.dichVu,
+                });
+            }
+            addThietBi();
+        }   
     })
+
+    const onChangeLoaiThietBi = (e:any) => {
+        formik.setFieldValue('loaiThietBi', e.value);
+    }
+
+    const onChangeDichVu = (e:any) => {
+        formik.setFieldValue('dichVu', e);
+    }
 
     const breadCrumbView = () => {
       const {pathname} = location;
@@ -85,7 +107,7 @@ export const ThemThietBi = () => {
             <h3 className='thietBi__content-heading'>
             Quản lý thiết bị
             </h3>
-            <form className='thietBi__content-add'>
+            <form className='thietBi__content-add' onSubmit={formik.handleSubmit}>
                 <div className='content__add-top'>
                     <h3 className='content__add-heading'>
                         Thông tin thiết bị
@@ -96,19 +118,19 @@ export const ThemThietBi = () => {
                                 <span>Mã thiết bị: </span>
                                 <img src={`${Image.chuY}`}/>
                             </div>
-                            <input className='content__add-input' name="maThietBi" onChange={formik.handleChange} placeholder="Nhập mã thiết bị"/>
+                            <input className='content__add-input' name="maThietBi" value={formik.values.maThietBi} onChange={formik.handleChange} placeholder="Nhập mã thiết bị"/>
                         </div>
                         <div className='content__add-item'>
                             <div className='content__add-label'>
                                 <span>Loại thiết bị: </span>
                                 <img src={`${Image.chuY}`}/>
                             </div>
-                            {/* <input className='content__add-input' value={formik.values.loaiThietBi} name="loaiThietBi" onChange={formik.handleChange}/> */}
                             <Select
                                 labelInValue
                                 placeholder="Chọn loại thiết bị"
+                                value={formik.values.loaiThietBi}
                                 style={{ width: 120 }}
-                                onChange={formik.handleChange}
+                                onChange={onChangeLoaiThietBi}
                                 suffixIcon={<img src={`${Image.select}`}/>}
                                 className="content__add-item-select"
                                 // open={true}
@@ -122,28 +144,28 @@ export const ThemThietBi = () => {
                                 <span>Tên thiết bị: </span>
                                 <img src={`${Image.chuY}`}/>
                             </div>
-                            <input className='content__add-input' name="tenThietBi" onChange={formik.handleChange} placeholder="Nhập tên thiết bị"/>
+                            <input className='content__add-input' name="tenThietBi" value={formik.values.tenThietBi}  onChange={formik.handleChange} placeholder="Nhập tên thiết bị"/>
                         </div>
                         <div className='content__add-item'>
                             <div className='content__add-label'>
                                 <span>Tên đăng nhập: </span>
                                 <img src={`${Image.chuY}`}/>
                             </div>
-                            <input className='content__add-input' name="tenDangNhap" onChange={formik.handleChange} placeholder="Nhập tên đăng nhập"/>
+                            <input className='content__add-input' name="tenDangNhap" value={formik.values.tenDangNhap} onChange={formik.handleChange} placeholder="Nhập tên đăng nhập"/>
                         </div>
                         <div className='content__add-item'>
                             <div className='content__add-label'>
                                 <span>Địa chỉ IP: </span>
                                 <img src={`${Image.chuY}`}/>
                             </div>
-                            <input className='content__add-input' name="diaChi" onChange={formik.handleChange} placeholder="Nhập địa chỉ IP"/>
+                            <input className='content__add-input' name="diaChi" value={formik.values.diaChi} onChange={formik.handleChange} placeholder="Nhập địa chỉ IP"/>
                         </div>
                         <div className='content__add-item'>
                             <div className='content__add-label'>
                                 <span>Mật khẩu: </span>
                                 <img src={`${Image.chuY}`}/>
                             </div>
-                            <input className='content__add-input' name="matKhau" onChange={formik.handleChange} placeholder="Nhập mật khẩu"/>
+                            <input className='content__add-input' name="matKhau" value={formik.values.matKhau} onChange={formik.handleChange} placeholder="Nhập mật khẩu"/>
                         </div>
                         <div className='content__add-item'>
                             <div className='content__add-label'>
@@ -151,10 +173,11 @@ export const ThemThietBi = () => {
                                 <img src={`${Image.chuY}`}/>
                             </div>
                             <Select
+                                value={formik.values.dichVu}
                                 mode="multiple"
                                 style={{ width: '100%'}}
                                 placeholder="Nhập dịch vụ sử dụng"
-                                onChange={formik.handleChange}
+                                onChange={onChangeDichVu}
                                 optionLabelProp="label"
                             >
                                 <Option value="All" label="Tất cả">
@@ -204,7 +227,7 @@ export const ThemThietBi = () => {
                     <button type='button' className='content__add-btn-cancel' onClick={()=> {
                         navigate('/thietbi');
                     }}>Hủy bỏ</button>
-                    <button type='button' className='content__add-btn-add'>Thêm thiết bị</button>
+                    <button type='submit' className='content__add-btn-add'>Thêm thiết bị</button>
                 </div>
             </form>  
         </div>

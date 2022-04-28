@@ -43,7 +43,7 @@ const MainRoutes = () => {
         <Routes>
           <Route path='/' element={<Home/>}>            
             <Route path='profile' element={<Profile/>}/> 
-            <Route path='dashboard' element={<Dashboard/>}>
+            <Route  path='dashboard' element={<Dashboard/>}>
               <Route index element={<DashboardDate/>}/>
               <Route path='dashboardMonth' element={<DashboardMonth/>}/>
               <Route path='dashboardWeek' element={<DashboardWeek/>}/>
@@ -51,18 +51,18 @@ const MainRoutes = () => {
             <Route path='thietbi' element={<Thietbi/>}>
               <Route index element={<DanhSachThietBi/>}/>
               <Route path='themThietBi' element={<ThemThietBi/>}/>
-              <Route path='chiTietThietBi' element={<ChiTietThietBi/>}/>
-              <Route path='capNhatThietBi' element={<CapNhatThietBi/>}/>
+              <Route path='chiTietThietBi/:id' element={<ChiTietThietBi/>}/>
+              <Route path='capNhatThietBi/:id' element={<CapNhatThietBi/>}/>
             </Route>           
             <Route path='dichvu' element={<Dichvu/>}>
               <Route index element={<DanhSachDichVu/>}/>  
-              <Route path='chiTietDichVu' element={<ChiTietDichVu/>}/>  
-              <Route path='capNhatDichVu' element={<CapNhatDichVu/>}/>  
+              <Route path='chiTietDichVu/:id' element={<ChiTietDichVu/>}/>  
+              <Route path='capNhatDichVu/:id' element={<CapNhatDichVu/>}/>  
               <Route path='themDichVu' element={<ThemDichVu/>}/>  
             </Route>           
             <Route path='capso' element={<Capso/>}>
               <Route index element={<DanhSachCapSo/>}/>
-              <Route path='chiTietCapSo' element={<ChiTietCapSo/>}/>
+              <Route path='chiTietCapSo/:id' element={<ChiTietCapSo/>}/>
               <Route path='themCapSo' element={<ThemCapSo/>}/>
             </Route>           
             <Route path='baocao' element={<BaoCao/>}>
@@ -71,11 +71,11 @@ const MainRoutes = () => {
             <Route path='qlVaiTro' element={<QuanLyVaiTro/>}>
                 <Route index element={<DanhSachVaiTro/>}/>
                 <Route path='themVaiTro' element={<ThemVaiTro/>}/>
-                <Route path='capNhatVaiTro' element={<CapNhatVaiTro/>}/>
+                <Route path='capNhatVaiTro/:id' element={<CapNhatVaiTro/>}/>
             </Route> 
             <Route path='qlTaiKhoan' element={<QuanLyTaiKhoan/>}>
               <Route index element={<DanhSachTaiKhoan/>}/>
-              <Route path='capNhatTaiKhoan/:ID' element={<CapNhattaiKhoan/>}/>            
+              <Route path='capNhatTaiKhoan/:id' element={<CapNhattaiKhoan/>}/>            
               <Route path='themTaiKhoan' element={<ThemTaiKhoan/>}/>            
             </Route> 
             <Route path='nhatKyNguoiDung' element={<NhatKyNguoiDung/>}/> 

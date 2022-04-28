@@ -1,8 +1,14 @@
 import { Breadcrumb, Select } from 'antd';
-import React, { Fragment } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom';
+import React, { Fragment, useEffect, useState } from 'react'
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Image } from '../../Util/variableImage';
 import {Formik, useFormik, FormikProps, Form, Field} from 'formik';
+import { MyParams } from '../../config/paramType';
+import { useDispatch, useSelector } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { State, thietBiCreator } from '../../Redux';
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from '../../firebase/firebase.config';
 
 interface formikFace {
     maThietBi: string,
@@ -11,10 +17,47 @@ interface formikFace {
     tenDangNhap: string,
     diaChi: string,
     matKhau: string,
-    dichVuSuDung: string[],
+    dichVu: string[],
 }
 
-export const CapNhatThietBi = () => {
+export const CapNhatThietBi = (props:any) => {
+
+    const {id} = useParams<keyof MyParams>() as MyParams;
+
+    const [infoThietBi,setInfoThietBi] = useState<any | undefined>({
+        maThietBi: '',
+        tenThietBi: '',
+        loaiThietBi: '',
+        dichVu: '',
+        diaChi: '',
+        tenDangNhap: '',
+        matKhau: '',
+    });
+
+    const dispatch = useDispatch();
+
+    const {LayDuLieu} = bindActionCreators(thietBiCreator, dispatch);
+
+    useEffect(()=> {
+        LayDuLieu(id);
+        console.log(id);
+      }, []);
+
+    const thietBiInfo = useSelector((state: State) => state.thietBi);
+
+    useEffect(()=> {
+        const thietBi = thietBiInfo.thietBiInfo[0]._document.data.value.mapValue.fields;
+        console.log(thietBi);
+        setInfoThietBi({
+          maThietBi: `${thietBi.maThietBi.stringValue}`,
+          tenThietBi: `${thietBi.tenThietBi.stringValue}`,
+          loaiThietBi: `${thietBi.loaiThietBi.stringValue}`,
+          dichVu: `${thietBi.dichVu.stringValue}`,
+          diaChi: `${thietBi.diaChi.stringValue}`,
+          tenDangNhap: `${thietBi.tenDangNhap.stringValue}`,
+          matKhau: `${thietBi.matKhau.stringValue}`,
+        });
+    }, [thietBiInfo]);
 
     const { Option } = Select;
 
@@ -23,20 +66,33 @@ export const CapNhatThietBi = () => {
     const location = useLocation();
 
     const initialValues: formikFace = {
-        maThietBi: 'KIO_01',
-        loaiThietBi: 'Kiosk',
-        tenThietBi: 'Kiosk',
-        tenDangNhap: 'Linhkyo011',
-        diaChi: '128.172.308',
-        matKhau: 'CMS',
-        dichVuSuDung: ['Khám tim mạch'],
+        maThietBi: `${infoThietBi.maThietBi}`,
+        loaiThietBi: `${infoThietBi.loaiThietBi}`,
+        tenThietBi: `${infoThietBi.tenThietBi}`,
+        tenDangNhap: `${infoThietBi.tenDangNhap}`,
+        diaChi: `${infoThietBi.diaChi}`,
+        matKhau: `${infoThietBi.matKhau}`,
+        dichVu: [`${infoThietBi.dichVu}`],
     }
 
     const formik = useFormik({
         initialValues,
         enableReinitialize: true,
         onSubmit: (values) => {
-            console.log(JSON.stringify(values));
+            const updateThietBi = async () => {
+                const thietBiRef = doc(db, "thietBi", id);
+
+                await updateDoc(thietBiRef, {
+                    maThietBi: `${values.maThietBi}`,
+                    loaiThietBi: `${values.loaiThietBi}`,
+                    tenThietBi: `${values.tenThietBi}`,
+                    tenDangNhap: `${values.tenDangNhap}`,
+                    diaChi: `${values.diaChi}`,
+                    matKhau: `${values.matKhau}`,
+                    dichVu: [`${values.dichVu}`],
+                })
+            }
+            updateThietBi();
         }
     })
 
@@ -77,6 +133,14 @@ export const CapNhatThietBi = () => {
         )
       }
 
+      const handleChangeLoaiThietBi = (e:any) => {
+            formik.setFieldValue('loaiThietBi',e.value);
+      }
+
+      const handleChangeDichVu = (e:any) => {
+            formik.setFieldValue('dichVu', e);
+    }
+
   return (
     <Fragment>
         <div className='thietBi__breadcrumb'>
@@ -86,7 +150,7 @@ export const CapNhatThietBi = () => {
             <h3 className='thietBi__content-heading'>
             Quản lý thiết bị
             </h3>
-            <form className='thietBi__content-update'>
+            <form className='thietBi__content-update' onSubmit={formik.handleSubmit}>
                 <div className='content__update-top'>
                     <h3 className='content__update-heading'>
                         Thông tin thiết bị
@@ -104,16 +168,15 @@ export const CapNhatThietBi = () => {
                                 <span>Loại thiết bị: </span>
                                 <img src={`${Image.chuY}`}/>
                             </div>
-                            {/* <input className='content__update-input' value={formik.values.loaiThietBi} name="loaiThietBi" onChange={formik.handleChange}/> */}
                             <Select
                                 labelInValue
-                                defaultValue={{ value: `${formik.values.loaiThietBi}` }}
+                                value={{ value: `${formik.values.loaiThietBi}` }}
                                 style={{ width: 120 }}
-                                onChange={formik.handleChange}
+                                onChange={handleChangeLoaiThietBi}
                                 suffixIcon={<img src={`${Image.select}`}/>}
                                 className="content__update-item-select"
                             >
-                                <Option value="Kiosk">Kiosk</Option>
+                                <Option value="kiosk">kiosk</Option>
                                 <Option value="Display counter">Display counter</Option>
                             </Select>
                         </div>
@@ -154,8 +217,8 @@ export const CapNhatThietBi = () => {
                                 mode="multiple"
                                 style={{ width: '100%' }}
                                 placeholder="select one country"
-                                defaultValue={[`${formik.values.dichVuSuDung}`]}
-                                onChange={formik.handleChange}
+                                value={{ value: `${formik.values.dichVu}` }}
+                                onChange={handleChangeDichVu}
                                 optionLabelProp="label"
                             >
                                 <Option value="All" label="Tất cả">
@@ -205,7 +268,7 @@ export const CapNhatThietBi = () => {
                     <button type='button' className='content__update-btn-cancel' onClick={()=> {
                         navigate('/thietbi');
                     }}>Hủy bỏ</button>
-                    <button type='button' className='content__update-btn-update'>Cập nhật</button>
+                    <button type='submit' className='content__update-btn-update'>Cập nhật</button>
                 </div>
             </form>  
         </div>

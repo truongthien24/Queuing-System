@@ -1,6 +1,6 @@
 import { collection, getDocs } from "firebase/firestore";
 import { Dispatch } from "redux";
-import { ActionProps } from "../Action/taiKhoanAction";
+import { ActionProps } from "../Action/thietBiAction";
 import {db} from '../../firebase/firebase.config';
 import { useState } from "react";
 
@@ -10,7 +10,7 @@ export const LoadDuLieu = () => async (dispatch: Dispatch<ActionProps>) => {
     // const [account, setAccount] = useState<any>([]);
 
     try {
-        const accountCollectionRef = collection(db, 'taiKhoan');    
+        const accountCollectionRef = collection(db, 'thietBi');    
         const data1 = await getDocs(accountCollectionRef);
         console.log(data1);
         dispatch({
@@ -36,3 +36,16 @@ export const LayDuLieu = (ID:string) => async (dispatch: Dispatch<ActionProps>) 
         console.log('Lỗi rồi!')
     }
 }
+
+// Lấy dữ liệu   
+// export const LayDuLieu2 = (ID:string) => async (dispatch: Dispatch<ActionProps>) => {
+//     try {
+//         dispatch({
+//             type: 'LAY_DU_LIEU_2',
+//             payload: `${ID}`
+//         })
+//     }
+//     catch(error:any) {
+//         console.log('Lỗi rồi!')
+//     }
+// }

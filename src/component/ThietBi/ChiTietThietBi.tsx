@@ -1,12 +1,54 @@
 import { Breadcrumb } from 'antd';
-import React  from 'react'
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState }  from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
+import { MyParams } from '../../config/paramType';
 import { Image } from '../../Util/variableImage';
+import { State, thietBiCreator } from '../../Redux/index';
 
 
 export const ChiTietThietBi = () => {
 
     const location = useLocation();
+
+    const {id} = useParams<keyof MyParams>() as MyParams;
+
+    const [infoThietBi,setInfoThietBi] = useState<any | undefined>({
+      maThietBi: '',
+      tenThietBi: '',
+      loaiThietBi: '',
+      dichVu: '',
+      diaChi: '',
+      tenDangNhap: '',
+      matKhau: '',
+    });
+
+    useEffect(()=> {
+      LayDuLieu(id);
+      console.log(id);
+  }, []);
+    
+    const dispatch = useDispatch();
+
+    const {LayDuLieu} = bindActionCreators(thietBiCreator, dispatch);
+
+    const thietBiInfo = useSelector((state: State) => state.thietBi);
+
+    useEffect(()=> {
+        const thietBi = thietBiInfo.thietBiInfo[0]._document.data.value.mapValue.fields;
+        console.log(thietBi);
+        setInfoThietBi({
+          maThietBi: `${thietBi.maThietBi.stringValue}`,
+          tenThietBi: `${thietBi.tenThietBi.stringValue}`,
+          loaiThietBi: `${thietBi.loaiThietBi.stringValue}`,
+          dichVu: `${thietBi.dichVu.stringValue}`,
+          diaChi: `${thietBi.diaChi.stringValue}`,
+          tenDangNhap: `${thietBi.tenDangNhap.stringValue}`,
+          matKhau: `${thietBi.matKhau.stringValue}`,
+        });
+        console.log('infoAccount',infoThietBi);
+    }, [thietBiInfo]);
 
     const navigate = useNavigate();
 
@@ -66,15 +108,15 @@ export const ChiTietThietBi = () => {
                         <div className='about__info-list'>
                             <div className='about__info-item'>
                                 <p>Mã thiết bị:</p>
-                                <span>KIO_01</span>
+                                <span>{infoThietBi.maThietBi}</span>
                             </div>
                             <div className='about__info-item'>
                                 <p>Tên thiết bị:</p>
-                                <span>kiosk</span>
+                                <span>{infoThietBi.tenThietBi}</span>
                             </div>
                             <div className='about__info-item'>
                                 <p>Địa chỉ IP:</p>
-                                <span>128.127.308</span>
+                                <span>{infoThietBi.diaChi}</span>
                             </div>
                         </div>
                     </div>
@@ -82,15 +124,15 @@ export const ChiTietThietBi = () => {
                         <div className='about__info-list'>
                             <div className='about__info-item'>
                                 <p>Loại thiết bị</p>
-                                <span>Kiosk</span>
+                                <span>{infoThietBi.loaiThietBi}</span>
                             </div>
                             <div className='about__info-item'>
-                                <p>Tài khoản</p>
-                                <span>KIO_01</span>
+                                <p>Tên đăng nhập</p>
+                                <span>{infoThietBi.tenDangNhap}</span>
                             </div>
                             <div className='about__info-item'>
                                 <p>Mật khẩu</p>
-                                <span>SMS</span>
+                                <span>{infoThietBi.matKhau}</span>
                             </div>
                         </div>
                     </div>

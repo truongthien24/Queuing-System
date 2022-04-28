@@ -10,29 +10,34 @@
         // Start ant-breadcrumb
         .ant-breadcrumb {
                 
-            span {
-                font-size: 20px !important;
-                color: #7E7D88;
+            ol {
+                align-items: center;
+                
+                li {
 
-                span {
-                    font-weight: 700 !important;
-
-                    a {
+                    span {
                         font-size: 20px !important;
                         color: #7E7D88;
+                        font-weight: 700 !important;
+        
+                        a {
+                            font-size: 20px !important;
+                            color: #7E7D88;
+                        }
+                    }
+    
+                    &:last-child {
+    
+                        span {
+                            color: $primary-color-txt !important;
+                        }
+                            
                     }
                 }
-
-                &:last-child {
-                    
-                    span {
-                        color: $primary-color-txt !important;
-                    }
+    
+                .ant-breadcrumb-separator {
+                    margin: 0 15.4px !important;
                 }
-            }
-
-            .ant-breadcrumb-separator {
-                margin: 0 15.4px !important;
             }
         }
         //End ant-breadcrumb 
@@ -336,7 +341,7 @@
                                 line-height: 24px;
                                 font-weight: 600;
                                 color: #282739;
-                                flex: 0.5;
+                                flex: 0.7;
                                 margin-bottom: 0;
                             }
 

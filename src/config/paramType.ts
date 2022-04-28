@@ -1,3 +1,3 @@
 export type MyParams = {
-    ID: string;
+    id: string;
 };
