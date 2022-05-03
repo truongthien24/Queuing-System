@@ -1,8 +1,13 @@
 import { Breadcrumb, Select, DatePicker, Input, Table } from 'antd';
-import React, { useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Image } from '../../Util/variableImage';
 import moment from 'moment';
+import { useDispatch, useSelector } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { dichVuCreator, State } from '../../Redux';
+import { MyParams } from '../../config/paramType';
+import { array } from 'yup/lib/locale';
 
 const { Option } = Select;
 
@@ -169,6 +174,13 @@ const data = [
 
 export const ChiTietDichVu = () => {
 
+    const [infoDichVu, setInfoDichVu] = useState<any>({
+        maDichVu: '',
+        tenDichVu: '',
+        moTa: '',
+        listCapSo: [],
+    });
+
     const navigate = useNavigate();
 
     const location = useLocation();
@@ -177,6 +189,45 @@ export const ChiTietDichVu = () => {
     const [endValue,setEndValue] = useState<any>(null);
     const [endOpen,setEndOpen] = useState<boolean>(false);
 
+    const {id} = useParams<keyof MyParams>() as MyParams;
+
+    const dispatch = useDispatch();
+
+    const {LayDuLieu} = bindActionCreators(dichVuCreator, dispatch);
+
+    useEffect(()=> {
+      LayDuLieu(id);
+    }, []);
+
+    const dichVuInfo = useSelector((state: State) => state.dichVu);
+
+    useEffect(()=> {
+        console.log(dichVuInfo);
+          const dichVuDoc =  dichVuInfo.dichVuInfo[0]._document.data.value.mapValue.fields;
+          const listCapSo = dichVuDoc.listCapSo.arrayValue.values;
+          let stateCapSo:any = [];
+          console.log('listCapSo', listCapSo);
+          for(let i in listCapSo) {
+              console.log(listCapSo[i]);
+              // stateCapSo.push(listCapSo[item].mapValue.fields);
+              const itemTemp = {
+                  stt: '',
+                  trangThai: ''
+              };
+              itemTemp.stt = listCapSo[i].mapValue.fields.stt.stringValue;
+              itemTemp.trangThai = listCapSo[i].mapValue.fields.trangThai.stringValue;
+              stateCapSo.push(itemTemp);
+          }
+          console.log('stateCapSo', stateCapSo);
+          setInfoDichVu({
+              maDichVu: `${dichVuDoc.maDichVu.stringValue}`,
+              tenDichVu: `${dichVuDoc.tenDichVu.stringValue}`,
+              moTa: `${dichVuDoc.moTa.stringValue}`,
+              listCapSo: stateCapSo
+          })
+          console.log('infoDichVu',infoDichVu); 
+    }, [dichVuInfo])
+    
     const date = new Date();
 
     const dateFormat = 'DD/MM/YYYY';
@@ -185,12 +236,12 @@ export const ChiTietDichVu = () => {
   
       {
         title: 'Số thứ tự',
-        dataIndex: 'soThuTu',
+        dataIndex: 'stt',
         width: 334,
       },
       {
         title: 'Trạng thái',
-        dataIndex: 'trangThaiHD',
+        dataIndex: 'trangThai',
         width: 334,
         render: (dataIndex:string) => {
     
@@ -326,15 +377,15 @@ export const ChiTietDichVu = () => {
                         <div className='detail__info'>
                             <div className='detail__info-item'>
                                 <p className='detail__info-left'>Mã dịch vụ: </p>
-                                <span className='detail__info-right'>201</span>
+                                <span className='detail__info-right'>{infoDichVu.maDichVu}</span>
                             </div>
                             <div className='detail__info-item'>
                                 <p className='detail__info-left'>Tên dịch vụ: </p>
-                                <span className='detail__info-right'>Khám tim mạch</span>
+                                <span className='detail__info-right'>{infoDichVu.tenDichVu}</span>
                             </div>
                             <div className='detail__info-item'>
                                 <p className='detail__info-left'>Mô tả: </p>
-                                <span className='detail__info-right'>Chuyên các bệnh lý về tim</span>
+                                <span className='detail__info-right'>{infoDichVu.moTa}</span>
                             </div>
                         </div>
                     </div>
@@ -426,7 +477,7 @@ export const ChiTietDichVu = () => {
                     </div>
                     <div className='dichVu__content-table detail'>
                       <Table
-                        dataSource={data}
+                        dataSource={infoDichVu.listCapSo}
                         columns={columns}
                         size="small"
                         pagination={{ pageSize: 8, itemRender:itemRender }}
@@ -438,7 +489,7 @@ export const ChiTietDichVu = () => {
             </div>
         </div>
         <div className='dichVu__capNhat' onClick={()=> {
-            navigate('/dichVu/capNhatDichVu');
+            navigate(`/dichVu/capNhatDichVu/${id}`);
         }}>
             <img src={`${Image.edit}`}/>
             <span>Cập nhật danh sách</span>

@@ -71,7 +71,7 @@ p {
 }
 
 .ant-select-dropdown {
-  overflow-y: scroll !important;
+  overflow-y: overlay !important;
   overflow-x: hidden !important;
   width: 100%;
 }
@@ -89,8 +89,8 @@ p {
   background: #FFC89B;
 }
 
-.ant-select-dropdown .rc-virtual-list-holder {
-  height: 100% !important;
+.ant-select-dropdown .rc-virtual-list-scrollbar-thumb {
+  display: none !important;
 }
 
 .ant-modal-wrap {
@@ -2353,6 +2353,11 @@ p {
   height: 49px !important;
   padding: 3.5px 17px !important;
   max-width: 268px;
+}
+
+.dichVu__content .dichVu__content-table .ant-table-wrapper .ant-table .ant-table-content tr .ant-table-cell p {
+  font-size: 14px !important;
+  margin-bottom: 0;
 }
 
 .dichVu__content .dichVu__content-table .ant-table-wrapper .ant-table .ant-table-content tr .ant-table-cell .ant-table-cell-content {

@@ -1,7 +1,10 @@
 import { Breadcrumb, DatePicker, Input, Select, Table } from 'antd';
 import moment from 'moment';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
+import { capSoCreator, State } from '../../Redux';
 import { Image } from '../../Util/variableImage';
 
 const {Option} = Select;
@@ -119,9 +122,29 @@ const data = [
 
 export const DanhSachCapSo = () => {
 
+    const dispatch = useDispatch();
+    
+    const {LoadDuLieu} = bindActionCreators(capSoCreator, dispatch);
+
+    useEffect(()=> {
+        LoadDuLieu();
+    }, []);
+
+    const {capSoData} = useSelector((state: State) => state.capSo);
+
+    useEffect(()=> {
+        console.log('Cấp số', capSoData.docs);
+        const getAccount = async () => {
+          setCapSoList(capSoData.docs.map((doc:any)=> ({...doc.data(), id: doc.id})));
+          console.log('Cấp số list',capSoList);
+      }
+        getAccount();
+    }, [capSoData]);  
+
     const [startValue,setStartValue] = useState<any>(null);
     const [endValue,setEndValue] = useState<any>(null);
     const [endOpen,setEndOpen] = useState<boolean>(false);
+    const [capSoList,setCapSoList] = useState<any>([]);
 
     const navigate = useNavigate();
 
@@ -135,7 +158,7 @@ export const DanhSachCapSo = () => {
   
       {
         title: 'STT',
-        dataIndex: 'soThuTu',
+        dataIndex: 'stt',
         width: 93,
       },
       {
@@ -155,12 +178,12 @@ export const DanhSachCapSo = () => {
       },
       {
         title: 'Hạn sử dụng',
-        dataIndex: 'hanSuDung',
+        dataIndex: 'HSD',
         width: 174,
       },
       {
         title: 'Trạng thái hoạt động',
-        dataIndex: 'trangThai',
+        dataIndex: 'trangThaiHoatDong',
         width: 147,
         render: (dataIndex:string) => {
     
@@ -192,12 +215,12 @@ export const DanhSachCapSo = () => {
       },
       {
         title: ' ',
-        dataIndex: 'Chi tiết',
+        dataIndex: 'id',
         width: 125,
-        render: () => {
+        render: (dataIndex: string) => {
           return (
             <button onClick={()=> {
-              navigate('/capSo/chiTietCapSo');
+              navigate(`/capSo/chiTietCapSo/${dataIndex}`);
             }}>
               Chi tiết
             </button>
@@ -375,7 +398,7 @@ export const DanhSachCapSo = () => {
                   </div>
                   <div className='capSo__content-table'>
                     <Table
-                        dataSource={data}
+                        dataSource={capSoList}
                         columns={columns}
                         size="small"
                         pagination={{ pageSize: 9, itemRender:itemRender }}

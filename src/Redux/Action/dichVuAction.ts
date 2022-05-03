@@ -13,13 +13,5 @@ type LayDuLieu = {
     payload: string
 }
 
-type dangNhap = {
-    type: 'DANG_NHAP',
-    payload: {
-        tenDangNhap: string,
-        matKhau: string
-    }
-}
 
-
-export type ActionProps = loadDuLieu | CapNhatDuLieu | LayDuLieu | dangNhap;
+export type ActionProps = loadDuLieu | CapNhatDuLieu | LayDuLieu ;

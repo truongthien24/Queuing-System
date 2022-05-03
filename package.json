@@ -5,6 +5,7 @@
   "dependencies": {
     "@ant-design/charts": "^1.3.6",
     "@reduxjs/toolkit": "^1.8.1",
+    "@stanlystark/table-to-excel": "^1.0.6",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^12.1.5",
     "@testing-library/user-event": "^13.5.0",
@@ -28,6 +29,7 @@
     "redux-thunk": "^2.4.1",
     "typescript": "^4.1.6",
     "web-vitals": "^2.1.4",
+    "xlsx": "^0.17.0",
     "yup": "^0.32.11"
   },
   "scripts": {

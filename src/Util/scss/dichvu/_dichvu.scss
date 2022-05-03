@@ -261,6 +261,11 @@
                                 height: 49px !important;
                                 padding: 3.5px 17px !important;
                                 max-width: 268px;
+
+                                p {
+                                    font-size: 14px !important;
+                                    margin-bottom: 0;
+                                }
                                 
                                 .ant-table-cell-content {
                                     max-width: 200px;

@@ -1,9 +1,55 @@
 import { Breadcrumb } from 'antd';
-import React from 'react'
-import { useLocation, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
+import { MyParams } from '../../config/paramType';
+import { capSoCreator, State } from '../../Redux';
 import { Image } from '../../Util/variableImage';
 
 export const ChiTietCapSo = () => {
+
+    const [capSo, setCapSo] = useState<any>({
+        hoTen: '',
+        tenDichVu: '',
+        stt: '',
+        thoiGianCap: '',
+        HSD: '',
+        nguonCap: '',
+        trangThaiHoatDong: '',
+        sdt: '',
+        email: ''
+    })
+    
+    const {id} = useParams<keyof MyParams>() as MyParams;
+
+    const dispatch = useDispatch();
+
+    const {LayDuLieu} = bindActionCreators(capSoCreator, dispatch);
+
+    useEffect(()=> {
+        LayDuLieu(id);
+    }, []);
+
+
+    const capSoInfo = useSelector((state: State) => state.capSo);
+
+    useEffect(()=> {
+        console.log('capSoInfo',capSoInfo);
+        const capSoData = capSoInfo.capSoInfo[0]._document.data.value.mapValue.fields;
+        setCapSo({
+            tenDichVu: `${capSoData.tenDichVu.stringValue}`,
+            stt: `${capSoData.stt.stringValue}`,
+            thoiGianCap: `${capSoData.thoiGianCap.stringValue}`,
+            HSD: `${capSoData.HSD.stringValue}`,
+            nguonCap: `${capSoData.nguonCap.stringValue}`,
+            trangThaiHoatDong: `${capSoData.trangThaiHoatDong.stringValue}`,
+            sdt: `${capSoData.sdt.stringValue}`,
+            email: `${capSoData.email.stringValue}`
+        })
+    }, [capSoInfo]);
+
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -63,23 +109,23 @@ export const ChiTietCapSo = () => {
                             <div className='about__info-list'>
                                 <div className='about__info-item'>
                                     <p>Họ tên:</p>
-                                    <span>Nguyễn Thị Dung</span>
+                                    <span>{capSo.hoTen}</span>
                                 </div>
                                 <div className='about__info-item'>
                                     <p>Tên dịch vụ:</p>
-                                    <span>Khám tim mạch</span>
+                                    <span>{capSo.tenDichVu}</span>
                                 </div>
                                 <div className='about__info-item'>
                                     <p>Số thứ tự: </p>
-                                    <span>2001201</span>
+                                    <span>{capSo.tenDichVu}</span>
                                 </div>
                                 <div className='about__info-item'>
                                     <p>Thời gian cấp: </p>
-                                    <span>14:35 - 07/11/2021</span>
+                                    <span>{capSo.thoiGianCap}</span>
                                 </div>
                                 <div className='about__info-item'>
                                     <p>Hạn sử dụng: </p>
-                                    <span>18:00 - 07/11/2021</span>
+                                    <span>{capSo.HSD}</span>
                                 </div>
                             </div>
                         </div>
@@ -87,22 +133,22 @@ export const ChiTietCapSo = () => {
                             <div className='about__info-list'>
                                 <div className='about__info-item'>
                                     <p>Nguồn cấp</p>
-                                    <span>Kiosk</span>
+                                    <span>{capSo.nguonCap}</span>
                                 </div>
                                 <div className='about__info-item'>
                                     <p>Trạng thái</p>
                                     <span className='d-flex align-items-center'>
                                         <img src={Image.dangthuchien} style={{marginRight: '3px'}}/>
-                                        Đang chờ
+                                        {capSo.trangThaiHoatDong}
                                     </span>
                                 </div>
                                 <div className='about__info-item'>
                                     <p>Số điện thoại</p>
-                                    <span>0948523623</span>
+                                    <span>{capSo.sdt}</span>
                                 </div>
                                 <div className='about__info-item'>
                                     <p>Địa chỉ Email: </p>
-                                    <span>nguyendung@gmail.com</span>
+                                    <span>{capSo.email}</span>
                                 </div>
                             </div>
                         </div>

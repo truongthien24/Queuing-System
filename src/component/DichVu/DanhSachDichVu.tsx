@@ -6,260 +6,19 @@ import { Image } from '../../Util/variableImage';
 import { Select } from 'antd';
 import { Table, Input, InputNumber, Popconfirm, Form, Typography } from 'antd';
 import moment from 'moment';
+import { useDispatch } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import dichVuReducer from '../../Redux/Reducer/dichVuReducer';
+import { dichVuCreator, State } from '../../Redux';
+import { useSelector } from 'react-redux';
 // import * as Data from '../../data/dichVuData.json';
 
-
-
-const data = [
-    {
-        "maDichVu": "KIO_01",
-        "tenDichVu": "Kiosk",
-        "loaiDichVu": "Kiosk",
-        "tenDangNhap": "Linhkyo011",
-        "diaChi": "192.168.1.10",
-        "trangThaiHD": "Ngưng hoạt động",
-        "trangThaiKN": "Mất kết nối",
-        "dichVu": "Khám tim mạch, Khám Sản - Phụ Khoa, Khám răng hàm mặt. Khám tai mũi họng, Khám hô hấp, Khám tổng quát",
-        "moTa": "Đang hoạt động",
-        "key": 0
-    },
-    {
-        "maDichVu": "KIO_01",
-        "tenDichVu": "Kiosk",
-        "diaChi": "192.168.1.10",
-        "trangThaiHD": "Hoạt động",
-        "trangThaiKN": "Kết nối",
-        "dichVu": "Khám tim mạch, Khám Sản - Phụ Khoa, Khám răng hàm mặt. Khám tai mũi họng, Khám hô hấp, Khám tổng quát",
-        "moTa": "Đang hoạt động",
-        "key": 1,
-    },
-    {
-        "key": 2,
-        "maDichVu": "KIO_01",
-        "tenDichVu": "Kiosk",
-        "diaChi": "192.168.1.10",
-        "trangThaiHD": "Hoạt động",
-        "trangThaiKN": "Mất kết nối",
-        "dichVu": "Khám tim mạch, Khám Sản - Phụ Khoa, Khám răng hàm mặt. Khám tai mũi họng, Khám hô hấp, Khám tổng quát",
-        "moTa": "Đang hoạt động",
-    },
-    {
-      "key": 3,
-      "maDichVu": "KIO_01",
-      "tenDichVu": "Kiosk",
-      "diaChi": "192.168.1.10",
-      "trangThaiHD": "Ngưng hoạt động",
-      "trangThaiKN": "Kết nối",
-      "dichVu": "Khám tim mạch, Khám Sản - Phụ Khoa, Khám răng hàm mặt. Khám tai mũi họng, Khám hô hấp, Khám tổng quát",
-      "moTa": "Đang hoạt động",
-
-    },
-    {
-      "key": 4,
-        "maDichVu": "KIO_01",
-        "tenDichVu": "Kiosk",
-        "diaChi": "192.168.1.10",
-        "trangThaiHD": "Hoạt động",
-        "trangThaiKN": "Mất kết nối",
-        "dichVu": "Khám tim mạch, Khám Sản - Phụ Khoa, Khám răng hàm mặt. Khám tai mũi họng, Khám hô hấp, Khám tổng quát",
-        "moTa": "Đang hoạt động",
-
-    },
-    {
-      "key": 5,
-        "maDichVu": "KIO_01",
-        "tenDichVu": "Kiosk",
-        "diaChi": "192.168.1.10",
-        "trangThaiHD": "Hoạt động",
-        "trangThaiKN": "Kết nối",
-        "dichVu": "Khám tim mạch, Khám Sản - Phụ Khoa, Khám răng hàm mặt. Khám tai mũi họng, Khám hô hấp, Khám tổng quát",
-        "moTa": "Đang hoạt động",
-
-    },
-    {
-      "key": 6,
-        "maDichVu": "KIO_01",
-        "tenDichVu": "Kiosk",
-        "diaChi": "192.168.1.10",
-        "trangThaiHD": "Ngưng hoạt động",
-        "trangThaiKN": "Kết nối",
-        "dichVu": "Khám tim mạch, Khám Sản - Phụ Khoa, Khám răng hàm mặt. Khám tai mũi họng, Khám hô hấp, Khám tổng quát",
-        "moTa": "Đang hoạt động",
-
-    },
-    {
-      "key": 7,
-        "maDichVu": "KIO_01",
-        "tenDichVu": "Kiosk",
-        "diaChi": "192.168.1.10",
-        "trangThaiHD": "Ngưng hoạt động",
-        "trangThaiKN": "Mất kết nối",
-        "dichVu": "Khám tim mạch, Khám Sản - Phụ Khoa, Khám răng hàm mặt. Khám tai mũi họng, Khám hô hấp, Khám tổng quát",
-        "moTa": "Đang hoạt động",
-
-    },
-    {
-      "key": 8,
-        "maDichVu": "KIO_01",
-        "tenDichVu": "Kiosk",
-        "diaChi": "192.168.1.10",
-        "trangThaiHD": "Hoạt động",
-        "trangThaiKN": "Mất kết nối",
-        "dichVu": "Khám tim mạch, Khám Sản - Phụ Khoa, Khám răng hàm mặt. Khám tai mũi họng, Khám hô hấp, Khám tổng quát",
-        "moTa": "Đang hoạt động",
-
-    },
-    {    
-      "key": 9,
-        "maDichVu": "KIO_01",
-        "tenDichVu": "Kiosk",
-        "diaChi": "192.168.1.10",
-        "trangThaiHD": "Ngưng hoạt động",
-        "trangThaiKN": "Mất kết nối",
-        "dichVu": "Khám tim mạch, Khám Sản - Phụ Khoa, Khám răng hàm mặt. Khám tai mũi họng, Khám hô hấp, Khám tổng quát",
-        "moTa": "Đang hoạt động",
-
-    },
-    {    
-      "key": 10,
-        "maDichVu": "KIO_01",
-        "tenDichVu": "Kiosk",
-        "diaChi": "192.168.1.10",
-        "trangThaiHD": "Ngưng hoạt động",
-        "trangThaiKN": "Kết nối",
-        "dichVu": "Khám tim mạch, Khám Sản - Phụ Khoa, Khám răng hàm mặt. Khám tai mũi họng, Khám hô hấp, Khám tổng quát",
-        "moTa": "Đang hoạt động",
-
-    },
-    {    
-      "key": 11,
-        "maDichVu": "KIO_01",
-        "tenDichVu": "Kiosk",
-        "diaChi": "192.168.1.10",
-        "trangThaiHD": "Ngưng hoạt động",
-        "trangThaiKN": "Mất kết nối",
-        "dichVu": "Khám tim mạch, Khám Sản - Phụ Khoa, Khám răng hàm mặt. Khám tai mũi họng, Khám hô hấp, Khám tổng quát",
-        "moTa": "Đang hoạt động",
-
-    },
-    {
-        "maDichVu": "KIO_01",
-        "tenDichVu": "Kiosk",
-        "diaChi": "192.168.1.10",
-        "trangThaiHD": "Ngưng hoạt động",
-        "trangThaiKN": "Mất kết nối",
-        "dichVu": "Khám tim mạch, Khám Sản - Phụ Khoa, Khám răng hàm mặt. Khám tai mũi họng, Khám hô hấp, Khám tổng quát",
-        "key": 0,
-        "moTa": "Đang hoạt động",
-
-    },
-    {
-        "maDichVu": "KIO_01",
-        "tenDichVu": "Kiosk",
-        "diaChi": "192.168.1.10",
-        "trangThaiHD": "Hoạt động",
-        "trangThaiKN": "Kết nối",
-        "dichVu": "Khám tim mạch, Khám Sản - Phụ Khoa, Khám răng hàm mặt. Khám tai mũi họng, Khám hô hấp, Khám tổng quát",
-        "key": 1,
-        "moTa": "Đang hoạt động",
-
-    },
-    {
-        "key": 2,
-        "maDichVu": "KIO_01",
-        "tenDichVu": "Kiosk",
-        "diaChi": "192.168.1.10",
-        "trangThaiHD": "Hoạt động",
-        "trangThaiKN": "Mất kết nối",
-        "dichVu": "Khám tim mạch, Khám Sản - Phụ Khoa, Khám răng hàm mặt. Khám tai mũi họng, Khám hô hấp, Khám tổng quát",
-        "moTa": "Đang hoạt động",
-
-    },
-    {
-      "key": 3,
-      "maDichVu": "KIO_01",
-      "tenDichVu": "Kiosk",
-      "diaChi": "192.168.1.10",
-      "trangThaiHD": "Ngưng hoạt động",
-      "trangThaiKN": "Kết nối",
-      "dichVu": "Khám tim mạch, Khám Sản - Phụ Khoa, Khám răng hàm mặt. Khám tai mũi họng, Khám hô hấp, Khám tổng quát",
-      "moTa": "Đang hoạt động",
-
-    },
-    {
-      "key": 4,
-        "maDichVu": "KIO_01",
-        "tenDichVu": "Kiosk",
-        "diaChi": "192.168.1.10",
-        "trangThaiHD": "Hoạt động",
-        "trangThaiKN": "Mất kết nối",
-        "dichVu": "Khám tim mạch, Khám Sản - Phụ Khoa, Khám răng hàm mặt. Khám tai mũi họng, Khám hô hấp, Khám tổng quát",
-        "moTa": "Đang hoạt động",
-
-    },
-    {
-      "key": 5,
-        "maDichVu": "KIO_01",
-        "tenDichVu": "Kiosk",
-        "diaChi": "192.168.1.10",
-        "trangThaiHD": "Hoạt động",
-        "trangThaiKN": "Kết nối",
-        "dichVu": "Khám tim mạch, Khám Sản - Phụ Khoa, Khám răng hàm mặt. Khám tai mũi họng, Khám hô hấp, Khám tổng quát",
-        "moTa": "Đang hoạt động",
-
-    },
-    {
-      "key": 6,
-        "maDichVu": "KIO_01",
-        "tenDichVu": "Kiosk",
-        "diaChi": "192.168.1.10",
-        "trangThaiHD": "Ngưng hoạt động",
-        "trangThaiKN": "Kết nối",
-        "dichVu": "Khám tim mạch, Khám Sản - Phụ Khoa, Khám răng hàm mặt. Khám tai mũi họng, Khám hô hấp, Khám tổng quát",
-        "moTa": "Đang hoạt động",
-
-    },
-    {
-      "key": 7,
-        "maDichVu": "KIO_01",
-        "tenDichVu": "Kiosk",
-        "diaChi": "192.168.1.10",
-        "trangThaiHD": "Ngưng hoạt động",
-        "trangThaiKN": "Mất kết nối",
-        "dichVu": "Khám tim mạch, Khám Sản - Phụ Khoa, Khám răng hàm mặt. Khám tai mũi họng, Khám hô hấp, Khám tổng quát",
-        "moTa": "Đang hoạt động",
-
-    },
-    {
-      "key": 8,
-        "maDichVu": "KIO_01",
-        "tenDichVu": "Kiosk",
-        "diaChi": "192.168.1.10",
-        "trangThaiHD": "Hoạt động",
-        "trangThaiKN": "Mất kết nối",
-        "dichVu": "Khám tim mạch, Khám Sản - Phụ Khoa, Khám răng hàm mặt. Khám tai mũi họng, Khám hô hấp, Khám tổng quát",
-        "moTa": "Đang hoạt động",
-
-    },
-    {    
-      "key": 9,
-        "maDichVu": "KIO_01",
-        "tenThietBi": "Kiosk",
-        "diaChi": "192.168.1.10",
-        "trangThaiHD": "Ngưng hoạt động",
-        "trangThaiKN": "Mất kết nối",
-        "dichVu": "Khám tim mạch, Khám Sản - Phụ Khoa, Khám răng hàm mặt. Khám tai mũi họng, Khám hô hấp, Khám tổng quát",
-        "moTa": "Đang hoạt động",
-
-    },
-  ];
   const { Option } = Select;
   
   const { Search } = Input;
 
 
 export const DanhSachDichVu = () => {
-    // const [chiTiet, setChiTiet] = useState(false);
 
     const location = useLocation();
   
@@ -268,6 +27,28 @@ export const DanhSachDichVu = () => {
     const [startValue,setStartValue] = useState<any>(null);
     const [endValue,setEndValue] = useState<any>(null);
     const [endOpen,setEndOpen] = useState<boolean>(false);
+
+    const [dichVu, setDichVu] = useState<any | undefined>([]);
+
+    const dispatch = useDispatch();
+
+    const {LoadDuLieu} = bindActionCreators(dichVuCreator, dispatch);
+
+    //Lấy dữ liệu từ reducer
+    useEffect(()=> {
+        LoadDuLieu();
+    }, []);
+
+    const dichVuData = useSelector((state: State) => state.dichVu);
+
+    useEffect(()=> {
+        console.log('Dịch vụ',dichVuData);
+        const dichVuDoc = dichVuData.dichVuData;
+        const getAccount = async () => {
+          setDichVu(dichVuDoc.docs.map((doc:any)=> ({...doc.data(), id: doc.id})));
+      }
+        getAccount();
+    }, [dichVuData]);
 
     const date = new Date();
 
@@ -292,10 +73,15 @@ export const DanhSachDichVu = () => {
         title: 'Mô tả',
         dataIndex: 'moTa',
         width: 230,
+        render: (dataIndex:string) => {
+          return <p style={{maxWidth: '230px', overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis'}}>
+              {dataIndex}
+          </p>
+        }
       },
       {
         title: 'Trạng thái hoạt động',
-        dataIndex: 'trangThaiHD',
+        dataIndex: 'trangThaiHoatDong',
         width: 253,
         render: (dataIndex:string) => {
     
@@ -316,12 +102,12 @@ export const DanhSachDichVu = () => {
       },
       {
         title: ' ',
-        dataIndex: 'Chi tiết',
+        dataIndex: 'id',
         width: 125,
-        render: () => {
+        render: (dataIndex:any) => {
           return (
             <button onClick={()=> {
-              navigate('/dichVu/chiTietDichVu');
+              navigate(`/dichVu/chiTietDichVu/${dataIndex}`);
             }}>
               Chi tiết
             </button>
@@ -330,12 +116,12 @@ export const DanhSachDichVu = () => {
       },
       {
         title: ' ',
-        dataIndex: 'Cập nhật',
+        dataIndex: 'id',
         width: 125,
-        render: () => {
+        render: (dataIndex:any) => {
           return (
             <button onClick={()=> {
-                navigate('/dichVu/capNhatDichVu');
+                navigate(`/dichVu/capNhatDichVu/${dataIndex}`);
               }}>
                 Cập nhật
               </button>
@@ -497,7 +283,7 @@ export const DanhSachDichVu = () => {
                 </div>
                 <div className='dichVu__content-table'>
                   <Table
-                      dataSource={data}
+                      dataSource={dichVu}
                       columns={columns}
                       size="small"
                       pagination={{ pageSize: 9, itemRender:itemRender }}

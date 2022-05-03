@@ -9,12 +9,17 @@ import {
   } from '@ant-design/icons';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import logo from '../image/logo.png';
+import { useDispatch, useSelector } from 'react-redux';
+import { State } from '../Redux';
 
   const { SubMenu } = Menu;
 
 export const Home = () => {
 
+    const dispatch = useDispatch;
 
+    const {userLogin} = useSelector((state: State) => state.taiKhoan);
+    
     const [imageProfile, setImageProfile] = useState<string>('./img/user.png');
 
     const [statusNotify, setStatusNotify] = useState<boolean>(false); //false là đóng, true là mở
@@ -89,6 +94,8 @@ export const Home = () => {
                     <Menu.Item key="7" className='home__menu-logOut'>
                         <button className='home__menu-logOut-btn'
                         onClick={()=> {
+                            localStorage.removeItem('accessToken');
+                            localStorage.removeItem('userLogin');
                             window.location.replace('/login');
                         }}>
                             <i className="fa-solid fa-arrow-right-from-bracket"></i>
@@ -112,7 +119,8 @@ export const Home = () => {
                     <div className='profile__img' style={{backgroundImage: `url('${imageProfile}')`, backgroundSize: 'cover'}}/>
                     <div className='profile__txt'>
                         <span>Xin chào</span>
-                        <p>Lê Quỳnh Ái Vân</p>
+                        {/* <p>Lê Quỳnh Ái Vân</p> */}
+                        <p>{userLogin[0].hoTen}</p>
                     </div>
                 </div>
                 {

@@ -1,10 +1,14 @@
 import { combineReducers } from "redux";
+import capSoReducer from "./capSoReducer";
+import dichVuReducer from "./dichVuReducer";
 import taiKhoanReducer from "./taiKhoanReducer";
 import thietBiReducer from "./thietBiReducer";
 
 const reducers = combineReducers({
     taiKhoan: taiKhoanReducer,
-    thietBi: thietBiReducer
+    thietBi: thietBiReducer,
+    dichVu: dichVuReducer,
+    capSo: capSoReducer
 })
 
 export default reducers;

@@ -3,7 +3,7 @@ import moment from 'moment';
 import React, { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Image } from '../../Util/variableImage';
-
+import XLSX from 'xlsx';
 
 const data = [
     {
@@ -406,6 +406,7 @@ export const LapBaoCao = () => {
                             size="small"
                             pagination={{ pageSize: 10, itemRender:itemRender }}
                             bordered
+                            id="table"
                         >
                         </Table>
                     </div>
@@ -413,6 +414,18 @@ export const LapBaoCao = () => {
             </div>
             <div className='baoCao__download' onClick={()=>{
                 alert('Down cái gì mà down');
+                const downloadExcel = () => {
+                    const workSheet = XLSX.utils.json_to_sheet(data);
+                    const workBook = XLSX.utils.book_new();
+                    XLSX.utils.book_append_sheet(workBook, workSheet, "baoCao");
+                    //Buffer 
+                    let buf = XLSX.write(workBook, {bookType: 'xlsx', type: 'buffer'});
+                    //Binary string
+                    XLSX.write(workBook, {bookType: 'xlsx', type: 'binary'});
+                    //Download
+                    XLSX.writeFile(workBook, 'baoCaoData.xlsx');
+                }
+                downloadExcel();
             }}>
                 <img src={`${Image.download}`}/>
                 <span>Tải về</span>

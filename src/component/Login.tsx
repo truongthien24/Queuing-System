@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Form, Input, Button, Checkbox } from 'antd';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { isBuffer } from 'util';
+import { useDispatch, useSelector } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { State, taiKhoanCreator } from '../Redux';
 
 type EventTypes = {
     username: string,
@@ -10,14 +13,37 @@ type EventTypes = {
 
 export const Login = () => {
 
+    const navigate = useNavigate();
+
+    const dispatch = useDispatch();
+    
+    const {LoadDuLieu, DangNhap} = bindActionCreators(taiKhoanCreator, dispatch);
+
+    useEffect(()=> {
+        LoadDuLieu();
+    }, [])
+
+    const {statusLogin} = useSelector((state:State)=> state.taiKhoan);
+
+    useEffect(()=> {
+        if(statusLogin === true) {
+            navigate('/');
+        }else {
+            return;
+        }
+    }, [statusLogin])
+
+
     const onFinish = (e: EventTypes) => {
         console.log('Success:', e);
-        if(e.username === 'lequynhaivan01' && e.password === '123456') {
-            window.location.replace('/');
-        }else {
-            alert('Tài khoản mật khẩu chưa đúng! mời bạn nhập lại');
-        }
+        // if(e.username === 'lequynhaivan01' && e.password === '123456') {
+        //     window.location.replace('/');
+        // }else {
+        //     alert('Tài khoản mật khẩu chưa đúng! mời bạn nhập lại');
+        // }
+        DangNhap(e.username, e.password);
     };
+
 
   return (
     <div className='layout'>
@@ -34,7 +60,6 @@ export const Login = () => {
                         >
                         <Form.Item
                             label=""
-                            // rules={[{ required: true, message: 'Vui lòng nhập tài khoản!' }]}
                         >
                             <p>Tên đăng nhập *</p>
                             <Form.Item name="username">
@@ -44,7 +69,6 @@ export const Login = () => {
 
                         <Form.Item
                             label=""
-                            // rules={[{ required: true, message: 'Vui lòng nhập mật khẩu!' }]}
                         >
                             <p>Mật khẩu *</p>
                             <Form.Item name="password">

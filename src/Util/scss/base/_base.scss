@@ -50,7 +50,7 @@
 
 // Start ant-select-dropdown scroll
 .ant-select-dropdown {
-    overflow-y: scroll !important;
+    overflow-y: overlay !important;
     overflow-x: hidden !important;
     width: 100%;
 
@@ -67,8 +67,12 @@
         background: #FFC89B;
     }
 
-    .rc-virtual-list-holder {
-        height: 100% !important;
+    // .rc-virtual-list-holder {
+    //     height: 100% !important;
+    // }
+
+    .rc-virtual-list-scrollbar-thumb {
+        display: none !important;
     }
 }
 // End ant-select-dropdown scroll

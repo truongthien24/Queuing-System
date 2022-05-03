@@ -1,11 +1,42 @@
 import { Breadcrumb, Modal, Select } from 'antd';
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
+import { capSoCreator, State } from '../../Redux';
+import { numberMaxCapSo } from '../../Util/method';
 import { Image } from '../../Util/variableImage';
+import { collection, addDoc } from "firebase/firestore"; 
+import { db } from '../../firebase/firebase.config';
 
 const {Option} = Select;
 
 export const ThemCapSo = () => {
+
+    const dispatch = useDispatch();
+
+    const [capSoList,setCapSoList] = useState<any>([]);
+
+    const {LoadDuLieu} = bindActionCreators(capSoCreator, dispatch);
+
+    const [select, setSelect] = useState<string>('fdsafadfs');
+
+    useEffect(()=> {
+      LoadDuLieu();
+    }, []);
+
+    const {capSoData} = useSelector((state:State)=>state.capSo);
+    const {userLogin} = useSelector((state:State)=>state.taiKhoan);
+
+    useEffect(() => {
+      console.log(capSoData);
+      const getAccount = async () => {
+        setCapSoList(capSoData.docs.map((doc:any)=> ({...doc.data(), id: doc.id})));
+        console.log('Cấp số list',capSoList);
+      }
+      getAccount();
+
+    }, [capSoData]);
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -23,6 +54,45 @@ export const ThemCapSo = () => {
     const handleCancel = () => {
       setIsModalVisible(false);
     };
+
+
+    const handleSubmit = (e:any) => {
+
+      let date = new Date();
+
+      e.preventDefault();
+      showModal();
+      const max = numberMaxCapSo(capSoList);
+      const stt = parseInt(max) + 1;
+      console.log(e.target.value);
+
+      const day = date.getDate();
+      const month = date.getMonth() + 1;
+      const hours = date.getHours();
+      const hoursHSD = hours + 4;
+      let dayString = '';
+      let monthString = '';
+      if(day < 10) {
+          dayString = `0${day}`
+      }
+      if (month < 10) {
+        monthString = `0${month}`
+      }
+
+
+
+      const addCapSo = async () => {
+        const docRef = await addDoc(collection(db, "capSo"), {
+          tenDichVu: `${select}`,
+          stt: `${stt}`,
+          nguonCap: 'Kiosk',
+          tenKhachHang: `${userLogin[0].hoTen}`,
+          thoiGianCap: `${date.getHours()}:${date.getSeconds()} - ${dayString}/${monthString}/${date.getFullYear()}`,
+          HSD: `${hoursHSD}:${date.getSeconds()} - ${dayString}/${monthString}/${date.getFullYear()}`
+        });
+      }
+      addCapSo();
+    }
 
     const breadCrumbView = () => {
         const {pathname} = location;
@@ -63,7 +133,8 @@ export const ThemCapSo = () => {
 
     const handleChangeSelect = (event:any) => {
         console.log(`select ${event}`);
-      }
+        setSelect(`${event}`);
+    }
 
     return (
         <div>
@@ -78,14 +149,16 @@ export const ThemCapSo = () => {
                     <h5 className='content__container-heading'>
                         Cấp số mới
                     </h5>
-                    <form className='content__container-form'>
+                    <form className='content__container-form' onSubmit={handleSubmit}>
                         <div className='content__container-form-top'>
                             <p className='form__top-title'>Dịch vụ khách hàng lựa chọn</p>
-                            <Select defaultValue="Tất cả" style={{ width: 400 }} onChange={handleChangeSelect} className='form__top-select' autoFocus={false} suffixIcon={<img src={Image.select}/>} placeholder='Chọn dịch vụ'>
-                                  <Option value="Tất cả">Tất cả</Option>
-                                  <Option value="Hoạt động">Đang chờ</Option>
-                                  <Option value="Ngưng hoạt động">Đã sử dụng</Option>
-                                  <Option value="Ngưng hoạt động">Bỏ qua</Option>
+                            <Select defaultValue="Khám tổng quát" style={{ width: 400 }} onChange={handleChangeSelect} className='form__top-select' autoFocus={false} suffixIcon={<img src={Image.select}/>} placeholder='Chọn dịch vụ' dropdownClassName='capSo__dropdown'>
+                                  <Option value="Khám tổng quát">Khám tổng quát</Option>
+                                  <Option value="Khám tai mũi họng">Khám tai mũi họng</Option>
+                                  <Option value="Khám răng hàm mặt">Khám răng hàm mặt</Option>
+                                  <Option value="Khám tim mạch">Khám tim mạch</Option>
+                                  <Option value="Khám sản - phụ khoa">Khám sản - phụ khoa</Option>
+                                  <Option value="Khám hô hấp">Khám hô hấp</Option>
                             </Select>
                         </div>
                         <div className='content__container-form-bottom'>
@@ -94,7 +167,7 @@ export const ThemCapSo = () => {
                             }}>
                                 Hủy bỏ
                             </button>
-                            <button className='form__bottom-btn-print' type='button'  onClick={showModal}>In số</button>
+                            <button className='form__bottom-btn-print' type='submit'>In số</button> 
                         </div>
                     </form>
                 </div>

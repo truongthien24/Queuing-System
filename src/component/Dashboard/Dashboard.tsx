@@ -283,7 +283,7 @@ export const Dashboard = () => {
                             <div className='item__left'>
                                 <RadialBar  {...configThietbi} />
                                 <div className='item__number'>
-                                    <p>4.221</p>
+                                    <p>{thietBi}</p>
                                     <div className='item__text thietbi'>
                                         <img src={`${Image.thietbimau}`}/>
                                         <span>Thiết bị</span>
@@ -317,7 +317,7 @@ export const Dashboard = () => {
                             <div className='item__left'>
                                 <RadialBar {...configDichVu} />
                                 <div className='item__number'>
-                                    <p>276</p>
+                                    <p>{dichVu}</p>
                                     <div className='item__text dichvu'>
                                         <img src={`${Image.dichvumau}`}/>
                                         <span>Dịch vụ</span>
@@ -351,7 +351,7 @@ export const Dashboard = () => {
                             <div className='item__left'>
                                 <RadialBar {...configCapSo} />
                                 <div className='item__number'>
-                                    <p>276</p>
+                                    <p>{capSo}</p>
                                     <div className='item__text capso'>
                                         <img src={`${Image.capsomau}`}/>
                                         <span>Cấp số</span>
