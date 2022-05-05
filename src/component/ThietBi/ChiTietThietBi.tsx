@@ -147,7 +147,7 @@ export const ChiTietThietBi = () => {
         </div>
 
         <div className='thietBi__capNhat' onClick={()=> {
-            navigate('/thietbi/capNhatThietBi');
+            navigate(`/thietbi/capNhatThietBi/${id}`);
         }}>
             <img src={`${Image.edit}`}/>
             <span>Cập nhật thiết bị</span>

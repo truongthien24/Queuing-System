@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Image } from '../../Util/variableImage';
 import { collection, addDoc  } from "firebase/firestore"; 
 import { db } from '../../firebase/firebase.config';
+import * as yup from 'yup';
 
 interface formikFace {
   maThietBi: string,
@@ -34,11 +35,28 @@ export const ThemThietBi = () => {
       dichVu: [],
     }
 
+    const validationSchema = yup.object().shape({
+        maThietBi: yup.string()
+          .required('Không được bỏ trống!').min(3, 'Tối thiểu 3 chữ!'),
+        tenThietBi: yup.string()
+          .required('Không được bỏ trống!'),
+        loaiThietBi: yup.string()
+          .required('Không được bỏ trống!'),
+        tenDangNhap: yup.string()
+          .required('Không được bỏ trống!'),
+        diaChi: yup.string()
+          .required('Không được bỏ trống!'),
+        matKhau: yup.string()
+          .required('Không được bỏ trống!'),
+        dichVu: yup.string()
+          .required('Không được bỏ trống!'),
+      })
+
     const formik = useFormik({
         initialValues,
         enableReinitialize: true,
         onSubmit: () => {
-            // console.log(JSON.stringify(values));s
+            // console.log(JSON.stringify(values));
             const addThietBi = async () => {
                 const docRef = await addDoc(collection(db, "thietBi"), {
                     maThietBi: formik.values.maThietBi,
@@ -51,7 +69,8 @@ export const ThemThietBi = () => {
                 });
             }
             addThietBi();
-        }   
+        },
+        validationSchema
     })
 
     const onChangeLoaiThietBi = (e:any) => {
@@ -118,7 +137,8 @@ export const ThemThietBi = () => {
                                 <span>Mã thiết bị: </span>
                                 <img src={`${Image.chuY}`}/>
                             </div>
-                            <input className='content__add-input' name="maThietBi" value={formik.values.maThietBi} onChange={formik.handleChange} placeholder="Nhập mã thiết bị"/>
+                            <input className='content__add-input' name="maThietBi" value={formik.values.maThietBi} onChange={formik.handleChange} placeholder="Nhập mã thiết bị" onBlur={formik.handleBlur}/>
+                            {formik.errors.maThietBi && formik.touched.maThietBi ? (<div className="text-danger">{formik.errors.maThietBi}</div>) : ''}
                         </div>
                         <div className='content__add-item'>
                             <div className='content__add-label'>
@@ -144,28 +164,32 @@ export const ThemThietBi = () => {
                                 <span>Tên thiết bị: </span>
                                 <img src={`${Image.chuY}`}/>
                             </div>
-                            <input className='content__add-input' name="tenThietBi" value={formik.values.tenThietBi}  onChange={formik.handleChange} placeholder="Nhập tên thiết bị"/>
+                            <input className='content__add-input' name="tenThietBi" value={formik.values.tenThietBi}  onChange={formik.handleChange} placeholder="Nhập tên thiết bị"  onBlur={formik.handleBlur}/>
+                            {formik.errors.tenThietBi && formik.touched.tenThietBi ? (<div className="text-danger">{formik.errors.tenThietBi}</div>) : ''}
                         </div>
                         <div className='content__add-item'>
                             <div className='content__add-label'>
                                 <span>Tên đăng nhập: </span>
                                 <img src={`${Image.chuY}`}/>
                             </div>
-                            <input className='content__add-input' name="tenDangNhap" value={formik.values.tenDangNhap} onChange={formik.handleChange} placeholder="Nhập tên đăng nhập"/>
+                            <input className='content__add-input' name="tenDangNhap" value={formik.values.tenDangNhap} onChange={formik.handleChange} placeholder="Nhập tên đăng nhập"  onBlur={formik.handleBlur}/>
+                            {formik.errors.tenDangNhap && formik.touched.tenDangNhap ? (<div className="text-danger">{formik.errors.tenDangNhap}</div>) : ''}
                         </div>
                         <div className='content__add-item'>
                             <div className='content__add-label'>
                                 <span>Địa chỉ IP: </span>
                                 <img src={`${Image.chuY}`}/>
                             </div>
-                            <input className='content__add-input' name="diaChi" value={formik.values.diaChi} onChange={formik.handleChange} placeholder="Nhập địa chỉ IP"/>
+                            <input className='content__add-input' name="diaChi" value={formik.values.diaChi} onChange={formik.handleChange} placeholder="Nhập địa chỉ IP"  onBlur={formik.handleBlur}/>
+                            {formik.errors.diaChi && formik.touched.diaChi ? (<div className="text-danger">{formik.errors.diaChi}</div>) : ''}
                         </div>
                         <div className='content__add-item'>
                             <div className='content__add-label'>
                                 <span>Mật khẩu: </span>
                                 <img src={`${Image.chuY}`}/>
                             </div>
-                            <input className='content__add-input' name="matKhau" value={formik.values.matKhau} onChange={formik.handleChange} placeholder="Nhập mật khẩu"/>
+                            <input className='content__add-input' name="matKhau" value={formik.values.matKhau} onChange={formik.handleChange} placeholder="Nhập mật khẩu"  onBlur={formik.handleBlur}/>
+                            {formik.errors.matKhau && formik.touched.matKhau ? (<div className="text-danger">{formik.errors.matKhau}</div>) : ''}
                         </div>
                         <div className='content__add-item'>
                             <div className='content__add-label'>

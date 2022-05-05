@@ -27,7 +27,8 @@ export const Login = () => {
 
     useEffect(()=> {
         if(statusLogin === true) {
-            navigate('/');
+            // navigate(-1);
+            window.location.replace('/dashboard');
         }else {
             return;
         }

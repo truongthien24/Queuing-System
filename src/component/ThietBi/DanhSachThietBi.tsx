@@ -19,7 +19,7 @@ export const DanhSachThietBi = () => {
 
    const dispatch = useDispatch();
 
-   const [thietBi, setThietBi] = useState<any>([]);
+   const [thietBi, setThietBi] = useState<any>();
 
    const {LoadDuLieu} = bindActionCreators(thietBiCreator, dispatch);
 
@@ -150,7 +150,31 @@ export const DanhSachThietBi = () => {
         console.log(`select ${event}`);
       }
     
-    const onChange = (value:any) => console.log(value.target.value);
+    const onChange = (value:any) => {
+      const values = value.target.value;
+      console.log('values: ',values);
+
+      if( values !== '') {
+        const result = thietBi.filter((item: any) => item.tenThietBi === values || item.tenDangNhap === values || item.loaiThietBi === values || item.maThietBi === values || item.diaChi === values);
+
+        console.log(result);
+  
+        if(result[0] !== undefined) {
+          setThietBi(result);
+        }else {
+          const getThietBi = async () => {
+            setThietBi(thietBiData.docs.map((doc:any)=> ({...doc.data(), id: doc.id})));
+          }
+          getThietBi();
+        }
+      }else {
+        const getThietBi = async () => {
+          setThietBi(thietBiData.docs.map((doc:any)=> ({...doc.data(), id: doc.id})));
+        }
+        getThietBi();
+      }
+      
+    };
 
     const breadCrumbView = () => {
         const {pathname} = location;

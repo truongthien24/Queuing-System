@@ -16,7 +16,7 @@ body {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  background-color: #000 !important;
+  background-color: #B1B1B1 !important;
 }
 
 p {
@@ -775,7 +775,7 @@ p {
 
 .home .home__profile .profile__notify .profile__notify-heading {
   background-color: #FF9138;
-  padding: 9px 24px;
+  padding: 9px 20px;
 }
 
 .home .home__profile .profile__notify .profile__notify-heading h3 {
@@ -794,7 +794,7 @@ p {
 
 .home .home__profile .profile__notify .profile__notify-content .profile__notify-list .profile__notify-item {
   height: 80px;
-  padding: 16px 24px 10px 24px;
+  padding: 16px 20px 10px 20px;
   position: relative;
 }
 
@@ -3790,25 +3790,28 @@ p {
   margin-bottom: 45px;
 }
 
-.qlVaiTro .vaiTro__breadcrumb .ant-breadcrumb span {
-  font-size: 20px !important;
-  color: #7E7D88;
+.qlVaiTro .vaiTro__breadcrumb .ant-breadcrumb ol {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
-.qlVaiTro .vaiTro__breadcrumb .ant-breadcrumb span span {
+.qlVaiTro .vaiTro__breadcrumb .ant-breadcrumb ol li span {
+  font-size: 20px !important;
+  color: #7E7D88;
   font-weight: 700 !important;
 }
 
-.qlVaiTro .vaiTro__breadcrumb .ant-breadcrumb span span a {
+.qlVaiTro .vaiTro__breadcrumb .ant-breadcrumb ol li span a {
   font-size: 20px !important;
   color: #7E7D88;
 }
 
-.qlVaiTro .vaiTro__breadcrumb .ant-breadcrumb span:last-child span {
+.qlVaiTro .vaiTro__breadcrumb .ant-breadcrumb ol li:last-child span {
   color: #FF7506 !important;
 }
 
-.qlVaiTro .vaiTro__breadcrumb .ant-breadcrumb .ant-breadcrumb-separator {
+.qlVaiTro .vaiTro__breadcrumb .ant-breadcrumb ol .ant-breadcrumb-separator {
   margin: 0 15.4px !important;
 }
 

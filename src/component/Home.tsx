@@ -10,13 +10,15 @@ import {
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import logo from '../image/logo.png';
 import { useDispatch, useSelector } from 'react-redux';
-import { State } from '../Redux';
+import { capSoCreator, State } from '../Redux';
+import { bindActionCreators } from 'redux';
+import moment from 'moment';
 
   const { SubMenu } = Menu;
 
 export const Home = () => {
 
-    const dispatch = useDispatch;
+    const [capSoList,setCapSoList] = useState<any>([]);
 
     const {userLogin} = useSelector((state: State) => state.taiKhoan);
     
@@ -30,9 +32,25 @@ export const Home = () => {
 
     const navigate = useNavigate();
 
+    const dispatch = useDispatch();
+    
+    const {LoadDuLieu} = bindActionCreators(capSoCreator, dispatch);
+
     useEffect(() => {
+        LoadDuLieu();
         console.log(imageProfile);
     }, []);
+
+    const {capSoData} = useSelector((state: State) => state.capSo);
+
+    useEffect(()=> {
+        console.log('Cấp số', capSoData.docs);
+        const getAccount = async () => {
+          setCapSoList(capSoData.docs.map((doc:any)=> ({...doc.data(), id: doc.id})));
+          console.log('Cấp số list',capSoList);
+      }
+        getAccount();
+    }, [capSoData]);  
 
     useEffect(()=> {
         if(statusNotify) {
@@ -43,6 +61,27 @@ export const Home = () => {
             setColorNotifyBtn('#FF9138')
         }
     }, [statusNotify]);
+
+    
+    const renderNotifyContent = () => {
+        console.log('Cấp số lít',capSoList);
+        return capSoList.map((item: any, key: string) => {
+            let currentTime = `${item.thoiGianCap}`.split(" - ");    
+            console.log(currentTime);
+            // console.log(item.ThoiGianCap.toDate('dd/MM/yyyy', '/'));
+            // item.ThoiGianCap.toDate('dd/MM/yyyy', '/');
+            
+            // console.log('currentTime',currentTime);
+            // let momentDate = moment(`${item.thoiGianCap}`);
+            return (<li className="profile__notify-item">
+                <div>
+                    <span>Người dùng: {item.tenKhachHang}</span>
+                    <p>Thời gian nhận số: {currentTime[0]} ngày {currentTime[1]} </p>
+                </div>  
+            </li>)
+        })
+    }
+
   
   return (
     <div className='layout'>
@@ -55,24 +94,24 @@ export const Home = () => {
                     className='home__menu'
                 >
                     <Menu.Item key="link" className="home__menu-logo">
-                        <Link to="/">
+                        <Link to="/dashboard">
                             <img src={`${logo}`}/>
                         </Link>
                     </Menu.Item>
                     <Menu.Item key="1" icon={<img src='./img/dashboard.png'/>}>
-                        <Link to='/dashboard'>Dashboard</Link>
+                        <Link to='dashboard'>Dashboard</Link>
                     </Menu.Item>
                     <Menu.Item key="2" icon={<img src='./img/thietbi.png'/>}>
-                        <Link to='/thietbi'>Thiết bị</Link>
+                        <Link to='thietbi'>Thiết bị</Link>
                     </Menu.Item>
                     <Menu.Item key="3" icon={<img src='./img/dichvu.png'/>}>
-                        <Link to='/dichvu'>Dịch vụ</Link>
+                        <Link to='dichvu'>Dịch vụ</Link>
                     </Menu.Item>
                     <Menu.Item key="4" icon={<img src='./img/capso.png'/>}>
-                        <Link to='/capso'>Cấp số</Link>
+                        <Link to='capso'>Cấp số</Link>
                     </Menu.Item>
                     <Menu.Item key="5" icon={<img src='./img/baocao.png'/>}>
-                        <Link to='/baocao'>Báo cáo</Link>
+                        <Link to='baocao'>Báo cáo</Link>
                     </Menu.Item>
                     <Menu.Item key="6" icon={<img src='./img/setting.png'/>}>
                         <span>
@@ -131,7 +170,8 @@ export const Home = () => {
                         </div>
                         <div className='profile__notify-content'>
                             <ul className='profile__notify-list'>
-                                <li className="profile__notify-item">
+                                {renderNotifyContent()}
+                                {/* <li className="profile__notify-item">
                                     <div>
                                         <span>Người dùng: Nguyễn Thị Thùy Dung</span>
                                         <p>Thời gian nhận số: 12h20 ngày 30/11/2021</p>
@@ -178,8 +218,8 @@ export const Home = () => {
                                         <span>Người dùng: Phạm Hồng Ngọc</span>
                                         <p>Thời gian nhận số: 12h20 ngày 30/11/2021</p>
                                     </div>
-                                </li>
-                            </ul>
+                                </li> */}
+                            </ul> 
                         </div>  
                     </div>
                     :

@@ -1,5 +1,5 @@
 import { collection, getDocs } from "firebase/firestore";
-import { Dispatch } from "redux";
+import { Action, Dispatch } from "redux";
 import { ActionProps } from "../Action/taiKhoanAction";
 import {db} from '../../firebase/firebase.config';
 import { useState } from "react";
@@ -50,5 +50,19 @@ export const DangNhap = (tenDangNhap: string, matKhau: string) => async (dispatc
     }
     catch(error) {
         console.log('Lỗi rồi!');
+    }
+}
+
+// Kiểm tra email 
+export const KiemTraEmail = (email: string) => async (dispatch: Dispatch<ActionProps>) => {
+    try {
+        dispatch({
+            type: 'KIEM_TRA_EMAIL',
+            payload: `${email}`
+        })
+    }
+    catch(error) {
+        console.log('Lỗi rồi!');
+        alert('Email không chính xác!');
     }
 }

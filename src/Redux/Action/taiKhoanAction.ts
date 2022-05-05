@@ -21,5 +21,9 @@ type dangNhap = {
     }
 }
 
+type KiemTraEmail = {
+    type: 'KIEM_TRA_EMAIL',
+    payload: string
+}
 
-export type ActionProps = loadDuLieu | CapNhatDuLieu | LayDuLieu | dangNhap;
+export type ActionProps = loadDuLieu | CapNhatDuLieu | LayDuLieu | dangNhap | KiemTraEmail;

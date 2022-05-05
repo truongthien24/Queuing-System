@@ -174,7 +174,32 @@ export const DanhSachDichVu = () => {
         setEndOpen(open);
       };
     
-    const onChange = (value:any) => console.log(value.target.value);
+    const onChange = (value:any) => {
+      const values = value.target.value;
+      console.log('values: ',values);
+
+      if( values !== '') {
+        const result = dichVu.filter((item: any) => item.tenDichVu === values || item.moTa === values || item.maDichVu === values);
+
+        console.log(result);
+  
+        if(result[0] !== undefined) {
+          setDichVu(result);
+        }else {
+          const dichVuDoc = dichVuData.dichVuData;
+          const getAccount = async () => {
+            setDichVu(dichVuDoc.docs.map((doc:any)=> ({...doc.data(), id: doc.id})));
+        }
+          getAccount();
+        }
+      }else {
+        const dichVuDoc = dichVuData.dichVuData;
+        const getAccount = async () => {
+          setDichVu(dichVuDoc.docs.map((doc:any)=> ({...doc.data(), id: doc.id})));
+      }
+        getAccount();
+      }
+    };
 
     function onOk(value:any) {
         console.log('onOk: ', value);

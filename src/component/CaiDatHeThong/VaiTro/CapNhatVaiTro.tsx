@@ -1,12 +1,17 @@
 import { Breadcrumb, Checkbox } from 'antd';
 import { useFormik } from 'formik';
-import React from 'react'
-import { useLocation, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
+import { MyParams } from '../../../config/paramType';
+import { nguoiDungCreator, State } from '../../../Redux';
 import { Image } from '../../../Util/variableImage';
 
 interface formikFace {
     tenVaiTro: string,
-    moTa: string
+    moTa: string,
+    soNguoiDung: string,
 }
 
 export const CapNhatVaiTro = () => {
@@ -15,9 +20,38 @@ export const CapNhatVaiTro = () => {
 
     const navigate = useNavigate();
 
+    const [vaiTro, setVaiTro] = useState<any>({
+      tenVaiTro: '',
+      soNguoiDung: '',
+      moTa: ''
+  })
+
+    const {id} = useParams<keyof MyParams>() as MyParams;
+  
+    const dispatch = useDispatch();
+
+    const {LayDuLieu} = bindActionCreators(nguoiDungCreator, dispatch);
+
+    useEffect(()=> {
+        LayDuLieu(id);
+    }, []);
+
+    
+    const vaiTroInfo = useSelector((state: State) => state.vaiTro);
+
+    useEffect(()=> {
+        const vaiTroData = vaiTroInfo.vaiTroInfo[0]._document.data.value.mapValue.fields;
+        setVaiTro({
+            tenVaiTro: `${vaiTroData.tenVaiTro.stringValue}`,
+            soNguoiDung: `${vaiTroData.soNguoiDung.stringValue}`,
+            moTa: `${vaiTroData.moTa.stringValue}`,
+        })
+    }, [vaiTroInfo]);
+
     const initialValues: formikFace = {
-        tenVaiTro: 'Kế toán',
-        moTa: 'Chịu trách nhiệm thống kê số liệu và kiểm toán'
+        tenVaiTro: `${vaiTro.tenVaiTro}`,
+        soNguoiDung: `${vaiTro.soNguoiDung}`,
+        moTa: `${vaiTro.moTa}`,
     }
 
     const formik = useFormik({

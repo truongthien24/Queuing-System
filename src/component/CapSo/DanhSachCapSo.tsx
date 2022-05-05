@@ -182,7 +182,7 @@ export const DanhSachCapSo = () => {
         width: 174,
       },
       {
-        title: 'Trạng thái hoạt động',
+        title: 'Trạng thái',
         dataIndex: 'trangThaiHoatDong',
         width: 147,
         render: (dataIndex:string) => {
@@ -271,7 +271,30 @@ export const DanhSachCapSo = () => {
         setEndOpen(open);
       };
     
-    const onChange = (value:any) => console.log(value.target.value);
+    const onChange = (value:any) => {
+      const values = value.target.value;
+      console.log('values: ',values);
+
+      if( values !== '') {
+        const result = capSoList.filter((item: any) => item.stt === values || item.tenKhachHang === values || item.tenDichVu === values || item.nguonCap === values);
+
+        console.log(result);
+  
+        if(result[0] !== undefined) {
+          setCapSoList(result);
+        }else {
+          const getThietBi = async () => {
+            setCapSoList(capSoData.docs.map((doc:any)=> ({...doc.data(), id: doc.id})));
+          }
+          getThietBi();
+        }
+      }else {
+        const getThietBi = async () => {
+          setCapSoList(capSoData.docs.map((doc:any)=> ({...doc.data(), id: doc.id})));
+        }
+        getThietBi();
+      }
+    };
 
     function onOk(value:any) {
         console.log('onOk: ', value);

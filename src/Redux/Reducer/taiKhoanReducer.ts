@@ -12,6 +12,7 @@ const initialState = {
     taiKhoanData: {},
     taiKhoanInfo: {},
     statusLogin: false,
+    confirmEmail: false,
     taiKhoanList: [],
     userLogin: usAccount
 };
@@ -41,6 +42,16 @@ const taiKhoanReducer = (state:any = initialState, action:ActionProps) => {
                 localStorage.setItem('userLogin',JSON.stringify(result));
             }
             console.log(state.statusLogin);
+            return {...state};
+        }
+        break;
+        case 'KIEM_TRA_EMAIL': {
+            const result = state.taiKhoanList.filter((item: any) => (item.email === action.payload));
+            console.log(result)
+            if(result[0].tenDangNhap !== undefined) {
+                state.confirmEmail = true;
+            }
+            console.log(state.confirmEmail)
             return {...state};
         }
         break;

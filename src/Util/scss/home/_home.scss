@@ -69,7 +69,7 @@
 
                 &.ant-menu-item-selected {
                     background-color: $primary-color-btn;
-                    
+
                     &.home__menu-logOut {
                         background-color: #fff;
                     }
@@ -243,7 +243,7 @@
 
             .profile__notify-heading {
                 background-color: $primary-color-btn;
-                padding: 9px 24px;
+                padding: 9px 20px;
 
                 h3 {
                     color: #fff;
@@ -266,7 +266,7 @@
                     //Start profile__notify-item
                     .profile__notify-item {
                         height: 80px;
-                        padding: 16px 24px 10px 24px;
+                        padding: 16px 20px 10px 20px;
                         position: relative;
 
                         span {

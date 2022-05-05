@@ -1,7 +1,10 @@
 import { Breadcrumb, DatePicker, Input, Table } from 'antd';
 import moment from 'moment';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
+import { nguoiDungCreator, State } from '../../../Redux';
 import { Image } from '../../../Util/variableImage';
 
 const data = [
@@ -145,6 +148,28 @@ const data = [
 
 export const NhatKyNguoiDung = () => {
 
+  const dispatch = useDispatch();
+
+  const [nhatKy, setNhatKy] = useState<any>([]);
+
+  const {LoadDuLieu} = bindActionCreators(nguoiDungCreator, dispatch);
+
+  useEffect(()=> {
+    LoadDuLieu();
+  }, []);
+
+  const nhatKyData = useSelector((state: State) => state.nguoiDung);
+
+  useEffect(()=> {
+    // console.log('nhật kí',nhatKyData);
+    const nhatKyDoc = nhatKyData.nhatKyData;
+    const getThietBi = async () => {
+      setNhatKy(nhatKyDoc.docs.map((doc:any)=> ({...doc.data(), id: doc.id})));
+    }
+    getThietBi();
+  }, [nhatKyData]);
+
+
   const [startValue,setStartValue] = useState<any>(null);
   const [endValue,setEndValue] = useState<any>(null);
   const [endOpen,setEndOpen] = useState<boolean>(false);
@@ -166,17 +191,17 @@ export const NhatKyNguoiDung = () => {
     },
     {
         title: 'Thời gian tác động',
-        dataIndex: 'hoTen',
+        dataIndex: 'thoiGianTacDong',
         width: 240,
     },
     {
         title: 'IP thực hiện',
-        dataIndex: 'sdt',
+        dataIndex: 'ipThucHien',
         width: 216,
     },
     {
         title: 'Thao tác thực hiện',
-        dataIndex: 'email',
+        dataIndex: 'thaoTacThucHien',
         width: 386,
     },
   ];
@@ -257,8 +282,31 @@ const handleEndOpenChange = (open:any) => {
     setEndOpen(open);
 };
 
-  const onChange = (e:any) => {
-    console.log(e);
+  const onChange = (value:any) => {
+    const values = value.target.value;
+    console.log('values: ',values);
+
+    if( values !== '') {
+      const result = nhatKy.filter((item: any) => item.tenDangNhap === values || item.ipThucHien === values || item.thaoTacThucHien === values);
+
+      console.log(result);
+
+      if(result[0] !== undefined) {
+        setNhatKy(result);
+      }else {
+        const nhatKyDoc = nhatKyData.nhatKyData;
+        const getAccount = async () => {
+          setNhatKy(nhatKyDoc.docs.map((doc:any)=> ({...doc.data(), id: doc.id})));
+      }
+        getAccount();
+      }
+    }else {
+      const nhatKyDoc = nhatKyData.nhatKyData;
+      const getAccount = async () => {
+        setNhatKy(nhatKyDoc.docs.map((doc:any)=> ({...doc.data(), id: doc.id})));
+    }
+      getAccount();
+    }
   }
   return (
     <div className='nguoiDung'>
@@ -320,7 +368,7 @@ const handleEndOpenChange = (open:any) => {
         <div className='nguoiDung__content-bottom'>
             <div className='nguoiDung__content-bottom-table'>
                 <Table
-                    dataSource={data}
+                    dataSource={nhatKy}
                     columns={columns}
                     size="small"
                     pagination={{ pageSize: 10, itemRender:itemRender }}
@@ -333,3 +381,4 @@ const handleEndOpenChange = (open:any) => {
     </div>
   )
 }
+

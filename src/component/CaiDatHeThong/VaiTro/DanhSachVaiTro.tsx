@@ -1,6 +1,9 @@
 import { Breadcrumb, Table } from 'antd';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
+import { State, vaiTroCreator } from '../../../Redux';
 import { Image } from '../../../Util/variableImage';
 
 const data = [
@@ -38,6 +41,27 @@ const data = [
 
 export const DanhSachVaiTro = () => {
 
+  const dispatch = useDispatch();
+
+  const [vaiTro, setVaiTro] = useState<any>([]);
+
+  const {LoadDuLieu} = bindActionCreators(vaiTroCreator, dispatch);
+
+  useEffect(()=> {
+    LoadDuLieu();
+  }, []);
+
+  const vaiTroData = useSelector((state: State) => state.vaiTro);
+
+  useEffect(()=> {
+    // console.log('nhật kí',nhatKyData);
+    const vaiTroDoc = vaiTroData.vaiTroData;
+    const getVaiTro = async () => {
+      setVaiTro(vaiTroDoc.docs.map((doc:any)=> ({...doc.data(), id: doc.id})));
+    }
+    getVaiTro();
+  }, [vaiTroData]);
+
     const location = useLocation();
 
     const navigate = useNavigate();
@@ -61,12 +85,12 @@ export const DanhSachVaiTro = () => {
         },
             {
             title: ' ',
-            dataIndex: 'Cập nhật',
+            dataIndex: 'id',
             width: 125,
-            render: () => {
+            render: (dataIndex: string) => {
                 return (
                 <button onClick={()=> {
-                    navigate('/qlVaiTro/capNhatVaiTro');
+                    navigate(`/qlVaiTro/capNhatVaiTro/${dataIndex}`);
                     }}>
                     Cập nhật
                     </button>
@@ -123,7 +147,7 @@ export const DanhSachVaiTro = () => {
                 </h3>
                 <div className='vaiTro__content-table'>
                     <Table
-                        dataSource={data}
+                        dataSource={vaiTro}
                         columns={columns}
                         size="small"
                         // pagination={{ pageSize: 6, itemRender:itemRender }}

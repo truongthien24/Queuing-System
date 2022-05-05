@@ -6,6 +6,10 @@ import { Select } from 'antd';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 
+type configCapSoType = {
+    annotation: [],
+}
+
 const { Option } = Select;
 
 export const Dashboard = () => {
@@ -49,15 +53,18 @@ export const Dashboard = () => {
     //tính phần trăm thiết bị
     const maxAngleThietBi = (thietBiHD/thietBi)*360;
     const ngungHD = (thietBiNHD/thietBi)*360;
+    const maxAngleThietBiPhanTram =  (thietBiHD/thietBi) * 100;
 
     //Tính phần trăm dịch vụ
     const maxAngleDichVu = (dichVuHD/dichVu)*360;
     const ngungHDDichVu = (dichVuNHD/dichVu)*360;
+    const maxAngleDichVuPhanTram =  (dichVuHD/dichVu) * 100;
 
     //Tính phần trăm cấp số
     const maxAngleCapSo = (capSoDaSD/capSo)*360;
     const dangChoCapSo = (capSoDangCho/capSo)*360;
     const boQuaCapSo = (capSoBoQua/capSo)*360;
+    const maxAngleCapSoPhanTram =  (capSoDaSD/capSo) * 100;
 
     console.log(maxAngleDichVu);
     console.log(ngungHDDichVu);
@@ -100,14 +107,14 @@ export const Dashboard = () => {
         },
     ];
 
-    const configThietbi = {       
+    const configThietbi:any = {       
         data: dataThietBi,
         xField: 'name',
         yField: 'star',
         width: 60,
         height: 60,
         radius: 1,
-        innerRadius: 0.7,
+        innerRadius: 0.75,
         maxAngle: maxAngleThietBi,
         tooltip: {
             showContent: false
@@ -124,26 +131,26 @@ export const Dashboard = () => {
         barBackground: {},
         barStyle: {
             cursor: 'pointer',
-            // lineCap: 'round'
+            lineCap: 'round'
         },
-        type: 'round'
-        // annotations: [
-        //     {
-        //         type: 'text',
-        //         position: ['50%', '50%'],
-        //         content: '56%',
-        //     },
-        //   ],
+        type: 'round',
+        annotations: [
+            {
+                type: 'text',
+                position: ['32%', '50%'],
+                content: `${maxAngleThietBiPhanTram.toFixed(0)}%`
+            }
+        ]
       };
 
-      const configDichVu = {
+      const configDichVu:any = {
         data: dataDichVu,
         xField: 'name',
         yField: 'star',
         width: 60,
         height: 60,
         radius: 1,
-        innerRadius: 0.7,
+        innerRadius: 0.75,
         maxAngle: maxAngleDichVu,
         tooltip: {
             showContent: false
@@ -161,17 +168,25 @@ export const Dashboard = () => {
         barBackground: {},
         barStyle: {
             cursor: 'pointer',
+            lineCap: 'round'
         },
+        annotations: [
+            {
+                type: 'text',
+                position: ['32%', '50%'],
+                content: `${maxAngleDichVuPhanTram.toFixed(0)}%`
+            }
+        ]
       };
 
-      const configCapSo = {
+      const configCapSo:any = {
         data: dataCapSo,
         xField: 'name',
         yField: 'star',
         width: 60,
         height: 60,
         radius: 1,
-        innerRadius: 0.5,
+        innerRadius: 0.6,
         maxAngle: maxAngleCapSo,
         tooltip: {
             showContent: false
@@ -190,7 +205,15 @@ export const Dashboard = () => {
         barBackground: {},
         barStyle: {
             cursor: 'pointer',
+            lineCap: 'round'
         },
+        annotations: [
+            {
+                type: 'text',
+                position: ['32%', '50%'],
+                content: `${maxAngleCapSoPhanTram.toFixed(0)}%`
+            }
+        ]
       };
 
       

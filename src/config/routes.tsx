@@ -41,14 +41,17 @@ const MainRoutes = () => {
   return (
     <div>
         <Routes>
-          <Route path='/' element={<Home/>}>            
+          {/* <Route path='/home' element={<Home/>}/> */}
+
+          <Route path='/' element={<Home/>}>   
+            <Route index element={<Dashboard/>}/>         
             <Route path='profile' element={<Profile/>}/> 
-            <Route  path='dashboard' element={<Dashboard/>}>
+            <Route path='dashboard' element={<Dashboard/>}>
               <Route index element={<DashboardDate/>}/>
               <Route path='dashboardMonth' element={<DashboardMonth/>}/>
               <Route path='dashboardWeek' element={<DashboardWeek/>}/>
             </Route>           
-            <Route path='thietbi' element={<Thietbi/>}>
+            <Route path='thietbi' element={<Thietbi/>}>x
               <Route index element={<DanhSachThietBi/>}/>
               <Route path='themThietBi' element={<ThemThietBi/>}/>
               <Route path='chiTietThietBi/:id' element={<ChiTietThietBi/>}/>

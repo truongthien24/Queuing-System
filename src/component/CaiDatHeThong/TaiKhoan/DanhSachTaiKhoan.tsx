@@ -9,147 +9,6 @@ import { LoadDuLieu } from '../../../Redux/ActionCreator/taiKhoanCreator';
 import { State, taiKhoanCreator } from '../../../Redux';
 import { bindActionCreators } from 'redux';
 
-
-
-// const data2 = [
-//   {
-//     "tenDangNhap":"tuyetnguyen@12",
-//     "hoTen":"Nguyễn Văn A",
-//     "sdt":"0919256712",
-//     "email":"tuyetnguyen123@gmail.com",
-//     "vaiTro":"Kế toán",
-//     "trangThaiHD":"Hoạt động",
-//   },
-//   {
-//     "tenDangNhap":"tuyetnguyen@13",
-//     "hoTen":"Nguyễn Văn B",
-//     "sdt":"0919256745",
-//     "email":"tuyetnguyen123@gmail.com",
-//     "vaiTro":"Kế toán",
-//     "trangThaiHD":"Hoạt động",
-//   },
-//   {
-//     "tenDangNhap":"tuyetnguyen@12",
-//     "hoTen":"Nguyễn Văn A",
-//     "sdt":"0919256712",
-//     "email":"tuyetnguyen123@gmail.com",
-//     "vaiTro":"Kế toán",
-//     "trangThaiHD":"Ngưng hoạt động",
-//   },
-//   {
-//     "tenDangNhap":"tuyetnguyen@12",
-//     "hoTen":"Nguyễn Văn A",
-//     "sdt":"0919256712",
-//     "email":"tuyetnguyen123@gmail.com",
-//     "vaiTro":"Kế toán",
-//     "trangThaiHD":"Hoạt động",
-//   },
-//   {
-//     "tenDangNhap":"tuyetnguyen@12",
-//     "hoTen":"Nguyễn Văn A",
-//     "sdt":"0919256712",
-//     "email":"tuyetnguyen123@gmail.com",
-//     "vaiTro":"Kế toán",
-//     "trangThaiHD":"Ngưng hoạt động",
-//   },
-//   {
-//     "tenDangNhap":"tuyetnguyen@12",
-//     "hoTen":"Nguyễn Văn A",
-//     "sdt":"0919256712",
-//     "email":"tuyetnguyen123@gmail.com",
-//     "vaiTro":"Kế toán",
-//     "trangThaiHD":"Ngưng hoạt động",
-//   },
-//   {
-//     "tenDangNhap":"tuyetnguyen@12",
-//     "hoTen":"Nguyễn Văn A",
-//     "sdt":"0919256712",
-//     "email":"tuyetnguyen123@gmail.com",
-//     "vaiTro":"Kế toán",
-//     "trangThaiHD":"Hoạt động",
-//   },
-//   {
-//     "tenDangNhap":"tuyetnguyen@12",
-//     "hoTen":"Nguyễn Văn A",
-//     "sdt":"0919256712",
-//     "email":"tuyetnguyen123@gmail.com",
-//     "vaiTro":"Kế toán",
-//     "trangThaiHD":"Hoạt động",
-//   },
-//   {
-//     "tenDangNhap":"tuyetnguyen@12",
-//     "hoTen":"Nguyễn Văn A",
-//     "sdt":"0919256712",
-//     "email":"tuyetnguyen123@gmail.com",
-//     "vaiTro":"Kế toán",
-//     "trangThaiHD":"Ngưng hoạt động",
-//   },
-//   {
-//     "tenDangNhap":"tuyetnguyen@12",
-//     "hoTen":"Nguyễn Văn A",
-//     "sdt":"0919256712",
-//     "email":"tuyetnguyen123@gmail.com",
-//     "vaiTro":"Kế toán",
-//     "trangThaiHD":"Ngưng hoạt động",
-//   },
-//   {
-//     "tenDangNhap":"tuyetnguyen@12",
-//     "hoTen":"Nguyễn Văn A",
-//     "sdt":"0919256712",
-//     "email":"tuyetnguyen123@gmail.com",
-//     "vaiTro":"Kế toán",
-//     "trangThaiHD":"Hoạt động",
-//   },
-//   {
-//     "tenDangNhap":"tuyetnguyen@12",
-//     "hoTen":"Nguyễn Văn A",
-//     "sdt":"0919256712",
-//     "email":"tuyetnguyen123@gmail.com",
-//     "vaiTro":"Kế toán",
-//     "trangThaiHD":"Ngưng hoạt động",
-//   },
-//   {
-//     "tenDangNhap":"tuyetnguyen@12",
-//     "hoTen":"Nguyễn Văn A",
-//     "sdt":"0919256712",
-//     "email":"tuyetnguyen123@gmail.com",
-//     "vaiTro":"Kế toán",
-//     "trangThaiHD":"Ngưng hoạt động",
-//   },
-//   {
-//     "tenDangNhap":"tuyetnguyen@12",
-//     "hoTen":"Nguyễn Văn A",
-//     "sdt":"0919256712",
-//     "email":"tuyetnguyen123@gmail.com",
-//     "vaiTro":"Kế toán",
-//     "trangThaiHD":"Hoạt động",
-//   },
-//   {
-//     "tenDangNhap":"tuyetnguyen@12",
-//     "hoTen":"Nguyễn Văn A",
-//     "sdt":"0919256712",
-//     "email":"tuyetnguyen123@gmail.com",
-//     "vaiTro":"Kế toán",
-//     "trangThaiHD":"Ngưng hoạt động",
-//   },
-//   {
-//     "tenDangNhap":"tuyetnguyen@12",
-//     "hoTen":"Nguyễn Văn A",
-//     "sdt":"0919256712",
-//     "email":"tuyetnguyen123@gmail.com",
-//     "vaiTro":"Kế toán",
-//     "trangThaiHD":"Ngưng hoạt động",
-//   },
-//   {
-//     "tenDangNhap":"tuyetnguyen@12",
-//     "hoTen":"Nguyễn Văn A",
-//     "sdt":"0919256712",
-//     "email":"tuyetnguyen123@gmail.com",
-//     "vaiTro":"Kế toán",
-//     "trangThaiHD":"Hoạt động",
-//   }
-// ];
-
 const {Option} = Select;
 
 export const DanhSachTaiKhoan = () => {
@@ -285,8 +144,29 @@ export const DanhSachTaiKhoan = () => {
       console.log(`select ${event}`);
     }
 
-    const onChange = (e:any) => {
-      console.log(e);
+    const onChange = (value:any) => {
+      const values = value.target.value;
+      console.log('values: ',values);
+
+      if( values !== '') {
+        const result = account.filter((item: any) => item.tenDangNhap === values || item.hoTen === values || item.sdt === values || item.email === values || item.vaiTro === values);
+
+        console.log(result);
+  
+        if(result[0] !== undefined) {
+          setAccount(result);
+        }else {
+          const getAccount = async () => {
+            setAccount(taiKhoanData.docs.map((doc:any)=> ({...doc.data(), id: doc.id})));
+        }
+          getAccount();
+        }
+      }else {
+        const getAccount = async () => {
+          setAccount(taiKhoanData.docs.map((doc:any)=> ({...doc.data(), id: doc.id})));
+      }
+        getAccount();
+      }
     }
   
   return (

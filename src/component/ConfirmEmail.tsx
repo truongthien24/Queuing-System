@@ -1,13 +1,36 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Form, Input, Button, Checkbox } from 'antd';
 import { NavLink } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { State, taiKhoanCreator } from '../Redux';
+import { useSelector } from 'react-redux';
 
 export const ConfirmEmail = () => {
 
+    const dispatch = useDispatch();
+
+    const {KiemTraEmail, LoadDuLieu} = bindActionCreators(taiKhoanCreator, dispatch);
+
+    useEffect(() => {
+        LoadDuLieu();
+    }, []);
+
+    const {confirmEmail} = useSelector((state: State)=>state.taiKhoan);
+
+    useEffect(()=>{
+        if(confirmEmail===true) {
+            window.location.replace('/resetPassword');
+        }
+    }, [confirmEmail])
+
     const [form] = Form.useForm();
 
-    const onFinish = (values: any) => {
-        console.log('Success:', values);
+    const onFinish = (event: any) => {
+        // console.log('Success:', values);
+        console.log(event.email);
+        const email = event.email;
+        KiemTraEmail(email);
     };
 
     const onFinishFailed = (errorInfo: any) => {
@@ -18,10 +41,6 @@ export const ConfirmEmail = () => {
         form.resetFields();
     };
 
-    const handleConfirm = (event:any) => {
-        console.log(event.target.value);
-        window.location.replace('/resetPassword');
-    }
   return (
     <div className='layout'>
         <div className='container-fuild h-100'>
@@ -45,7 +64,7 @@ export const ConfirmEmail = () => {
                             <p style={{fontSize: '1.1rem'}}>Vui lòng nhập email để đặt lại mật khẩu của bạn *</p>
                         <Form.Item
                             label=""
-                            name="username"
+                            name="email"
                             rules={[{ required: true, message: 'Vui lòng nhập email!' }]}
                         >
                             <Input className='confirmPassword__left-input'/>
@@ -55,11 +74,11 @@ export const ConfirmEmail = () => {
                             <Button htmlType="button" onClick={onReset} className='confirmPassword__left-btn confirmPassword__cancel'>
                                 Hủy
                             </Button>
-                            <Button type="primary" htmlType="submit" className='confirmPassword__left-btn' onClick={handleConfirm}>
+                            <Button type="primary" htmlType="submit" className='confirmPassword__left-btn'>
                                 <span style={{fontWeight: '500'}}>Tiếp tục</span>
                             </Button>
                         </Form.Item>
-                        </Form>
+                    </Form>
                 </div>
                 <div className='col-7 confirmPassword__right'>
                     <img src='img/Frame.png' className='confirmPassword__right-img'/>
