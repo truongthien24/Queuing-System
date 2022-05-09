@@ -1,13 +1,38 @@
 import { Breadcrumb, Checkbox } from 'antd';
+import { useFormik } from 'formik';
 import React from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Image } from '../../../Util/variableImage';
+import * as yup from 'yup'
+
+interface formikFace {
+    tenVaiTro: string,
+    moTa: string
+}
 
 export const ThemVaiTro = () => {
 
     const location = useLocation();
 
     const navigate = useNavigate();
+
+    const initialValues:formikFace = {
+        tenVaiTro: '',
+        moTa: ''
+    }
+
+    const validationSchema = yup.object().shape({
+        tenVaiTro: yup.string().required('Không được bỏ trống!'),
+        moTa: yup.string().required('Không được bỏ trống!'),
+    })
+
+    const formik = useFormik({
+      initialValues,
+      onSubmit: (e:any) => {
+          console.log(e);
+      },
+      validationSchema
+    })
 
     const breadCrumbView = () => {
       const {pathname} = location;
@@ -57,7 +82,7 @@ export const ThemVaiTro = () => {
           <h3 className='vaiTro__content-heading'>
             Danh sách vai trò
           </h3>
-          <form className='vaiTro__content-form'>
+          <form className='vaiTro__content-form' onSubmit={formik.handleSubmit}>
             <div className='vaiTro__content-form-top'>
               <h5 className='content__form-top-heading'>
                 Thông tin vai trò
@@ -68,13 +93,16 @@ export const ThemVaiTro = () => {
                     <div className='content__form-top-title'>
                       <span>Tên vai trò:</span> <img src={Image.chuY}/>
                     </div>
-                    <input placeholder='Nhập tên vai trò'/>
+                    <input placeholder='Nhập tên vai trò' name='tenVaiTro' onChange={formik.handleChange} onBlur={formik.handleBlur}/>
+                    {formik.errors.tenVaiTro && formik.touched.tenVaiTro ? (<div className='text-danger'>{formik.errors.tenVaiTro}</div>) : ''}
                   </div>
                   <div className='content__form-top-item'>
                     <div className='content__form-top-title'>
                       <span>Mô tả:</span>
                     </div>
-                    <textarea placeholder='Nhập mô tả'/>
+                    <textarea placeholder='Nhập mô tả' name='moTa' onChange={formik.handleChange} onBlur={formik.handleBlur}/>
+                    {formik.errors.moTa && formik.touched.moTa ? (<div className='text-danger'>{formik.errors.moTa}</div>) : ''}
+
                   </div>
                   <div className='content__form-top-item'>
                     <div className='content__form-top-item-warning'>
@@ -135,7 +163,7 @@ export const ThemVaiTro = () => {
               <button className='content__form-bottom-cancel' type='button' onClick={()=> {
                 navigate('/qlVaiTro');
               }}>Hủy bỏ</button>
-              <button className='content__form-bottom-add' type='button' onClick={()=> {
+              <button className='content__form-bottom-add' type='submit' onClick={()=> {
                 navigate('/qlVaiTro');
               }}>Thêm mới</button>
             </div>

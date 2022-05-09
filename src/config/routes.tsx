@@ -41,8 +41,6 @@ const MainRoutes = () => {
   return (
     <div>
         <Routes>
-          {/* <Route path='/home' element={<Home/>}/> */}
-
           <Route path='/' element={<Home/>}>   
             <Route index element={<Dashboard/>}/>         
             <Route path='profile' element={<Profile/>}/> 
@@ -85,7 +83,7 @@ const MainRoutes = () => {
           </Route>
           <Route path='/login' element={<Login/>}/>
           <Route path='/confirmEmail' element={<ConfirmEmail/>}/>
-          <Route path='/resetPassword' element={<ResetPassword/>}/>
+          <Route path='/resetPassword/:id' element={<ResetPassword/>}/>
         </Routes>
     </div>
   )

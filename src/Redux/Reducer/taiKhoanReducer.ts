@@ -49,6 +49,8 @@ const taiKhoanReducer = (state:any = initialState, action:ActionProps) => {
             const result = state.taiKhoanList.filter((item: any) => (item.email === action.payload));
             console.log(result)
             if(result[0].tenDangNhap !== undefined) {
+                state.taiKhoanInfo = result[0];
+                console.log(state.taiKhoanInfo)
                 state.confirmEmail = true;
             }
             console.log(state.confirmEmail)

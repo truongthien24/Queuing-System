@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Form, Input, Button, Checkbox } from 'antd';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { State, taiKhoanCreator } from '../Redux';
@@ -10,19 +10,29 @@ export const ConfirmEmail = () => {
 
     const dispatch = useDispatch();
 
+    const [taiKhoanID, setTaiKhoanID] = useState<string>('');
+
     const {KiemTraEmail, LoadDuLieu} = bindActionCreators(taiKhoanCreator, dispatch);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         LoadDuLieu();
     }, []);
 
-    const {confirmEmail} = useSelector((state: State)=>state.taiKhoan);
+    const {confirmEmail, taiKhoanInfo} = useSelector((state: State)=>state.taiKhoan);
 
     useEffect(()=>{
         if(confirmEmail===true) {
-            window.location.replace('/resetPassword');
+            setTaiKhoanID(taiKhoanInfo.id);
         }
     }, [confirmEmail])
+
+    useEffect(()=> {
+        if(taiKhoanID !== '') {
+            navigate(`/resetPassword/${taiKhoanID}`);
+        }
+    }, [taiKhoanID])
 
     const [form] = Form.useForm();
 
@@ -67,6 +77,7 @@ export const ConfirmEmail = () => {
                             name="email"
                             rules={[{ required: true, message: 'Vui lòng nhập email!' }]}
                         >
+                            {/* <Form.Item name="email"noStyle><Input className='confirmPassword__left-input'/></Form.Item> */}
                             <Input className='confirmPassword__left-input'/>
                         </Form.Item>
 

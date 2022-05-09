@@ -52,7 +52,7 @@ export const ThemTaiKhoan = () => {
       .email('Email không đúng dạng!')
       .required('Không được bỏ trống!'),
     nhapLaiMatKhau: yup.string()
-      .required('Không được bỏ trống!'),    
+      .required('Không được bỏ trống!').oneOf([yup.ref('matKhau'), null], 'Mật khẩu nhập lại không chính xác!')   
   })
 
   const formik = useFormik({

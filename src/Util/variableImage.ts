@@ -41,6 +41,7 @@ import prev from '../image/prev.png';
 import next from '../image/next.png';
 import arrowRight from '../image/arrow-right.png';
 import download from '../image/download.png';
+import frame from '../image/Frame.png';
 
 export const Image = {
     logo: `${logo}`,
@@ -86,4 +87,5 @@ export const Image = {
     next: `${next}`,
     arrowRight: `${arrowRight}`,
     download: `${download}`,
+    frame: `${frame}`,
 } 

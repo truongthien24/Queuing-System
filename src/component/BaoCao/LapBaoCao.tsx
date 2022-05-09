@@ -1,6 +1,6 @@
 import { Breadcrumb, Button, DatePicker, Input, Table } from 'antd';
 import moment from 'moment';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Image } from '../../Util/variableImage';
 import XLSX from 'xlsx';
@@ -122,6 +122,9 @@ export const LapBaoCao = () => {
     const [startValue,setStartValue] = useState<any>(null);
     const [endValue,setEndValue] = useState<any>(null);
     const [endOpen,setEndOpen] = useState<boolean>(false);
+
+    const [dayStart, setDayStart] = useState<string>('');
+    const [dayEnd, setDayEnd] = useState<string>('');
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -344,12 +347,50 @@ export const LapBaoCao = () => {
     
     const onStartChange = (value:any) => {
         setStartValue(value);
-        console.log(value);
+        const test = value._d;
+        console.log(test);
+        const day = test.getDate();
+        const month = test.getMonth() + 1;
+        const year = test.getFullYear();
+        let dayString = '';
+        let monthString = '';
+        if(day < 10) {
+            dayString = `0${day}`;
+        }else {
+            dayString = `${day}`
+        }
+        if(month < 10) {
+          monthString = `0${month}`;
+        }else {
+          monthString = `${month}`
+        }
+        const date = `${dayString}/${monthString}/${year}`;
+        setDayStart(date);
+        console.log(date);
       };
     
     const onEndChange = (value:any) => {
         setEndValue(value);
-        console.log(value)
+        const test = value._d;
+        console.log(test);
+        const day = test.getDate();
+        const month = test.getMonth() + 1;
+        const year = test.getFullYear();
+        let dayString = '';
+        let monthString = '';
+        if(day < 10) {
+            dayString = `0${day}`;
+        }else {
+            dayString = `${day}`
+        }
+        if(month < 10) {
+          monthString = `0${month}`;
+        }else {
+          monthString = `${month}`
+        }
+        const date = `${dayString}/${monthString}/${year}`;
+        setDayEnd(date);
+        console.log(date);
       };
     
     const handleStartOpenChange = (open:any) => {
@@ -361,6 +402,15 @@ export const LapBaoCao = () => {
     const handleEndOpenChange = (open:any) => {
         setEndOpen(open);
     };
+
+    useEffect(()=> {
+      console.log('dayStart', dayStart);
+    }, [dayStart]);
+
+    useEffect(()=> {
+      console.log('dayEnd', dayEnd);
+    }, [dayEnd]);
+    
     return (
         <div>
             <div className='baoCao__breadcrumb'>
@@ -413,7 +463,6 @@ export const LapBaoCao = () => {
                 </div>
             </div>
             <div className='baoCao__download' onClick={()=>{
-                alert('Down cái gì mà down');
                 const downloadExcel = () => {
                     const workSheet = XLSX.utils.json_to_sheet(data);
                     const workBook = XLSX.utils.book_new();

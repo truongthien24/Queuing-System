@@ -48,7 +48,7 @@ export const Home = () => {
         const getAccount = async () => {
           setCapSoList(capSoData.docs.map((doc:any)=> ({...doc.data(), id: doc.id})));
           console.log('Cấp số list',capSoList);
-      }
+        }
         getAccount();
     }, [capSoData]);  
 
@@ -65,21 +65,19 @@ export const Home = () => {
     
     const renderNotifyContent = () => {
         console.log('Cấp số lít',capSoList);
-        return capSoList.map((item: any, key: string) => {
-            let currentTime = `${item.thoiGianCap}`.split(" - ");    
-            console.log(currentTime);
-            // console.log(item.ThoiGianCap.toDate('dd/MM/yyyy', '/'));
-            // item.ThoiGianCap.toDate('dd/MM/yyyy', '/');
-            
-            // console.log('currentTime',currentTime);
-            // let momentDate = moment(`${item.thoiGianCap}`);
-            return (<li className="profile__notify-item">
-                <div>
-                    <span>Người dùng: {item.tenKhachHang}</span>
-                    <p>Thời gian nhận số: {currentTime[0]} ngày {currentTime[1]} </p>
-                </div>  
-            </li>)
-        })
+        if(capSoList[0] !== undefined) {
+            return capSoList.map((item: any, key: string) => {
+                let currentTime = `${item.thoiGianCap}`.split(" - ");    
+                console.log(currentTime);
+                return (<li className="profile__notify-item">
+                    <div>
+                        <span>Người dùng: {item.tenKhachHang}</span>
+                        <p>Thời gian nhận số: {currentTime[0]} ngày {currentTime[1]} </p>
+                    </div>  
+                </li>)
+            })
+        }
+        return;
     }
 
   
@@ -219,7 +217,7 @@ export const Home = () => {
                                         <p>Thời gian nhận số: 12h20 ngày 30/11/2021</p>
                                     </div>
                                 </li> */}
-                            </ul> 
+                            </ul>  
                         </div>  
                     </div>
                     :

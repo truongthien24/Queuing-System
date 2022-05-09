@@ -55,8 +55,9 @@ export const ThemThietBi = () => {
     const formik = useFormik({
         initialValues,
         enableReinitialize: true,
-        onSubmit: () => {
+        onSubmit: (values:any) => {
             // console.log(JSON.stringify(values));
+            console.log(values);
             const addThietBi = async () => {
                 const docRef = await addDoc(collection(db, "thietBi"), {
                     maThietBi: formik.values.maThietBi,
