@@ -31,7 +31,7 @@ export const ThemThietBi = () => {
       tenThietBi: '',
       tenDangNhap: '',
       diaChi: '',
-      matKhau: '',
+      matKhau: '', 
       dichVu: [],
     }
 
@@ -40,23 +40,19 @@ export const ThemThietBi = () => {
           .required('Không được bỏ trống!').min(3, 'Tối thiểu 3 chữ!'),
         tenThietBi: yup.string()
           .required('Không được bỏ trống!'),
-        loaiThietBi: yup.string()
-          .required('Không được bỏ trống!'),
         tenDangNhap: yup.string()
           .required('Không được bỏ trống!'),
         diaChi: yup.string()
           .required('Không được bỏ trống!'),
         matKhau: yup.string()
           .required('Không được bỏ trống!'),
-        dichVu: yup.string()
-          .required('Không được bỏ trống!'),
       })
 
     const formik = useFormik({
         initialValues,
         enableReinitialize: true,
+        validationSchema,
         onSubmit: (values:any) => {
-            // console.log(JSON.stringify(values));
             console.log(values);
             const addThietBi = async () => {
                 const docRef = await addDoc(collection(db, "thietBi"), {
@@ -71,7 +67,7 @@ export const ThemThietBi = () => {
             }
             addThietBi();
         },
-        validationSchema
+        
     })
 
     const onChangeLoaiThietBi = (e:any) => {
@@ -80,6 +76,11 @@ export const ThemThietBi = () => {
 
     const onChangeDichVu = (e:any) => {
         formik.setFieldValue('dichVu', e);
+    }
+
+    const submitForm = (event:any) => {
+        event.preventDefault();
+        console.log(event.target[0].valuse);
     }
 
     const breadCrumbView = () => {
@@ -149,7 +150,7 @@ export const ThemThietBi = () => {
                             <Select
                                 labelInValue
                                 placeholder="Chọn loại thiết bị"
-                                value={formik.values.loaiThietBi}
+                                defaultValue={formik.values.loaiThietBi}
                                 style={{ width: 120 }}
                                 onChange={onChangeLoaiThietBi}
                                 suffixIcon={<img src={`${Image.select}`}/>}
@@ -198,7 +199,7 @@ export const ThemThietBi = () => {
                                 <img src={`${Image.chuY}`}/>
                             </div>
                             <Select
-                                value={formik.values.dichVu}
+                                defaultValue={formik.values.dichVu}
                                 mode="multiple"
                                 style={{ width: '100%'}}
                                 placeholder="Nhập dịch vụ sử dụng"

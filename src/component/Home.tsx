@@ -36,9 +36,13 @@ export const Home = () => {
     
     const {LoadDuLieu} = bindActionCreators(capSoCreator, dispatch);
 
+    if(userLogin === null) {
+        window.location.replace('/login');
+    }
+
     useEffect(() => {
-        LoadDuLieu();
-        console.log(imageProfile);
+            LoadDuLieu();
+            console.log(imageProfile);
     }, []);
 
     const {capSoData} = useSelector((state: State) => state.capSo);
