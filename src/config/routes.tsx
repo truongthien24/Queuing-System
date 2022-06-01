@@ -49,7 +49,7 @@ const MainRoutes = () => {
               <Route path='dashboardMonth' element={<DashboardMonth/>}/>
               <Route path='dashboardWeek' element={<DashboardWeek/>}/>
             </Route>           
-            <Route path='thietbi' element={<Thietbi/>}>x
+            <Route path='thietbi' element={<Thietbi/>}>
               <Route index element={<DanhSachThietBi/>}/>
               <Route path='themThietBi' element={<ThemThietBi/>}/>
               <Route path='chiTietThietBi/:id' element={<ChiTietThietBi/>}/>

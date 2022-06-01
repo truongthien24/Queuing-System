@@ -19,8 +19,14 @@ export const Login = () => {
     
     const {LoadDuLieu, DangNhap} = bindActionCreators(taiKhoanCreator, dispatch);
 
+    const {userLogin} = useSelector((state:State)=>state.taiKhoan);
+
     useEffect(()=> {
         LoadDuLieu();
+        console.log('us',userLogin);
+        if(userLogin!==null) {
+            navigate('/dashboard')
+        }
     }, [])
 
     const {statusLogin} = useSelector((state:State)=> state.taiKhoan);
